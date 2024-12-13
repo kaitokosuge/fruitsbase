@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 // import { http, HttpResponse } from "msw";
 import { afterAll, afterEach, beforeEach, expect, test } from "vitest";
 import Hello from "./Hello";
-import { server } from "@/app/__tests__/msw/server";
+import { server } from "./../app/__tests__/msw/server";
 
 beforeEach(() => {
 	server.listen();
