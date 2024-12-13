@@ -109,3 +109,21 @@ https://vitest.dev/guide/coverage
 
 カバレッジレポーターに関して  
 https://github.com/marketplace/actions/vitest-coverage-report
+
+## msv インストール
+
+```
+npm install msw@latest --save-dev
+```
+
+handler でインターセプトするリクエストとモックデータを定義  
+↓  
+hello.tsx のテストコードで利用
+
+参考資料
+
+msw  
+https://mswjs.io/docs/getting-started
+
+setupserver  
+https://mswjs.io/docs/api/setup-server/
