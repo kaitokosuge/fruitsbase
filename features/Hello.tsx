@@ -1,7 +1,7 @@
-import React from "react";
-import { fetchHello } from "./fetchHello";
+import React from 'react';
+import { fetchHello } from './fetchHello';
 
 export default async function Hello() {
-	const { data } = await fetchHello();
-	return <div>{data.title}</div>;
+    const { data } = await fetchHello();
+    return <div>{data.title}</div>;
 }
