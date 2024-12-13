@@ -1,7 +1,57 @@
+<details>
+<summary>選定技術</summary>
+<h4>プログラミング言語</h4>
+TypeScript
+
+<h4>フレームワーク</h4>
+Next.js
+
+<h4>認証・認可</h4>
+clerk
+
+<h4>DB</h4>
+supabase(pgsql)
+
+<h4>ORM</h4>
+prisma
+
+<h4>テストフレームワーク</h4>
+Vitest
+
+<h4>API モック</h4>
+msw
+
+<h4>データ通信</h4>
+axios
+
+<h4>スタイル</h4>
+tailwind css
+
+<h4>コードスタイル</h4>
+eslint,prettier
+
+<h4>CI</h4>
+github actions
+
+<h4>デプロイ</h4>
+vercel
+
+</details>
+
+<details>
+<summary>start</summary>
+node
+20.12.2
+
+next.js 15.1.0
+
 ```
 npx create-next-app@latest
 ```
 
+</details>
+<details>
+<summary>testing setup</summary>
 <h2>Vitest インストール</h2>
 
 ```
@@ -71,13 +121,13 @@ package.json
 
 ```
 test: {
-		environment: "jsdom",
-		coverage: {
-            //追加
-			reporter: ["text", "json-summary", "html"],
-			provider: "v8",
-		},
+	environment: "jsdom",
+	coverage: {
+      //追加
+	  reporter: ["text", "json-summary", "html"],
+	  provider: "v8",
 	},
+},
 
 ```
 
@@ -85,25 +135,26 @@ test: {
 
 ```
 coverage: {
-		reporter: ["text", "json-summary", "html"],
-		provider: "v8",
-        //追加
-		exclude: [
-			"lib/**/*",
-			"**/*.test.tsx",
-			".next",
-			"next.config.js",
-			"postcss.config.js",
-			"tailwind.config.ts",
-			"vitest.config.ts",
-		],
-		reportOnFailure: true,
-	},
+	reporter: ["text", "json-summary", "html"],
+	provider: "v8",
+    //追加
+	exclude: [
+		"lib/**/*",
+		"**/*.test.tsx",
+		".next",
+		"next.config.js",
+		"postcss.config.js",
+		"tailwind.config.ts",
+		"vitest.config.ts",
+	],
+	reportOnFailure: true,
+},
 ```
 
 参考資料<br/>
 Next.js×Vitest に関して  
-https://ja.next-community-docs.dev/docs/app/building-your-application/testing/vitest  
+https://ja.next-community-docs.dev/docs/app/building-your-application/testing/vitest
+
 カバレッジに関して  
 https://vitest.dev/guide/coverage
 
@@ -120,10 +171,17 @@ handler でインターセプトするリクエストとモックデータを定
 ↓  
 hello.tsx のテストコードで利用
 
-参考資料
-
+参考資料  
 msw  
 https://mswjs.io/docs/getting-started
 
 setupserver  
 https://mswjs.io/docs/api/setup-server/
+
+## CI
+
+test,codecheck job を定義し、プルリクエスト作成時に実行。coverage の視覚情報も見れるようにする
+
+![](/public/coverage.png)
+
+</details>
