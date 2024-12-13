@@ -5,5 +5,19 @@ export default defineConfig({
 	plugins: [react()],
 	test: {
 		environment: "jsdom",
+		coverage: {
+			reporter: ["text", "json-summary", "html"],
+			provider: "v8",
+			exclude: [
+				"lib/**/*",
+				"**/*.test.tsx",
+				".next",
+				"next.config.js",
+				"postcss.config.js",
+				"tailwind.config.ts",
+				"vitest.config.ts",
+			],
+			reportOnFailure: true,
+		},
 	},
 });
