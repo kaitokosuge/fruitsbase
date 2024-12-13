@@ -187,7 +187,7 @@ test,codecheck job を定義し、プルリクエスト作成時に実行。cove
 </details>
 
 <details>
-<summary>auth setup</summary>
+<summary>auth & DB setup</summary>
 
 ```
 npm install @clerk/nextjs
@@ -205,5 +205,76 @@ matcher: [
     '/(api|trpc)(.*)',
   ],
 ```
+
+layout.tsx で clerk provider を設定
+
+```
+<ClerkProvider></ClerkProvider>
+```
+
+↓  
+clerk dashboard で webhook を定義する。（https のみ使えるため、ngrok で簡易デプロイする）  
+↓  
+webhook を作成すると`SIGNING_SECRET`が発行されるため環境変数として定義
+
+## prisma インストール
+
+```
+npm install prisma --save-dev
+```
+
+スキーマファイル生成
+
+```
+npx prisma init
+```
+
+ユーザースキーマ定義
+
+```
+model User {
+  id            String    @id @default(cuid())
+  clerkId       String    @unique
+  username      String?
+  name          String?
+  bio           String?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  email         String    @unique
+}
+```
+
+↓  
+supabase で DB を作成し、環境変数に DB URL を記載
+
+マイグレート
+
+```
+npx prisma migrate dev --name init
+```
+
+svix install
+
+```
+svix
+```
+
+参考資料
+
+clerk×Next.js に関して  
+https://clerk.com/docs/quickstarts/nextjs
+
+prisma  
+https://www.prisma.io/docs/orm/tools/prisma-cli#installation
+
+prisma×Next.js に関して
+https://vercel.com/guides/nextjs-prisma-postgres
+
+prisma migrate  
+https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-typescript-postgresql
+
+prisma best practice  
+https://www.prisma.io/docs/orm/more/help-and-troubleshooting/help-articles/nextjs-prisma-client-dev-practices
 
 </details>
