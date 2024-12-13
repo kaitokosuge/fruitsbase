@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export type Post = {
 	userId: number;
 	id: number;
