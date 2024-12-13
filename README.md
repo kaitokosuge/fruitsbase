@@ -185,3 +185,25 @@ test,codecheck job を定義し、プルリクエスト作成時に実行。cove
 ![](/public/coverage.png)
 
 </details>
+
+<details>
+<summary>auth setup</summary>
+
+```
+npm install @clerk/nextjs
+```
+
+env ファイルへ提供された環境変数をセット
+
+middleware.ts に api を監視させる
+
+```
+matcher: [
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
+  ],
+```
+
+</details>
