@@ -1,4 +1,4 @@
-import QuizViews from '@/features/quizViews/QuizViews';
+import QuizViews from './../features/quizViews/QuizViews';
 
 export default function Home() {
     return (
