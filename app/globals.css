@@ -81,3 +81,24 @@ body {
         @apply bg-background text-foreground;
     }
 }
+/* editor.js */
+.codex-editor__redactor {
+    padding-bottom: 0px !important;
+}
+.ce-code__textarea {
+    min-height: 50px !important;
+    font-size: 15px !important;
+    background: #3f3f3f !important;
+    border: none !important;
+    color: white !important;
+}
+.codex-editor path {
+    stroke: gray;
+}
+.ce-popover--opened > .ce-popover__container {
+    background-color: rgb(220, 220, 220);
+    border: none;
+}
+.cdx-search-field {
+    display: none;
+}
