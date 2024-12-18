@@ -1,8 +1,8 @@
 'use client';
-import EditorJS from '@editorjs/editorjs';
+import EditorJS, { OutputBlockData } from '@editorjs/editorjs';
 import { useState } from 'react';
 type DataItem = {
-    id: string;
+    id: string | undefined;
     type: string;
     data: Record<string, string>;
 };
@@ -12,15 +12,14 @@ export const useHandleOption = () => {
     const [optionText, setOptionText] = useState<OptionObj>({});
     const handleOptionChange = (editor: EditorJS, optionId: number) => {
         editor.save().then((editorObj) => {
-            console.log('毎回送られるID', optionId);
-            console.log('毎回送られるOBJ', editorObj);
-            console.log('objobj', editorObj.blocks);
-            const newItems: DataItem[] = editorObj.blocks.map((block: any) => ({
-                id: block.id,
-                type: block.type,
-                data: block.data,
-            }));
-
+            const newItems: DataItem[] = editorObj.blocks.map(
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                (block: OutputBlockData<string, any>) => ({
+                    id: block.id,
+                    type: block.type,
+                    data: block.data,
+                }),
+            );
             setOptionText((prevState) => {
                 const existingItems = prevState[optionId] || [];
 
@@ -52,24 +51,3 @@ export const useHandleOption = () => {
     };
     return { optionText, handleOptionChange };
 };
-
-// const obj = {
-//     1: [
-//         { id: 'kYhvY1bZST', type: 'paragraph', data: { text: '選択肢1' } },
-//         {
-//             id: 'kYhv4tfZST',
-//             type: 'paragraph',
-//             data: { text: '選択肢1の続き' },
-//         },
-//     ],
-//     2: [{ id: 'jYhvYsdZSu', type: 'paragraph', data: { text: '選択肢2' } }],
-//     3: [
-//         { id: 'asdfY1bZSf', type: 'paragraph', data: { text: '選択肢3' } },
-//         {
-//             id: 'oknfY1bZSf',
-//             type: 'paragraph',
-//             data: { text: '選択肢3の続き' },
-//         },
-//     ],
-//     4: [{ id: 'iYhvY1bodg', type: 'paragraph', data: { text: '選択肢4' } }],
-// };
