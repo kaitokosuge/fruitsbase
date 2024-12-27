@@ -49,7 +49,7 @@ export default function QuestionEditor({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isWindowMade]);
     return (
-        <div className="mx-auto">
+        <div className="mx-auto h-[150px]">
             {inputText !== '{}' && (
                 <p className="text-gray-500 text-[11px] mx-auto w-[650px]">
                     クイズ本文

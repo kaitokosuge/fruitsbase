@@ -50,7 +50,10 @@ export default function ExplanationEditor({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isWindowMade]);
     return (
-        <div className="mx-auto">
+        <div className="mx-auto mt-10">
+            <p className="border-t mx-auto w-[650px] border-[#252525] pt-2 text-gray-500">
+                クイズ解説
+            </p>
             <div
                 id={editorId}
                 className="mx-auto lg:w-[1000px] min-h-[300px]"

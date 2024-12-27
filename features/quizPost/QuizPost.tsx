@@ -16,25 +16,25 @@ const ExplanationEditor = dynamic(
         ssr: false,
     },
 );
-
 const Option = dynamic(() => import('./components/Options/Option'), {
     ssr: false,
 });
-
+export type QuizOption = {
+    text: string;
+    is_correct: boolean;
+    id: number;
+};
 export default function QuizPost() {
     const { inputExText, handleInputExChange } = useHandleInputExplanation();
     const { inputText, handleInputChange } = useHandleInputEditor();
-    const { optionText, handleOptionChange } = useHandleOption();
-    console.log('qu', JSON.parse(inputText));
-    console.log('ex', JSON.parse(inputExText));
-    console.log('op', optionText);
+    const {
+        addOption,
+        removeOption,
+        handleOptionChange,
+        handleChangeIsCorrect,
+        options,
+    } = useHandleOption();
 
-    const options: { text: string; is_correct: boolean; id: number }[] = [
-        { text: 'string', is_correct: false, id: 1 },
-        { text: 'string', is_correct: false, id: 3 },
-    ];
-    // const addOption = () => {};
-    // const removeOption = () => {};
     return (
         <div className="mt-10">
             <QuestionEditor
@@ -42,16 +42,29 @@ export default function QuizPost() {
                 placeholder="クイズ本文"
                 handleInputChange={handleInputChange}
             />
+
             {options.map((option, index: number) => (
-                <div key={index}>
+                <div key={option.id}>
                     <Option
-                        optionId={option.id}
+                        options={options}
+                        option={option}
                         index={index}
                         handleOptionChange={handleOptionChange}
+                        handleChangeIsCorrect={handleChangeIsCorrect}
+                        removeOption={removeOption}
                     />
                 </div>
             ))}
-            {options.length < 6 && <button>選択肢を追加する</button>}
+            <div className="mx-auto w-[650px] flex justify-end">
+                {options.length < 6 && (
+                    <button
+                        onClick={addOption}
+                        className="block text-gray-500 bg-gray-800 px-2 py-1 rounded-md text-[13px]"
+                    >
+                        選択肢を追加する
+                    </button>
+                )}
+            </div>
 
             <ExplanationEditor
                 id="explanation"

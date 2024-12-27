@@ -102,3 +102,7 @@ body {
 .cdx-search-field {
     display: none;
 }
+.codex-editor [data-placeholder-active]:empty:before,
+.codex-editor [data-placeholder-active][data-empty='true']:before {
+    color: rgb(46, 46, 46) !important;
+}
