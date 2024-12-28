@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import EditorJS from '@editorjs/editorjs';
 import CodeTool from '@editorjs/code';
-import { QuizOption } from '../../QuizPost';
+import { QuizOption } from '../../models/QuizOption';
 
 export default function Option({
     option,

@@ -3,7 +3,7 @@ import EditorJS, { OutputBlockData } from '@editorjs/editorjs';
 import { useState } from 'react';
 import { QuizOption } from '../../models/QuizOption';
 
-type DataItem = {
+export type DataItem = {
     id: string | undefined;
     type: string;
     data: Record<string, string>;
