@@ -10,5 +10,5 @@ export const useHandleQuestion = () => {
             setQuestionText(strEditorData);
         });
     };
-    return { questionText, handleInputChange };
+    return { questionText, handleInputChange, setQuestionText };
 };

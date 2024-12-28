@@ -6,6 +6,8 @@ import { useHandleOption } from './hooks/useHandleOption/useHandleOption';
 import Category from './components/Category/Category';
 import { useHandleCategory } from './hooks/useHandleCategory/useHandleCategory';
 import { useHandleQuestion } from './hooks/useHandleQuestion/useHandleQuestion';
+import { SaveQuiz } from './repositories/SaveQuiz';
+
 const QuestionEditor = dynamic(
     () => import('./components/Editor/QuestionEditor'),
     {
@@ -21,11 +23,7 @@ const ExplanationEditor = dynamic(
 const Option = dynamic(() => import('./components/Options/Option'), {
     ssr: false,
 });
-export type QuizOption = {
-    text: string;
-    is_correct: boolean;
-    id: number;
-};
+
 export default function QuizPost({
     categories,
 }: {
@@ -46,13 +44,29 @@ export default function QuizPost({
         removeOption,
         handleOptionChange,
         handleChangeIsCorrect,
+
         options,
     } = useHandleOption();
     const { selectedIds, handleClickCategory } = useHandleCategory();
 
-    console.log(questionText, selectedIds, options, explanationText);
     return (
-        <div className="mt-10">
+        <div className="mt-10 pb-10">
+            <div className="w-[670px] mx-auto flex justify-end">
+                <button
+                    onClick={() =>
+                        SaveQuiz(
+                            questionText,
+                            selectedIds,
+                            options,
+                            explanationText,
+                        )
+                    }
+                    className="block"
+                >
+                    保存
+                </button>
+            </div>
+
             <Category
                 categories={categories}
                 handleClickCategory={handleClickCategory}
@@ -91,7 +105,6 @@ export default function QuizPost({
                 placeholder="クイズ解説"
                 handleInputExChange={handleInputExChange}
             />
-            <button>保存</button>
         </div>
     );
 }

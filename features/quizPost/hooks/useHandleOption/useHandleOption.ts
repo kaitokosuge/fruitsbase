@@ -1,7 +1,8 @@
 'use client';
 import EditorJS, { OutputBlockData } from '@editorjs/editorjs';
 import { useState } from 'react';
-import { QuizOption } from '../../QuizPost';
+import { QuizOption } from '../../models/QuizOption';
+
 type DataItem = {
     id: string | undefined;
     type: string;
@@ -126,10 +127,12 @@ export const useHandleOption = () => {
     };
     return {
         optionText,
+        setOptionText,
         addOption,
         removeOption,
         handleOptionChange,
         handleChangeIsCorrect,
         options,
+        setOptions,
     };
 };

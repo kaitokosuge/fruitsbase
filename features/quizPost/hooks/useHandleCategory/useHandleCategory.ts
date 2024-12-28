@@ -13,5 +13,5 @@ export const useHandleCategory = () => {
             });
         }
     };
-    return { selectedIds, handleClickCategory };
+    return { selectedIds, handleClickCategory, setSelectedIds };
 };

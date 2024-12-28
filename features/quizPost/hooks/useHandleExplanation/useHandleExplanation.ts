@@ -12,5 +12,5 @@ export const useHandleExplanation = () => {
         });
     };
 
-    return { explanationText, handleInputExChange };
+    return { explanationText, handleInputExChange, setExplanationText };
 };
