@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { useHandleInputExplanation } from './hooks/useHandleInputExplanation/useHandleInputExplanation';
 import { useHandleInputEditor } from './hooks/useHandleInputEditor/useHandleInputEditor';
 import { useHandleOption } from './hooks/useHandleOption/useHandleOption';
+import Category from './components/Category/Category';
 const QuestionEditor = dynamic(
     () => import('./components/Editor/QuestionEditor'),
     {
@@ -24,7 +25,19 @@ export type QuizOption = {
     is_correct: boolean;
     id: number;
 };
-export default function QuizPost() {
+export default function QuizPost({
+    categories,
+}: {
+    categories: {
+        id: string;
+        name: string;
+        color: string | null;
+        svg: string | null;
+        authorId: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }[];
+}) {
     const { inputExText, handleInputExChange } = useHandleInputExplanation();
     const { inputText, handleInputChange } = useHandleInputEditor();
     const {
@@ -37,6 +50,7 @@ export default function QuizPost() {
 
     return (
         <div className="mt-10">
+            <Category categories={categories} />
             <QuestionEditor
                 id="question"
                 placeholder="クイズ本文"

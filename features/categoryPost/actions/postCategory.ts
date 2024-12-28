@@ -2,13 +2,11 @@
 import prisma from '@/lib/prisma';
 import { auth } from '@clerk/nextjs/server';
 
-// category: { name: string; svg: string }
-
 const sleep = (ms: number) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
 };
 export async function submitCategory(formData: FormData): Promise<void> {
-    await sleep(2000);
+    await sleep(500);
     try {
         const { userId } = await auth();
         if (!userId) {
@@ -20,23 +18,21 @@ export async function submitCategory(formData: FormData): Promise<void> {
             throw new Error();
         }
         const categorySvg = formData.get('svg');
+        const removeScriptSvg = (input: string) => {
+            return input.replace(/<script.*?>.*?<\/script>/gi, '');
+        };
+        const safeSvg = removeScriptSvg(categorySvg as string);
 
-        console.log('categoryName:', categoryName);
-        console.log('categorySvg:', categorySvg);
-        console.log('userId:', userId);
         const result = await prisma.category.create({
             data: {
                 name: categoryName,
-                svg: categorySvg as string,
+                svg: safeSvg,
                 authorId: userId,
             },
         });
-
         console.log('result', result);
-        // return new Response('Category has been created!', { status: 200 });
     } catch (error) {
         console.log('フォームのデータ', formData);
         console.log('エラー内容', JSON.stringify(error));
-        // return new Response('Category Error', { status: 500 });
     }
 }
