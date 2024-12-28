@@ -55,7 +55,7 @@ model Category {
   id          String   @id @default(cuid())
   name        String
   color       String?
-  svg         String   @db.Text
+  svg         String?  @db.Text
   author      User     @relation(fields: [authorId], references: [id])
   authorId    String
   Category_Quiz Category_Quiz[]
