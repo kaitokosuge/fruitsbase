@@ -1,10 +1,11 @@
 'use client';
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { useHandleInputExplanation } from './hooks/useHandleInputExplanation/useHandleInputExplanation';
-import { useHandleInputEditor } from './hooks/useHandleInputEditor/useHandleInputEditor';
+import { useHandleExplanation } from './hooks/useHandleExplanation/useHandleExplanation';
 import { useHandleOption } from './hooks/useHandleOption/useHandleOption';
 import Category from './components/Category/Category';
+import { useHandleCategory } from './hooks/useHandleCategory/useHandleCategory';
+import { useHandleQuestion } from './hooks/useHandleQuestion/useHandleQuestion';
 const QuestionEditor = dynamic(
     () => import('./components/Editor/QuestionEditor'),
     {
@@ -38,8 +39,8 @@ export default function QuizPost({
         updatedAt: Date;
     }[];
 }) {
-    const { inputExText, handleInputExChange } = useHandleInputExplanation();
-    const { inputText, handleInputChange } = useHandleInputEditor();
+    const { questionText, handleInputChange } = useHandleQuestion();
+    const { explanationText, handleInputExChange } = useHandleExplanation();
     const {
         addOption,
         removeOption,
@@ -47,10 +48,15 @@ export default function QuizPost({
         handleChangeIsCorrect,
         options,
     } = useHandleOption();
+    const { selectedIds, handleClickCategory } = useHandleCategory();
 
+    console.log(questionText, selectedIds, options, explanationText);
     return (
         <div className="mt-10">
-            <Category categories={categories} />
+            <Category
+                categories={categories}
+                handleClickCategory={handleClickCategory}
+            />
             <QuestionEditor
                 id="question"
                 placeholder="クイズ本文"

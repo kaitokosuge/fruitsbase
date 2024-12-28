@@ -3,7 +3,7 @@ import React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import EditorJS from '@editorjs/editorjs';
 import CodeTool from '@editorjs/code';
-import { useHandleInputEditor } from '../../hooks/useHandleInputEditor/useHandleInputEditor';
+import { useHandleQuestion } from '../../hooks/useHandleQuestion/useHandleQuestion';
 
 export default function QuestionEditor({
     id,
@@ -14,7 +14,7 @@ export default function QuestionEditor({
     placeholder: string;
     handleInputChange: (editor: EditorJS) => void;
 }) {
-    const { inputText } = useHandleInputEditor();
+    const { questionText } = useHandleQuestion();
 
     const questionRef = useRef<EditorJS | null>(null);
     //windowオブジェクトが作成されてからeditorインスタンスを作るため、フラグを定義
@@ -36,7 +36,7 @@ export default function QuestionEditor({
                     code: CodeTool,
                 },
                 autofocus: true,
-                data: JSON.parse(inputText),
+                data: JSON.parse(questionText),
                 onChange: () => handleInputChange(questionEditor),
             });
         }
@@ -50,7 +50,7 @@ export default function QuestionEditor({
     }, [isWindowMade]);
     return (
         <div className="mx-auto h-[150px]">
-            {inputText !== '{}' && (
+            {questionText !== '{}' && (
                 <p className="text-gray-500 text-[11px] mx-auto w-[650px]">
                     クイズ本文
                 </p>

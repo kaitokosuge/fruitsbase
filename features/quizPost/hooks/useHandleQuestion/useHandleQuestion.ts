@@ -2,13 +2,13 @@
 import { useState } from 'react';
 import EditorJS from '@editorjs/editorjs';
 
-export const useHandleInputEditor = () => {
-    const [inputText, setInputText] = useState<string>('{}');
+export const useHandleQuestion = () => {
+    const [questionText, setQuestionText] = useState<string>('{}');
     const handleInputChange = (editor: EditorJS) => {
         editor.save().then((editorObj) => {
             const strEditorData = JSON.stringify(editorObj.blocks);
-            setInputText(strEditorData);
+            setQuestionText(strEditorData);
         });
     };
-    return { inputText, handleInputChange };
+    return { questionText, handleInputChange };
 };

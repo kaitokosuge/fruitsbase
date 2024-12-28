@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import EditorJS from '@editorjs/editorjs';
 import CodeTool from '@editorjs/code';
 
-import { useHandleInputExplanation } from '../../hooks/useHandleInputExplanation/useHandleInputExplanation';
+import { useHandleExplanation } from '../../hooks/useHandleExplanation/useHandleExplanation';
 
 export default function ExplanationEditor({
     id,
@@ -15,7 +15,7 @@ export default function ExplanationEditor({
     placeholder: string;
     handleInputExChange: (editor: EditorJS) => void;
 }) {
-    const { inputExText } = useHandleInputExplanation();
+    const { explanationText } = useHandleExplanation();
 
     const questionRef = useRef<EditorJS | null>(null);
     //windowオブジェクトが作成されてからeditorインスタンスを作るため、フラグを定義
@@ -37,7 +37,7 @@ export default function ExplanationEditor({
                     code: CodeTool,
                 },
                 autofocus: false,
-                data: JSON.parse(inputExText),
+                data: JSON.parse(explanationText),
                 onChange: () => handleInputExChange(questionEditor),
             });
         }
