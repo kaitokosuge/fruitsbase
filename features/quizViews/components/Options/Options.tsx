@@ -17,13 +17,13 @@ export default function Options({
                 {quiz.options.map((option, index) => (
                     <button
                         onClick={() => handleClickOption(option.id, quiz.id)}
-                        className="border-b border-b-[#404040] text-left relative cursor-pointer hover:bg-[#3c3c3c] duration-200 pr-5"
+                        className="border-b border-b-[#404040] rounded-md text-left relative cursor-pointer hover:bg-[#3c3c3c] duration-200 pr-5"
                         key={index}
                     >
                         {/* <div className="absolute left-0 top-0 bg-none bg-option-btn-left"></div>
                         <div className="absolute right-0 top-0 bg-option-btn-right"></div> */}
                         <div className="overflow-scroll whitespace-nowrap py-7 pl-5 pr-5">
-                            <p className="absolute text-xl font-bold text-blue-700">
+                            <p className="absolute text-xl font-bold text-blue-500">
                                 {index + 1}
                             </p>
                             {JSON.parse(option.option).map((obj: DataItem) => (

@@ -44,27 +44,34 @@ export default function QuizPost({
         removeOption,
         handleOptionChange,
         handleChangeIsCorrect,
-
         options,
     } = useHandleOption();
     const { selectedIds, handleClickCategory } = useHandleCategory();
 
     return (
         <div className="mt-10 pb-10">
-            <div className="w-[670px] mx-auto flex justify-end">
-                <button
-                    onClick={() =>
-                        SaveQuiz(
-                            questionText,
-                            selectedIds,
-                            options,
-                            explanationText,
-                        )
-                    }
-                    className="block"
-                >
-                    保存
-                </button>
+            <div className="w-[670px] mx-auto flex items-center justify-between">
+                <p className="text-xs text-[#6a6a6a]">
+                    知識をアウトプットしよう！
+                </p>
+                <div className="flex items-center">
+                    <button className="bg-[#333333] text-white px-5 py-1 block rounded-md font-bold hover:bg-blue-950 duration-200">
+                        プレビュー
+                    </button>
+                    <button
+                        onClick={() =>
+                            SaveQuiz(
+                                questionText,
+                                selectedIds,
+                                options,
+                                explanationText,
+                            )
+                        }
+                        className="ml-3 bg-[#333333] text-white px-5 py-1 block rounded-md font-bold hover:bg-blue-800 duration-200"
+                    >
+                        公開する
+                    </button>
+                </div>
             </div>
 
             <Category
@@ -93,7 +100,7 @@ export default function QuizPost({
                 {options.length < 6 && (
                     <button
                         onClick={addOption}
-                        className="block text-gray-500 bg-gray-800 px-2 py-1 rounded-md text-[13px]"
+                        className="block text-gray-500 bg-[#333333] px-2 py-1 rounded-md text-[13px] hover:text-white duration-300"
                     >
                         選択肢を追加する
                     </button>

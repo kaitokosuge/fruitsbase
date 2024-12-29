@@ -41,16 +41,16 @@ export default function QuizViews({ quizzes }: { quizzes: any }) {
                                     <div className="flex items-start absolute">
                                         <img
                                             src={quiz.user.image}
-                                            alt=""
+                                            alt="profile image"
                                             width={25}
                                             height={25}
                                             className="rounded-full"
                                         />
                                         <div className="ml-2">
-                                            <p className=" text-gray-400  text-xs">
+                                            <p className="text-gray-400  text-[13px]">
                                                 {quiz.user.username}
                                             </p>
-                                            <p className="text-[10px] text-gray-400">
+                                            <p className="text-[10px] text-gray-500">
                                                 {quiz.createdAt}
                                             </p>
                                         </div>

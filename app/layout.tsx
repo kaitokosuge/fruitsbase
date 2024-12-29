@@ -20,7 +20,7 @@ export default function RootLayout({
     return (
         <ClerkProvider>
             <html lang="ja">
-                <body className="bg-[#171717] text-[#F0F0F0]">
+                <body className="bg-[#171717] text-[#F0F0F0] w-screen min-h-screen">
                     <SignedOut>
                         <SignInButton />
                     </SignedOut>

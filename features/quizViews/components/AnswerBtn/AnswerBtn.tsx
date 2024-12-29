@@ -12,7 +12,7 @@ export default function AnswerBtn({
         <div>
             <button
                 onClick={() => tryQuiz(selectedOptionIds, quizId)}
-                className="bg-[#3333] text-white px-5 py-1 block rounded-md font-bold hover:bg-[#1d1d1d33] hover:text-black duration-200"
+                className="bg-[#333333] text-white px-5 py-1 block rounded-md font-bold hover:bg-blue-800 duration-200"
             >
                 解答する
             </button>

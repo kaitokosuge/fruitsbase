@@ -17,15 +17,17 @@ export default function Category({
     handleClickCategory: (id: string) => void;
 }) {
     return (
-        <div>
-            <p className="w-[670px] mx-auto text-gray-400">カテゴリ</p>
+        <div className="mt-5">
+            <p className="w-[650px] mx-auto text-gray-500 text-xs pt-4 border-t border-[#252525]">
+                カテゴリ
+            </p>
             <div className="w-[670px] mx-auto flex items-center overflow-scroll py-5">
                 {categories.map((item) => (
                     <button
                         id={item.id}
                         onClick={() => handleClickCategory(item.id)}
                         key={item.id}
-                        className="flex items-center px-2 py-1 border border-gray-600 w-fit rounded-md ml-4"
+                        className="flex items-center px-2 py-1 border border-[#363636] w-fit rounded-md ml-2"
                     >
                         <div className="">
                             {item.svg && (
@@ -36,7 +38,7 @@ export default function Category({
                                 </>
                             )}
                         </div>
-                        <div className="ml-1 text-[13px] text-gray-500">
+                        <div className="ml-1 text-[13px] text-gray-500 whitespace-nowrap">
                             {item.name}
                         </div>
                     </button>

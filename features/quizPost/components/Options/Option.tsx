@@ -60,14 +60,14 @@ export default function Option({
                         }
                         name="pets"
                         id="pet-select"
-                        className="font-bold bg-gray-800 ml-3 rounded-md px-3 py-1 text-[21px] text-gray-300 focus:outline-none"
+                        className="font-bold bg-[#333333] ml-3 rounded-md px-3 py-1 text-[21px] text-gray-300 focus:outline-none"
                     >
                         <option value="true">◎</option>
                         <option value="false">×</option>
                     </select>
                     <button
                         onClick={() => removeOption(option.id)}
-                        className="ml-2 text-[12px] bg-gray-800 px-4 py-2 rounded-md text-gray-400"
+                        className="ml-2 text-[12px] bg-[#333333] px-4 py-2 rounded-md text-gray-400"
                     >
                         削除
                     </button>
@@ -76,7 +76,7 @@ export default function Option({
 
             <div
                 id={String(option.id)}
-                className="min-h-[100px] mx-auto lg:w-[1000px] text-gray-400"
+                className="min-h-[100px] mx-auto lg:w-[1000px] text-gray-300"
             ></div>
         </div>
     );

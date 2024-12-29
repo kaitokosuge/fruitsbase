@@ -16,7 +16,6 @@ export default async function page() {
 
     return (
         <div>
-            <h2 className="w-[700px] mx-auto text-gray-400">クイズの投稿</h2>
             <QuizPost categories={categories} />
         </div>
     );
