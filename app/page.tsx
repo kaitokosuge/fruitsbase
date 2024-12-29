@@ -1,12 +1,54 @@
-import CategoryPost from '@/features/categoryPost/CategoryPost';
+/* eslint-disable @next/next/no-img-element */
 import QuizViews from './../features/quizViews/QuizViews';
+import prisma from '@/lib/prisma';
+import ProfileCard from '@/features/profileCardView/ProfileCard';
+import { auth } from '@clerk/nextjs/server';
 
-export default function Home() {
+export default async function Home() {
+    const { userId, redirectToSignIn } = await auth();
+    if (!userId) {
+        return redirectToSignIn();
+    }
+    const quizzes = await prisma.quiz.findMany({
+        include: {
+            Category_Quiz: {
+                include: {
+                    category: true,
+                },
+            },
+            Option: true,
+            author: true,
+        },
+    });
+    const authUser = await prisma.user.findFirst({
+        where: {
+            id: userId,
+        },
+        include: {
+            Category: true,
+        },
+    });
+
+    console.log('quizzes', quizzes);
     return (
-        <main className="">
-            <h1>Fruitsbase</h1>
-            <CategoryPost />
-            <QuizViews />
+        <main className="bg-[#171717] text-[#F0F0F0]">
+            <div className="w-[90%] mx-auto pt-5">
+                <h1>
+                    <img
+                        src="/fruitsbase-logo.png"
+                        alt="fruitsbase"
+                        className="w-[120px] fixed"
+                    />
+                </h1>
+                <div className="flex justify-between">
+                    <div className="w-[20%]">
+                        <ProfileCard authUser={authUser} />
+                    </div>
+                    <div className="w-[75%]">
+                        <QuizViews quizzes={quizzes} />
+                    </div>
+                </div>
+            </div>
         </main>
     );
 }

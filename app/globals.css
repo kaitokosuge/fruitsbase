@@ -6,9 +6,21 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f0f0f0;
 }
+pre {
+    border-radius: 8px;
+    padding: 18px !important;
+}
 .small-svg > svg {
+    width: 13px !important;
+    height: 13px !important;
+}
+.medium-svg > svg {
     width: 20px !important;
     height: 20px !important;
+}
+.big-svg > svg {
+    width: 30px !important;
+    height: 30px !important;
 }
 @layer base {
     :root {
@@ -67,13 +79,13 @@ body {
 }
 
 .bg-option-btn-left {
-    background: linear-gradient(to right, #f0f0f0 12%, #eeeeee00);
-    height: 64px;
+    background: linear-gradient(to right, #2c2c2c 12%, #eeeeee00);
+    height: 100%;
     width: 27px;
 }
 .bg-option-btn-right {
-    background: linear-gradient(to left, #f0f0f0 12%, #eeeeee00);
-    height: 64px;
+    background: linear-gradient(to left, #2c2c2c 12%, #eeeeee00);
+    height: 100%;
     width: 27px;
 }
 @layer base {

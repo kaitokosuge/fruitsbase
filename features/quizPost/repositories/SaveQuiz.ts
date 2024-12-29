@@ -7,10 +7,6 @@ export const SaveQuiz = async (
     options: QuizOption[],
     explanationText: string,
 ) => {
-    console.log(questionText);
-    console.log(selectedIds);
-    console.log(options);
-    console.log(explanationText);
     const res = await fetch('/api/quiz/create', {
         method: 'POST',
         headers: {

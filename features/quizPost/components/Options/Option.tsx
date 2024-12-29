@@ -30,7 +30,7 @@ export default function Option({
                 onReady() {
                     optionRef.current = optionEditor;
                 },
-                placeholder: `選択肢${index + 1}`,
+                placeholder: `選択肢`,
                 tools: {
                     code: CodeTool,
                 },
