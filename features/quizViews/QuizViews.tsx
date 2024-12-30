@@ -98,6 +98,7 @@ export default function QuizViews({ quizzes }: { quizzes: any }) {
                                 <DrawerDescription></DrawerDescription>
 
                                 <Options
+                                    selectedOptionIds={selectedOptionIds}
                                     quiz={quiz}
                                     handleClickOption={handleClickOption}
                                 />

@@ -7,9 +7,11 @@ import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 export default function Options({
     quiz,
     handleClickOption,
+    selectedOptionIds,
 }: {
     quiz: any;
     handleClickOption: (optionId: string, quizId: string) => void;
+    selectedOptionIds: string[];
 }) {
     return (
         <div>
@@ -17,11 +19,23 @@ export default function Options({
                 {quiz.options.map((option, index) => (
                     <button
                         onClick={() => handleClickOption(option.id, quiz.id)}
-                        className="border-b border-b-[#404040] rounded-md text-left relative cursor-pointer hover:bg-[#3c3c3c] duration-200 pr-5"
+                        className={
+                            selectedOptionIds.some((id) => option.id === id)
+                                ? 'border-b border-b-[#404040] rounded-md text-left relative cursor-pointer bg-[#3d3d3d] duration-200 pr-5'
+                                : 'border-b border-b-[#404040] hover:rounded-md text-left relative cursor-pointer hover:bg-[#2c2c2c] duration-200 pr-5'
+                        }
                         key={index}
                     >
                         <div className="overflow-scroll whitespace-nowrap py-7 pl-5 pr-5">
-                            <p className="absolute text-xl font-bold text-blue-500">
+                            <p
+                                className={
+                                    selectedOptionIds.some(
+                                        (id) => option.id === id,
+                                    )
+                                        ? 'absolute text-2xl font-bold text-emerald-500 duration-300'
+                                        : 'absolute text-2xl font-bold text-[#5e5e5e]'
+                                }
+                            >
                                 {index + 1}
                             </p>
                             {JSON.parse(option.option).map((obj: DataItem) => (
