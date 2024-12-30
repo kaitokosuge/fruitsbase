@@ -7,6 +7,10 @@ export const SaveQuiz = async (
     options: QuizOption[],
     explanationText: string,
 ) => {
+    const isPost = confirm('公開しますか？');
+    if (!isPost) {
+        return;
+    }
     const res = await fetch('/api/quiz/create', {
         method: 'POST',
         headers: {
