@@ -4,6 +4,7 @@ import parse from 'html-react-parser';
 export default function Category({
     categories,
     handleClickCategory,
+    selectedIds,
 }: {
     categories: {
         id: string;
@@ -15,6 +16,7 @@ export default function Category({
         updatedAt: Date;
     }[];
     handleClickCategory: (id: string) => void;
+    selectedIds: string[];
 }) {
     return (
         <div className="mt-5">
@@ -27,7 +29,11 @@ export default function Category({
                         id={item.id}
                         onClick={() => handleClickCategory(item.id)}
                         key={item.id}
-                        className="flex items-center px-2 py-1 border border-[#363636] w-fit rounded-md ml-2"
+                        className={
+                            selectedIds.some((id) => item.id === id)
+                                ? 'duration-200 bg-blue-950 text-white flex items-center px-2 py-1 border border-[#707070] w-fit rounded-md ml-2'
+                                : 'duration-200 hover:bg-blue-950 hover:text-white text-gray-500 flex items-center px-2 py-1 border border-[#363636] w-fit rounded-md ml-2'
+                        }
                     >
                         <div className="">
                             {item.svg && (
@@ -38,7 +44,7 @@ export default function Category({
                                 </>
                             )}
                         </div>
-                        <div className="ml-1 text-[13px] text-gray-500 whitespace-nowrap">
+                        <div className="ml-1 text-[13px] whitespace-nowrap">
                             {item.name}
                         </div>
                     </button>

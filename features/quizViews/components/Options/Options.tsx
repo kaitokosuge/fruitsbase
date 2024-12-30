@@ -20,8 +20,6 @@ export default function Options({
                         className="border-b border-b-[#404040] rounded-md text-left relative cursor-pointer hover:bg-[#3c3c3c] duration-200 pr-5"
                         key={index}
                     >
-                        {/* <div className="absolute left-0 top-0 bg-none bg-option-btn-left"></div>
-                        <div className="absolute right-0 top-0 bg-option-btn-right"></div> */}
                         <div className="overflow-scroll whitespace-nowrap py-7 pl-5 pr-5">
                             <p className="absolute text-xl font-bold text-blue-500">
                                 {index + 1}
@@ -29,14 +27,18 @@ export default function Options({
                             {JSON.parse(option.option).map((obj: DataItem) => (
                                 <div key={obj.id} className="pt-10">
                                     {'code' in obj.data ? (
-                                        <SyntaxHighlighter
-                                            language="typescript"
-                                            style={atomOneDark}
-                                        >
-                                            {obj.data.code}
-                                        </SyntaxHighlighter>
+                                        <div className="text-[13px] mt-2">
+                                            <SyntaxHighlighter
+                                                language="typescript"
+                                                style={atomOneDark}
+                                            >
+                                                {obj.data.code}
+                                            </SyntaxHighlighter>
+                                        </div>
                                     ) : (
-                                        <div>{obj.data.text}</div>
+                                        <div className="mt-2">
+                                            {obj.data.text}
+                                        </div>
                                     )}
                                 </div>
                             ))}

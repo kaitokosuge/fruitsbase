@@ -16,6 +16,8 @@ import { useTryQuiz } from './hooks/useTryQuiz/useTryQuiz';
 import { formatDateToJST } from './utils/formatDateToJST/formatDateToJST';
 import AnswerBtn from './components/AnswerBtn/AnswerBtn';
 import CategoryArea from './components/CategoryArea/CategoryArea';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 export default function QuizViews({ quizzes }: { quizzes: any }) {
     const { handleClickOption, selectedOptionIds } = useTryQuiz();
@@ -23,7 +25,7 @@ export default function QuizViews({ quizzes }: { quizzes: any }) {
     const renderQuizzes = quizzes.map((quiz) => ({
         id: quiz.id,
         user: quiz.author,
-        question: JSON.parse(quiz.question)[0].data.text,
+        question: quiz.question,
         createdAt: formatDateToJST(quiz.createdAt),
         categories: quiz.Category_Quiz,
         options: quiz.Option,
@@ -58,27 +60,43 @@ export default function QuizViews({ quizzes }: { quizzes: any }) {
                                             <CategoryArea quiz={quiz} />
                                         </div>
                                     </div>
-
-                                    <p className="text-[20px] w-full text-white overflow-scroll whitespace-nowrap font-bold pt-10">
-                                        {quiz.question}
+                                    <p className="text-[17px] w-full text-white overflow-scroll whitespace-nowrap font-bold pt-10">
+                                        {JSON.parse(quiz.question)[0].data.text}
                                     </p>
                                 </div>
                             </div>
                         </DrawerTrigger>
                         <DrawerContent className="min-h-[90%] max-h-[95%] md:px-10 bg-[#1c1c1c]">
                             <DrawerHeader className="xl:w-[80%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll pb-20">
-                                <DrawerTitle className="font-normal md:text-[22px] text-[16px] mt-10 text-left text-white">
-                                    {quiz.question}
-                                </DrawerTitle>
-                                <DrawerDescription></DrawerDescription>
-
-                                <div className="flex items-center justify-between">
+                                <div className="flex items-center justify-between mt-10">
                                     <CategoryArea quiz={quiz} />
                                     <AnswerBtn
                                         quizId={quiz.id}
                                         selectedOptionIds={selectedOptionIds}
                                     />
                                 </div>
+                                <DrawerTitle className="font-normal md:text-[18px] text-[16px] mt-5 text-left text-white">
+                                    {JSON.parse(quiz.question).map((item) => (
+                                        <div key={item.id}>
+                                            {'code' in item.data ? (
+                                                <div className="text-[13px] mt-4">
+                                                    <SyntaxHighlighter
+                                                        language="typescript"
+                                                        style={atomOneDark}
+                                                    >
+                                                        {item.data.code}
+                                                    </SyntaxHighlighter>
+                                                </div>
+                                            ) : (
+                                                <div className="mt-4">
+                                                    {item.data.text}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </DrawerTitle>
+                                <DrawerDescription></DrawerDescription>
+
                                 <Options
                                     quiz={quiz}
                                     handleClickOption={handleClickOption}

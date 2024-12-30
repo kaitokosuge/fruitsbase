@@ -75,6 +75,7 @@ export default function QuizPost({
             </div>
 
             <Category
+                selectedIds={selectedIds}
                 categories={categories}
                 handleClickCategory={handleClickCategory}
             />
