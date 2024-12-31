@@ -51,12 +51,12 @@ export default function ExplanationEditor({
     }, [isWindowMade]);
     return (
         <div className="mx-auto mt-10">
-            <p className="border-t mx-auto w-[650px] border-[#252525] pt-2 text-gray-500">
+            <p className="sm:w-[650px] w-[350px] border-t mx-auto border-[#252525] pt-2 text-gray-500">
                 クイズ解説
             </p>
             <div
                 id={editorId}
-                className="mx-auto lg:w-[1000px] min-h-[300px]"
+                className="mx-auto w-[350px] sm:w-[600px] lg:w-[1000px] min-h-[300px]"
             ></div>
         </div>
     );

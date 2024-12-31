@@ -50,12 +50,12 @@ export default function QuizPost({
 
     return (
         <div className="mt-10 pb-10">
-            <div className="w-[670px] mx-auto flex items-center justify-between">
-                <p className="text-xs text-[#6a6a6a]">
+            <div className="md:w-[670px] sm:w-[600px] w-[350px] mx-auto flex items-center justify-between">
+                <p className="md:text-xs text-[10px] text-[#6a6a6a]">
                     知識をアウトプットしよう！
                 </p>
                 <div className="flex items-center">
-                    <button className="bg-[#333333] text-white px-5 py-1 block rounded-md font-bold hover:bg-blue-950 duration-200">
+                    <button className="md:text-md text-xs bg-[#333333] text-white px-3 py-1 block rounded-md font-bold hover:bg-blue-950 duration-200">
                         プレビュー
                     </button>
                     <button
@@ -67,7 +67,7 @@ export default function QuizPost({
                                 explanationText,
                             )
                         }
-                        className="ml-3 bg-[#333333] text-white px-5 py-1 block rounded-md font-bold hover:bg-blue-800 duration-200"
+                        className="md:text-md text-xs ml-3 bg-[#333333] text-white px-3 py-1 block rounded-md font-bold hover:bg-blue-800 duration-200"
                     >
                         公開する
                     </button>
@@ -97,7 +97,7 @@ export default function QuizPost({
                     />
                 </div>
             ))}
-            <div className="mx-auto w-[650px] flex justify-end">
+            <div className="mx-auto w-[350px] sm:w-[600px] md:w-[650px] flex justify-end">
                 {options.length < 6 && (
                     <button
                         onClick={addOption}

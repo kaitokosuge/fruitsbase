@@ -50,12 +50,12 @@ export default function QuestionEditor({
     }, [isWindowMade]);
     return (
         <div className="mx-auto min-h-[150px]">
-            <p className="w-[650px] mx-auto text-gray-500 text-xs pt-4 border-t border-[#252525]">
+            <p className="sm:w-[650px] w-[350px] mx-auto text-gray-500 text-xs pt-4 border-t border-[#252525]">
                 クイズ本文
             </p>
             <div
                 id={editorId}
-                className="mx-auto lg:w-[1000px] min-h-[150px]"
+                className="mx-auto w-[350px] sm:w-[600px] lg:w-[1000px] min-h-[150px]"
             ></div>
         </div>
     );

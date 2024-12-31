@@ -5,6 +5,7 @@ import { AuthUser } from './models/AuthUser';
 import CategoryPost from '../categoryPost/CategoryPost';
 import Link from 'next/link';
 import parse from 'html-react-parser';
+import { UserButton } from '@clerk/nextjs';
 
 export default function ProfileCard({ authUser }: { authUser: AuthUser }) {
     if (!authUser) {
@@ -13,6 +14,7 @@ export default function ProfileCard({ authUser }: { authUser: AuthUser }) {
     return (
         <div className="w-full mt-20">
             <div className="lg:w-[300px] w-[250px] fixed bg-[#232323] px-4 py-4 rounded-md">
+                <UserButton />
                 <div className="flex items-center">
                     {authUser.image && (
                         <img

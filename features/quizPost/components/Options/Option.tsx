@@ -48,7 +48,7 @@ export default function Option({
     }, [isWindowMade]);
     return (
         <div className="mt-5">
-            <div className="flex mx-auto items-center w-[650px] justify-between border-t border-[#252525] pt-2">
+            <div className="flex mx-auto items-center sm:w-[650px] w-[350px] justify-between border-t border-[#252525] pt-2">
                 <p className="text-gray-500 text-[14px] min-w-[100px]">
                     選択肢{index + 1}
                 </p>
@@ -76,7 +76,7 @@ export default function Option({
 
             <div
                 id={String(option.id)}
-                className="min-h-[100px] mx-auto lg:w-[1000px] text-gray-300"
+                className="min-h-[100px] mx-auto w-[350px] sm:w-[600px] lg:w-[1000px] text-gray-300"
             ></div>
         </div>
     );

@@ -20,10 +20,10 @@ export default function Category({
 }) {
     return (
         <div className="mt-5">
-            <p className="w-[650px] mx-auto text-gray-500 text-xs pt-4 border-t border-[#252525]">
+            <p className="sm:w-[650px] w-[350px] mx-auto text-gray-500 text-xs pt-4 border-t border-[#252525]">
                 カテゴリ
             </p>
-            <div className="w-[670px] mx-auto flex items-center overflow-scroll py-5">
+            <div className="sm:w-[670px] w-[360px] mx-auto flex items-center overflow-scroll py-5">
                 {categories.map((item) => (
                     <button
                         id={item.id}
