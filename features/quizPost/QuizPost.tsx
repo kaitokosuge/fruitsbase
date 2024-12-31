@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import React from 'react';
 import dynamic from 'next/dynamic';
@@ -49,31 +50,39 @@ export default function QuizPost({
     const { selectedIds, handleClickCategory } = useHandleCategory();
 
     return (
-        <div className="mt-10 pb-10">
-            <div className="md:w-[670px] sm:w-[600px] w-[350px] mx-auto flex items-center justify-between">
-                <p className="md:text-xs text-[10px] text-[#6a6a6a]">
-                    知識をアウトプットしよう！
-                </p>
-                <div className="flex items-center">
-                    <button className="md:text-md text-xs bg-[#333333] text-white px-3 py-1 block rounded-md font-bold hover:bg-blue-950 duration-200">
-                        プレビュー
-                    </button>
-                    <button
-                        onClick={() =>
-                            SaveQuiz(
-                                questionText,
-                                selectedIds,
-                                options,
-                                explanationText,
-                            )
-                        }
-                        className="md:text-md text-xs ml-3 bg-[#333333] text-white px-3 py-1 block rounded-md font-bold hover:bg-blue-800 duration-200"
-                    >
-                        公開する
-                    </button>
+        <div className="">
+            <div className="border-b border-[#2c2c2c] fixed w-full bg-[#171717] z-[99]">
+                <div className="flex justify-between items-center mx-auto w-[90%] py-2">
+                    <h1 className="flex items-center">
+                        <img
+                            src="/fruitsbase-logo.png"
+                            alt="Fruitsbase"
+                            className="md:w-[120px] w-[100px] block"
+                        />
+                    </h1>
+                    <div className="flex items-center">
+                        <p className="md:text-xs md:block hidden text-[#6a6a6a]">
+                            知識をアウトプットしよう！
+                        </p>
+                        <button className="ml-3 md:text-[17px] text-xs bg-[#333333] text-white px-3 md:py-3 py-1 block rounded-md font-bold hover:bg-blue-950 duration-200">
+                            プレビュー
+                        </button>
+                        <button
+                            onClick={() =>
+                                SaveQuiz(
+                                    questionText,
+                                    selectedIds,
+                                    options,
+                                    explanationText,
+                                )
+                            }
+                            className="md:text-[17px] text-xs ml-3 bg-[#333333] text-white px-3 md:py-3 py-1 block rounded-md font-bold hover:bg-blue-800 duration-200"
+                        >
+                            公開する
+                        </button>
+                    </div>
                 </div>
             </div>
-
             <Category
                 selectedIds={selectedIds}
                 categories={categories}

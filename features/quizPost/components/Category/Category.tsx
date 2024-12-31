@@ -19,8 +19,8 @@ export default function Category({
     selectedIds: string[];
 }) {
     return (
-        <div className="mt-5">
-            <p className="sm:w-[650px] w-[350px] mx-auto text-gray-500 text-xs pt-4 border-t border-[#252525]">
+        <div className="md:pt-[80px] pt-[50px]">
+            <p className="sm:w-[650px] w-[350px] mx-auto text-gray-500 text-xs pt-4">
                 カテゴリ
             </p>
             <div className="sm:w-[670px] w-[360px] mx-auto flex items-center overflow-scroll py-5">

@@ -40,38 +40,62 @@ export default function QuizViews({ quizzes }: { quizzes: any }) {
                 <div key={quiz.id} className="mt-[10px]">
                     <Drawer>
                         <DrawerTrigger className="bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center">
-                            <div className="flex items-center w-[100%] overflow-scroll py-7">
+                            <div className="flex items-center w-[100%] py-7 overflow-hidden">
                                 <div>
-                                    <div className="flex items-start absolute">
-                                        <img
-                                            src={quiz.user.image}
-                                            alt="profile image"
-                                            width={25}
-                                            height={25}
-                                            className="rounded-full"
-                                        />
-                                        <div className="ml-2">
-                                            <p className="text-gray-400  text-[13px]">
-                                                {quiz.user.username}
-                                            </p>
-                                            <p className="text-[10px] text-gray-500">
-                                                {quiz.createdAt}
-                                            </p>
-                                        </div>
-                                        <div className="flex md:w-full w-[50%] overflow-x-scroll items-center ml-5">
-                                            <CategoryArea quiz={quiz} />
+                                    <div className="w-full overflow-hidden flex items-center justify-between">
+                                        <div className="flex items-start">
+                                            <img
+                                                src={quiz.user.image}
+                                                alt="profile image"
+                                                width={25}
+                                                height={25}
+                                                className="rounded-full"
+                                            />
+                                            <div className="ml-2">
+                                                <p className="text-gray-400 text-[13px]">
+                                                    {quiz.user.username}
+                                                </p>
+                                                <p className="text-[10px] text-gray-500">
+                                                    {quiz.createdAt}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <p className="text-[17px] w-full overflow-scroll whitespace-nowrap font-bold pt-10">
-                                        {JSON.parse(quiz.question)[0].data.text}
-                                    </p>
+                                    <div className="text-[17px] w-full whitespace-nowrap overflow-x-scroll font-bold pt-5">
+                                        <p className="w-fit">
+                                            {
+                                                JSON.parse(quiz.question)[0]
+                                                    .data.text
+                                            }
+                                        </p>
+                                    </div>
+                                    <div className="flex overflow-x-scroll items-center w-full mt-3">
+                                        <CategoryArea quiz={quiz} />
+                                    </div>
                                 </div>
                             </div>
                         </DrawerTrigger>
-                        <DrawerContent className="min-h-[90%] max-h-[95%] md:px-10 bg-[#1c1c1c]">
-                            <DrawerHeader className="xl:w-[80%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
+                        <DrawerContent className="md:min-h-[calc(100vh-80px)] md:max-h-[calc(100vh-80px)] min-h-[calc(100vh-60px)] max-h-[calc(100vh-60px)] md:px-10 bg-[#131313]">
+                            <DrawerHeader className="pb-20 xl:w-[80%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
+                                <div className="md:mt-5 mt-0 flex md:justify-end justify-around">
+                                    {quiz.id === quizResponse.quizId &&
+                                        quizResponse.result === 'true' &&
+                                        !loading && (
+                                            <div className="text-emerald-500 md:text-xl text-[15px] font-bold ">
+                                                <p>正解です！</p>
+                                            </div>
+                                        )}
+                                    {quiz.id === quizResponse.quizId &&
+                                        quizResponse.result === 'false' &&
+                                        !loading && (
+                                            <div className="text-red-400 md:text-[18px] text-[15px] font-bold">
+                                                <p>不正解です</p>
+                                            </div>
+                                        )}
+                                </div>
+
                                 <div className="flex items-center justify-between md:mt-5 mt-3">
-                                    <div className="w-[150px] md:w-[400px]">
+                                    <div className="w-[180px] md:w-[400px]">
                                         <CategoryArea quiz={quiz} />
                                     </div>
                                     <div className="flex items-center">
@@ -82,20 +106,6 @@ export default function QuizViews({ quizzes }: { quizzes: any }) {
                                                 </div>
                                             </div>
                                         )}
-                                        {quiz.id === quizResponse.quizId &&
-                                            quizResponse.result === 'true' &&
-                                            !loading && (
-                                                <div className="text-emerald-500 md:text-xl text-xs font-bold ">
-                                                    <p>正解です！</p>
-                                                </div>
-                                            )}
-                                        {quiz.id === quizResponse.quizId &&
-                                            quizResponse.result === 'false' &&
-                                            !loading && (
-                                                <div className="text-red-700 md:text-xl text-xs font-bold ">
-                                                    <p>不正解です</p>
-                                                </div>
-                                            )}
                                         <AnswerBtn
                                             handleClickSubmit={
                                                 handleClickSubmit
@@ -108,11 +118,17 @@ export default function QuizViews({ quizzes }: { quizzes: any }) {
                                         />
                                     </div>
                                 </div>
-                                <DrawerTitle className="font-normal md:text-[18px] text-[16px] mt-5 text-left text-white">
+                                <DrawerTitle className="hidden">
+                                    question
+                                </DrawerTitle>
+                                <div className="font-normal md:text-[18px] text-[16px] text-left max-w-full">
                                     {JSON.parse(quiz.question).map((item) => (
-                                        <div key={item.id}>
+                                        <div
+                                            key={item.id}
+                                            className="max-w-full"
+                                        >
                                             {'code' in item.data ? (
-                                                <div className="text-[13px] mt-4">
+                                                <div className="text-[13px] mt-4 md:w-full w-[340px] mx-auto">
                                                     <SyntaxHighlighter
                                                         language="typescript"
                                                         style={atomOneDark}
@@ -127,7 +143,7 @@ export default function QuizViews({ quizzes }: { quizzes: any }) {
                                             )}
                                         </div>
                                     ))}
-                                </DrawerTitle>
+                                </div>
                                 <DrawerDescription></DrawerDescription>
 
                                 <Options
@@ -137,8 +153,8 @@ export default function QuizViews({ quizzes }: { quizzes: any }) {
                                     handleClickOption={handleClickOption}
                                 />
                             </DrawerHeader>
-                            <DrawerFooter>
-                                <DrawerClose className="text-[10px]">
+                            <DrawerFooter className="flex items-center">
+                                <DrawerClose className="text-[10px] text-gray-600 hover:text-white duration-300 border border-[#1c1c1c] w-[45%] py-2 rounded-md">
                                     閉じる
                                 </DrawerClose>
                             </DrawerFooter>

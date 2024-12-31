@@ -28,8 +28,8 @@ export default function Options({
                                 ? result.result === 'true' &&
                                   result.quizId === quiz.id
                                     ? 'border-b border-b-[#404040] rounded-md text-left relative cursor-pointer bg-emerald-500 duration-200 md:pr-5'
-                                    : 'border-b border-b-[#404040] rounded-md text-left relative cursor-pointer bg-[#3d3d3d] duration-200 md:pr-5'
-                                : 'border-b border-b-[#404040] hover:rounded-md text-left relative cursor-pointer hover:bg-[#2c2c2c] duration-200 md:pr-5'
+                                    : 'border-b border-b-[#404040] rounded-md text-left relative cursor-pointer bg-[#202020] duration-200 md:pr-5'
+                                : 'border-b border-b-[#404040] hover:rounded-md text-left relative cursor-pointer hover:bg-[#1a1a1a] duration-200 md:pr-5'
                         }
                         key={index}
                     >
@@ -39,7 +39,8 @@ export default function Options({
                                     selectedOptionIds.some(
                                         (id) => option.id === id,
                                     )
-                                        ? result === 'true'
+                                        ? result.result === 'true' &&
+                                          result.quizId === quiz.id
                                             ? 'absolute text-2xl font-bold text-white duration-300'
                                             : 'absolute text-2xl font-bold text-emerald-500 duration-300'
                                         : 'absolute text-2xl font-bold text-[#5e5e5e]'
@@ -47,24 +48,28 @@ export default function Options({
                             >
                                 {index + 1}
                             </p>
-                            {JSON.parse(option.option).map((obj: DataItem) => (
-                                <div key={obj.id} className="pt-10">
-                                    {'code' in obj.data ? (
-                                        <div className="text-[13px] mt-2">
-                                            <SyntaxHighlighter
-                                                language="typescript"
-                                                style={atomOneDark}
-                                            >
-                                                {obj.data.code}
-                                            </SyntaxHighlighter>
+                            <div className="mt-5">
+                                {JSON.parse(option.option).map(
+                                    (obj: DataItem) => (
+                                        <div key={obj.id} className="pt-2">
+                                            {'code' in obj.data ? (
+                                                <div className="text-[13px] mt-2">
+                                                    <SyntaxHighlighter
+                                                        language="typescript"
+                                                        style={atomOneDark}
+                                                    >
+                                                        {obj.data.code}
+                                                    </SyntaxHighlighter>
+                                                </div>
+                                            ) : (
+                                                <div className="mt-2">
+                                                    {obj.data.text}
+                                                </div>
+                                            )}
                                         </div>
-                                    ) : (
-                                        <div className="mt-2">
-                                            {obj.data.text}
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
+                                    ),
+                                )}
+                            </div>
                         </div>
                     </button>
                 ))}

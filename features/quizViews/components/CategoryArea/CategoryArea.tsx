@@ -7,14 +7,14 @@ export default function CategoryArea({ quiz }: { quiz: any }) {
             {quiz.categories.map((category) => (
                 <div
                     key={category.category.name}
-                    className="flex items-center border border-[#313131] px-2 py-1 rounded-md ml-1"
+                    className="flex items-center border border-[#313131] px-2 py-1 rounded-md mr-1"
                 >
                     {category.category.svg && (
                         <div className="small-svg block">
                             {parse(category.category.svg)}
                         </div>
                     )}
-                    <p className="ml-1 text-[11px] font-bold text-gray-400 whitespace-nowrap">
+                    <p className="text-[11px] font-bold text-gray-400 whitespace-nowrap">
                         {category.category.name}
                     </p>
                 </div>
