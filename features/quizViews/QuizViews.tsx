@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+'use client';
 import React from 'react';
 import {
     Drawer,
@@ -9,85 +11,152 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from './../../components/ui/drawer';
-import Image from 'next/image';
+import Options from './components/Options/Options';
+import { useOption } from './hooks/useOption/useOption';
+import { formatDateToJST } from './utils/formatDateToJST/formatDateToJST';
+import AnswerBtn from './components/AnswerBtn/AnswerBtn';
+import CategoryArea from './components/CategoryArea/CategoryArea';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { useTry } from './hooks/useTry/useTry';
 
-export default function QuizViews() {
-    const dummy = [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-    ];
+export default function QuizViews({ quizzes }: { quizzes: any }) {
+    const { handleClickOption, selectedOptionIds } = useOption();
+    const { handleClickSubmit, quizResponse, loading } = useTry();
+
+    const renderQuizzes = quizzes.map((quiz) => ({
+        id: quiz.id,
+        user: quiz.author,
+        question: quiz.question,
+        createdAt: formatDateToJST(quiz.createdAt),
+        categories: quiz.Category_Quiz,
+        options: quiz.Option,
+    }));
+
     return (
-        <div>
-            {dummy.map((item) => (
-                <div key={item} className="mt-5">
+        <div className="pb-20">
+            <h2 className="text-xs text-gray-400">time line</h2>
+            {renderQuizzes.map((quiz) => (
+                <div key={quiz.id} className="mt-[10px]">
                     <Drawer>
-                        <DrawerTrigger className="w-[80%] mx-auto bg-white text-left px-5 rounded-md flex justify-between items-center">
-                            <div className="flex items-center w-[50%]">
-                                <div className="min-w-[30px] h-[30px]">
-                                    <Image
-                                        src="/coverage.png"
-                                        className="block h-full w-full rounded-full"
-                                        alt="profile"
-                                        width={30}
-                                        height={30}
-                                    />
-                                </div>
-                                <p className="ml-3 overflow-scroll whitespace-nowrap py-5">
-                                    mswのSetupServerの使い方として適切なものはどれ？mswのSetupServerの使い方として適切なものはどれ？mswのSetupServerの使い方として適切なものはどれ？
-                                </p>
-                            </div>
-                            <div className="w-[40%] flex items-center">
-                                <p className="text-xs">2023/11/09</p>
-                                <div className="w-[25px] h-[25px] bg-yellow-400 ml-5 rounded-[5px]"></div>
-                                <p className="ml-1 text-[14px] font-bold">
-                                    JavaScript
-                                </p>
-                                <div className="w-[25px] h-[25px] bg-blue-500 ml-5 rounded-[5px]"></div>
-                                <p className="ml-1 text-[14px] font-bold">
-                                    TypeScript
-                                </p>
-                            </div>
-                        </DrawerTrigger>
-                        <DrawerContent className="min-h-[85%] max-h-[95%] md:px-10 bg-[#F0F0F0]">
-                            <DrawerHeader className="xl:w-[80%] md:w-[95%] w-[100%] mx-auto">
-                                <DrawerTitle className="md:text-[22px] text-[16px] mt-10 text-left">
-                                    mswのSetupServerの使い方として適切なものはどれ？
-                                </DrawerTitle>
-                                <DrawerDescription></DrawerDescription>
-
-                                <div className="flex items-center justify-between">
-                                    <div className="flex items-center"></div>
-                                    <div>
-                                        <button className="bg-[#3333] text-white px-5 py-1 block rounded-md font-bold">
-                                            解答する
-                                        </button>
+                        <DrawerTrigger className="bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center">
+                            <div className="flex items-center w-[100%] py-7 overflow-hidden">
+                                <div>
+                                    <div className="w-full overflow-hidden flex items-center justify-between">
+                                        <div className="flex items-start">
+                                            <img
+                                                src={quiz.user.image}
+                                                alt="profile image"
+                                                width={25}
+                                                height={25}
+                                                className="rounded-full"
+                                            />
+                                            <div className="ml-2">
+                                                <p className="text-gray-400 text-[13px]">
+                                                    {quiz.user.username}
+                                                </p>
+                                                <p className="text-[10px] text-gray-500">
+                                                    {quiz.createdAt}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="text-[17px] w-full whitespace-nowrap overflow-x-scroll font-bold pt-5">
+                                        <p className="w-fit">
+                                            {
+                                                JSON.parse(quiz.question)[0]
+                                                    .data.text
+                                            }
+                                        </p>
+                                    </div>
+                                    <div className="flex overflow-x-scroll items-center w-full mt-3">
+                                        <CategoryArea quiz={quiz} />
                                     </div>
                                 </div>
-                                <div className="grid mt-2 lg:grid-cols-2 grid-cols-1 gap-4">
-                                    <button className="border border-[#c9c9c9] text-left relative rounded-md">
-                                        <div className="absolute left-0 top-0 bg-none rounded-md bg-option-btn-left"></div>
-                                        <div className="absolute right-0 rounded-md top-0 bg-option-btn-right"></div>
-                                        <div className="overflow-scroll whitespace-nowrap py-5 pl-5 pr-5">
-                                            あerverからのrequestのインターセプトserverからのrequestのインターセプトserverからのrequestのインターセプト
-                                        </div>
-                                    </button>
-                                    <button className="border border-[#c9c9c9] text-left relative rounded-md">
-                                        <div className="absolute left-0 top-0 bg-none rounded-md bg-option-btn-left"></div>
-                                        <div className="absolute right-0 rounded-md top-0 bg-option-btn-right"></div>
-                                        <div className="overflow-scroll whitespace-nowrap py-5 pl-5 pr-5">
-                                            あerverからのrequestのインターセプトserverからのrequestのインターセプトserverからのrequestのインターセプト
-                                        </div>
-                                    </button>
-                                    <button className="border border-[#c9c9c9] text-left relative rounded-md">
-                                        <div className="absolute left-0 top-0 bg-none rounded-md bg-option-btn-left"></div>
-                                        <div className="absolute right-0 rounded-md top-0 bg-option-btn-right"></div>
-                                        <div className="overflow-scroll whitespace-nowrap py-5 pl-5 pr-5">
-                                            あerverからのrequestのインターセプトserverからのrequestのインターセプトserverからのrequestのインターセプト
-                                        </div>
-                                    </button>
+                            </div>
+                        </DrawerTrigger>
+                        <DrawerContent className="md:min-h-[calc(100vh-80px)] md:max-h-[calc(100vh-80px)] min-h-[calc(100vh-60px)] max-h-[calc(100vh-60px)] md:px-10 bg-[#131313]">
+                            <DrawerHeader className="pb-20 xl:w-[80%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
+                                <div className="md:mt-5 mt-0 flex md:justify-end justify-around">
+                                    {quiz.id === quizResponse.quizId &&
+                                        quizResponse.result === 'true' &&
+                                        !loading && (
+                                            <div className="text-emerald-500 md:text-xl text-[15px] font-bold ">
+                                                <p>正解です！</p>
+                                            </div>
+                                        )}
+                                    {quiz.id === quizResponse.quizId &&
+                                        quizResponse.result === 'false' &&
+                                        !loading && (
+                                            <div className="text-red-400 md:text-[18px] text-[15px] font-bold">
+                                                <p>不正解です</p>
+                                            </div>
+                                        )}
                                 </div>
+
+                                <div className="flex items-center justify-between md:mt-5 mt-3">
+                                    <div className="w-[180px] md:w-[400px]">
+                                        <CategoryArea quiz={quiz} />
+                                    </div>
+                                    <div className="flex items-center">
+                                        {loading && (
+                                            <div className="spinner-box">
+                                                <div className="circle-border">
+                                                    <div className="circle-core"></div>
+                                                </div>
+                                            </div>
+                                        )}
+                                        <AnswerBtn
+                                            handleClickSubmit={
+                                                handleClickSubmit
+                                            }
+                                            loading={loading}
+                                            quizId={quiz.id}
+                                            selectedOptionIds={
+                                                selectedOptionIds
+                                            }
+                                        />
+                                    </div>
+                                </div>
+                                <DrawerTitle className="hidden">
+                                    question
+                                </DrawerTitle>
+                                <div className="font-normal md:text-[18px] text-[16px] text-left max-w-full">
+                                    {JSON.parse(quiz.question).map((item) => (
+                                        <div
+                                            key={item.id}
+                                            className="max-w-full"
+                                        >
+                                            {'code' in item.data ? (
+                                                <div className="text-[13px] mt-4 md:w-full w-[340px] mx-auto">
+                                                    <SyntaxHighlighter
+                                                        language="typescript"
+                                                        style={atomOneDark}
+                                                    >
+                                                        {item.data.code}
+                                                    </SyntaxHighlighter>
+                                                </div>
+                                            ) : (
+                                                <div className="mt-4">
+                                                    {item.data.text}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                                <DrawerDescription></DrawerDescription>
+
+                                <Options
+                                    result={quizResponse}
+                                    selectedOptionIds={selectedOptionIds}
+                                    quiz={quiz}
+                                    handleClickOption={handleClickOption}
+                                />
                             </DrawerHeader>
-                            <DrawerFooter>
-                                <DrawerClose>閉じる</DrawerClose>
+                            <DrawerFooter className="flex items-center">
+                                <DrawerClose className="text-[10px] text-gray-600 hover:text-white duration-300 border border-[#1c1c1c] w-[45%] py-2 rounded-md">
+                                    閉じる
+                                </DrawerClose>
                             </DrawerFooter>
                         </DrawerContent>
                     </Drawer>

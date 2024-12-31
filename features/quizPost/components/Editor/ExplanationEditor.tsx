@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import EditorJS from '@editorjs/editorjs';
 import CodeTool from '@editorjs/code';
 
-import { useHandleInputExplanation } from '../../hooks/useHandleInputExplanation/useHandleInputExplanation';
+import { useHandleExplanation } from '../../hooks/useHandleExplanation/useHandleExplanation';
 
 export default function ExplanationEditor({
     id,
@@ -15,7 +15,7 @@ export default function ExplanationEditor({
     placeholder: string;
     handleInputExChange: (editor: EditorJS) => void;
 }) {
-    const { inputExText } = useHandleInputExplanation();
+    const { explanationText } = useHandleExplanation();
 
     const questionRef = useRef<EditorJS | null>(null);
     //windowオブジェクトが作成されてからeditorインスタンスを作るため、フラグを定義
@@ -37,7 +37,7 @@ export default function ExplanationEditor({
                     code: CodeTool,
                 },
                 autofocus: false,
-                data: JSON.parse(inputExText),
+                data: JSON.parse(explanationText),
                 onChange: () => handleInputExChange(questionEditor),
             });
         }
@@ -50,10 +50,13 @@ export default function ExplanationEditor({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isWindowMade]);
     return (
-        <div className="mx-auto">
+        <div className="mx-auto mt-10">
+            <p className="sm:w-[650px] w-[350px] border-t mx-auto border-[#252525] pt-2 text-gray-500">
+                クイズ解説
+            </p>
             <div
                 id={editorId}
-                className="mx-auto lg:w-[1000px] min-h-[300px]"
+                className="mx-auto w-[350px] sm:w-[600px] lg:w-[1000px] min-h-[300px]"
             ></div>
         </div>
     );

@@ -2,15 +2,15 @@
 import { useState } from 'react';
 import EditorJS from '@editorjs/editorjs';
 
-export const useHandleInputExplanation = () => {
-    const [inputExText, setInputExText] = useState<string>('{}');
+export const useHandleExplanation = () => {
+    const [explanationText, setExplanationText] = useState<string>('{}');
     const handleInputExChange = (editor: EditorJS) => {
         editor.save().then((editorObj) => {
             console.log(editorObj);
             const strEditorData = JSON.stringify(editorObj.blocks);
-            setInputExText(strEditorData);
+            setExplanationText(strEditorData);
         });
     };
 
-    return { inputExText, handleInputExChange };
+    return { explanationText, handleInputExChange, setExplanationText };
 };
