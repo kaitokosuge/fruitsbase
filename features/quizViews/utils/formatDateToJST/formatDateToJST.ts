@@ -8,5 +8,7 @@ export const formatDateToJST = (inputDate: Date): string => {
 
     const currentYear = new Date().getFullYear();
 
-    return year === currentYear ? `${month}/${day}` : `${year}/${month}/${day}`;
+    return year === currentYear
+        ? `${year}/${month}/${day}`
+        : `${year}/${month}/${day}`;
 };

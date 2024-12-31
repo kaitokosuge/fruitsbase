@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const useTryQuiz = () => {
+export const useOption = () => {
     const [selectedOptionIds, setSelectedOptionIds] = useState<string[]>([]);
     const [tryingQuizId, setTryingQuizId] = useState<string | null>();
     const handleClickOption = (optionId: string, quizId: string) => {

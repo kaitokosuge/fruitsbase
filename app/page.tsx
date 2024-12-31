@@ -28,8 +28,6 @@ export default async function Home() {
             Category: true,
         },
     });
-
-    console.log('quizzes', quizzes);
     return (
         <main className="bg-[#171717] text-[#F0F0F0]">
             <div className="w-[90%] mx-auto pt-5">
@@ -41,10 +39,10 @@ export default async function Home() {
                     />
                 </h1>
                 <div className="flex justify-between">
-                    <div className="w-[20%]">
+                    <div className="lg:w-[300px] w-[250px] md:block hidden">
                         <ProfileCard authUser={authUser} />
                     </div>
-                    <div className="w-[75%]">
+                    <div className="xl:w-[75%] lg:w-[65%] md:w-[60%] w-full">
                         <QuizViews quizzes={quizzes} />
                     </div>
                 </div>

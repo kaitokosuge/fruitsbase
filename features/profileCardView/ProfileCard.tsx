@@ -12,7 +12,7 @@ export default function ProfileCard({ authUser }: { authUser: AuthUser }) {
     }
     return (
         <div className="w-full mt-20">
-            <div className="w-[300px] fixed bg-[#232323] px-4 py-4 rounded-md">
+            <div className="lg:w-[300px] w-[250px] fixed bg-[#232323] px-4 py-4 rounded-md">
                 <div className="flex items-center">
                     {authUser.image && (
                         <img

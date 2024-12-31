@@ -12,15 +12,17 @@ import {
     DrawerTrigger,
 } from './../../components/ui/drawer';
 import Options from './components/Options/Options';
-import { useTryQuiz } from './hooks/useTryQuiz/useTryQuiz';
+import { useOption } from './hooks/useOption/useOption';
 import { formatDateToJST } from './utils/formatDateToJST/formatDateToJST';
 import AnswerBtn from './components/AnswerBtn/AnswerBtn';
 import CategoryArea from './components/CategoryArea/CategoryArea';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { useTry } from './hooks/useTry/useTry';
 
 export default function QuizViews({ quizzes }: { quizzes: any }) {
-    const { handleClickOption, selectedOptionIds } = useTryQuiz();
+    const { handleClickOption, selectedOptionIds } = useOption();
+    const { handleClickSubmit, quizResponse, loading } = useTry();
 
     const renderQuizzes = quizzes.map((quiz) => ({
         id: quiz.id,
@@ -35,7 +37,7 @@ export default function QuizViews({ quizzes }: { quizzes: any }) {
         <div className="pb-20">
             <h2 className="text-xs text-gray-400">time line</h2>
             {renderQuizzes.map((quiz) => (
-                <div key={quiz.id} className="mt-[15px]">
+                <div key={quiz.id} className="mt-[10px]">
                     <Drawer>
                         <DrawerTrigger className="bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center">
                             <div className="flex items-center w-[100%] overflow-scroll py-7">
@@ -56,24 +58,55 @@ export default function QuizViews({ quizzes }: { quizzes: any }) {
                                                 {quiz.createdAt}
                                             </p>
                                         </div>
-                                        <div className="w-[40%] flex items-center ml-5">
+                                        <div className="flex md:w-full w-[50%] overflow-x-scroll items-center ml-5">
                                             <CategoryArea quiz={quiz} />
                                         </div>
                                     </div>
-                                    <p className="text-[17px] w-full text-white overflow-scroll whitespace-nowrap font-bold pt-10">
+                                    <p className="text-[17px] w-full overflow-scroll whitespace-nowrap font-bold pt-10">
                                         {JSON.parse(quiz.question)[0].data.text}
                                     </p>
                                 </div>
                             </div>
                         </DrawerTrigger>
                         <DrawerContent className="min-h-[90%] max-h-[95%] md:px-10 bg-[#1c1c1c]">
-                            <DrawerHeader className="xl:w-[80%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll pb-20">
-                                <div className="flex items-center justify-between mt-10">
-                                    <CategoryArea quiz={quiz} />
-                                    <AnswerBtn
-                                        quizId={quiz.id}
-                                        selectedOptionIds={selectedOptionIds}
-                                    />
+                            <DrawerHeader className="xl:w-[80%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
+                                <div className="flex items-center justify-between md:mt-5 mt-3">
+                                    <div className="w-[150px] md:w-[400px]">
+                                        <CategoryArea quiz={quiz} />
+                                    </div>
+                                    <div className="flex items-center">
+                                        {loading && (
+                                            <div className="spinner-box">
+                                                <div className="circle-border">
+                                                    <div className="circle-core"></div>
+                                                </div>
+                                            </div>
+                                        )}
+                                        {quiz.id === quizResponse.quizId &&
+                                            quizResponse.result === 'true' &&
+                                            !loading && (
+                                                <div className="text-emerald-500 md:text-xl text-xs font-bold ">
+                                                    <p>正解です！</p>
+                                                </div>
+                                            )}
+                                        {quiz.id === quizResponse.quizId &&
+                                            quizResponse.result === 'false' &&
+                                            !loading && (
+                                                <div className="text-red-700 md:text-xl text-xs font-bold ">
+                                                    <p>不正解です</p>
+                                                </div>
+                                            )}
+                                        <AnswerBtn
+                                            handleClickSubmit={
+                                                handleClickSubmit
+                                            }
+                                            loading={loading}
+                                            quizId={quiz.id}
+                                            selectedOptionIds={
+                                                selectedOptionIds
+                                            }
+                                        />
+                                    </div>
                                 </div>
                                 <DrawerTitle className="font-normal md:text-[18px] text-[16px] mt-5 text-left text-white">
                                     {JSON.parse(quiz.question).map((item) => (
@@ -98,13 +131,14 @@ export default function QuizViews({ quizzes }: { quizzes: any }) {
                                 <DrawerDescription></DrawerDescription>
 
                                 <Options
+                                    result={quizResponse}
                                     selectedOptionIds={selectedOptionIds}
                                     quiz={quiz}
                                     handleClickOption={handleClickOption}
                                 />
                             </DrawerHeader>
                             <DrawerFooter>
-                                <DrawerClose className="text-black">
+                                <DrawerClose className="text-[10px]">
                                     閉じる
                                 </DrawerClose>
                             </DrawerFooter>

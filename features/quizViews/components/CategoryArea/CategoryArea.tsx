@@ -3,18 +3,18 @@ import parse from 'html-react-parser';
 
 export default function CategoryArea({ quiz }: { quiz: any }) {
     return (
-        <div className="flex items-center">
+        <div className="flex items-center overflow-x-scroll">
             {quiz.categories.map((category) => (
                 <div
                     key={category.category.name}
                     className="flex items-center border border-[#313131] px-2 py-1 rounded-md ml-1"
                 >
                     {category.category.svg && (
-                        <div className="small-svg rounded-[5px]">
+                        <div className="small-svg block">
                             {parse(category.category.svg)}
                         </div>
                     )}
-                    <p className="ml-1 text-[11px] font-bold text-gray-400">
+                    <p className="ml-1 text-[11px] font-bold text-gray-400 whitespace-nowrap">
                         {category.category.name}
                     </p>
                 </div>
