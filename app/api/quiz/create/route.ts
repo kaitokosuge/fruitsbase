@@ -8,6 +8,15 @@ export async function POST(req: NextRequest) {
         return redirectToSignIn();
     }
     const data = await req.json();
+
+    const options = data.options;
+    const hasTrueOption = options.some((option) => option.is_correct === true);
+
+    if (!hasTrueOption) {
+        console.log('一つも正しくない');
+        return NextResponse.json({ res: 'fail', error: 'option' });
+    }
+
     const questionText = data.question;
     const explanationText = data.explanation;
     const categories = data.categories;
@@ -28,7 +37,6 @@ export async function POST(req: NextRequest) {
         },
     });
 
-    const options = data.options;
     for (let i = 0; options.length > i; i++) {
         const optionRes = await prisma.option.create({
             data: {

@@ -7,10 +7,6 @@ export const SaveQuiz = async (
     options: QuizOption[],
     explanationText: string,
 ) => {
-    const isPost = confirm('公開しますか？');
-    if (!isPost) {
-        return;
-    }
     const res = await fetch('/api/quiz/create', {
         method: 'POST',
         headers: {
@@ -26,6 +22,9 @@ export const SaveQuiz = async (
     if (res.ok) {
         const data = await res.json();
         console.log('data!', data);
-        redirect('/');
+        if (data.res === 'success') {
+            redirect('/');
+        }
+        return data;
     }
 };
