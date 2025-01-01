@@ -109,6 +109,9 @@ code {
     }
 }
 /* editor.js */
+.ce-popover__container {
+    z-index: 999 !important;
+}
 .codex-editor__redactor {
     padding-bottom: 0px !important;
 }

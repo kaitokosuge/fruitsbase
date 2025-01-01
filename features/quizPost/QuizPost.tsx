@@ -8,6 +8,7 @@ import Category from './components/Category/Category';
 import { useHandleCategory } from './hooks/useHandleCategory/useHandleCategory';
 import { useHandleQuestion } from './hooks/useHandleQuestion/useHandleQuestion';
 import { SaveQuiz } from './repositories/SaveQuiz';
+import { usePost } from './hooks/usePost/usePost';
 
 const QuestionEditor = dynamic(
     () => import('./components/Editor/QuestionEditor'),
@@ -48,6 +49,7 @@ export default function QuizPost({
         options,
     } = useHandleOption();
     const { selectedIds, handleClickCategory } = useHandleCategory();
+    const { loading, postResponse, handleClickAnswer } = usePost();
 
     return (
         <div className="">
@@ -69,13 +71,14 @@ export default function QuizPost({
                         </button>
                         <button
                             onClick={() =>
-                                SaveQuiz(
+                                handleClickAnswer(
                                     questionText,
                                     selectedIds,
                                     options,
                                     explanationText,
                                 )
                             }
+                            disabled={loading}
                             className="md:text-[17px] text-xs ml-3 bg-[#333333] text-white px-3 md:py-3 py-1 block rounded-md font-bold hover:bg-blue-800 duration-200"
                         >
                             公開する
@@ -88,12 +91,56 @@ export default function QuizPost({
                 categories={categories}
                 handleClickCategory={handleClickCategory}
             />
+            {postResponse && (
+                <div className="sm:w-[650px] w-[350px] mx-auto pb-1">
+                    {postResponse.error === 'quizText' && (
+                        <p className="text-red-800  text-xs">
+                            クイズの本文を入力してください
+                        </p>
+                    )}
+                </div>
+            )}
+            {postResponse && (
+                <div className="sm:w-[650px] w-[350px] mx-auto pb-1">
+                    {postResponse.error === 'quizTextCode' && (
+                        <p className="text-red-800  text-xs">
+                            未入力のコードブロックがあります
+                        </p>
+                    )}
+                </div>
+            )}
             <QuestionEditor
                 id="question"
                 placeholder="クイズ本文"
                 handleInputChange={handleInputChange}
             />
-
+            {postResponse && (
+                <div className="sm:w-[650px] w-[350px] mx-auto">
+                    {postResponse.error === 'option' && (
+                        <p className="text-red-800  text-xs">
+                            選択肢は少なくとも一つは◎になるようにクイズを作成してください
+                        </p>
+                    )}
+                </div>
+            )}
+            {postResponse && (
+                <div className="sm:w-[650px] w-[350px] mx-auto">
+                    {postResponse.error === 'optionCode' && (
+                        <p className="text-red-800  text-xs">
+                            未入力のコードブロックがあります
+                        </p>
+                    )}
+                </div>
+            )}
+            {postResponse && (
+                <div className="sm:w-[650px] w-[350px] mx-auto">
+                    {postResponse.error === 'optionText' && (
+                        <p className="text-red-800  text-xs">
+                            選択肢の文章を入力してください
+                        </p>
+                    )}
+                </div>
+            )}
             {options.map((option, index: number) => (
                 <div key={option.id}>
                     <Option
@@ -116,7 +163,6 @@ export default function QuizPost({
                     </button>
                 )}
             </div>
-
             <ExplanationEditor
                 id="explanation"
                 placeholder="クイズ解説"

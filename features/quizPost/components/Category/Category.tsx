@@ -44,7 +44,7 @@ export default function Category({
                                 </>
                             )}
                         </div>
-                        <div className="ml-1 text-[13px] whitespace-nowrap">
+                        <div className="text-[13px] whitespace-nowrap">
                             {item.name}
                         </div>
                     </button>

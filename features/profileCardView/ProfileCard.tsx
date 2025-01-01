@@ -2,7 +2,6 @@
 'use client';
 import React from 'react';
 import { AuthUser } from './models/AuthUser';
-import CategoryPost from '../categoryPost/CategoryPost';
 import parse from 'html-react-parser';
 import {
     Dialog,
@@ -54,7 +53,6 @@ export default function ProfileCard({ authUser }: { authUser: AuthUser }) {
                     ))}
                 </div>
                 <div className="mt-10">
-                    <CategoryPost />
                     <Dialog>
                         <DialogTrigger className="mt-2 block text-sm border border-[#383838] rounded-md px-2 py-1 cursor-pointer">
                             Settings

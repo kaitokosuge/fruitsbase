@@ -8,7 +8,60 @@ export async function POST(req: NextRequest) {
         return redirectToSignIn();
     }
     const data = await req.json();
+
+    const options = data.options;
+    const hasTrueOption = options.some((option) => option.is_correct === true);
+
+    //クイズ本文バリデーション
     const questionText = data.question;
+
+    if (questionText === '{}' || questionText === '[]') {
+        console.log('クイズの文章が空です');
+        console.log(questionText);
+        return NextResponse.json({ res: 'fail', error: 'quizText' });
+    }
+
+    const questionObj = JSON.parse(questionText);
+    const isCodeExist = questionObj.some((question) => {
+        if (question.type === 'code') {
+            return question.data.code === '';
+        }
+    });
+    console.log('コードは存在しているか', isCodeExist);
+
+    if (isCodeExist) {
+        console.log('クイズの文章におけるソースコードが空です');
+        console.log(questionText);
+        return NextResponse.json({ res: 'fail', error: 'quizTextCode' });
+    }
+
+    // 選択肢バリデーション
+    if (!hasTrueOption) {
+        console.log('一つも正しい選択肢がありません');
+        return NextResponse.json({ res: 'fail', error: 'option' });
+    }
+    const isOptionTextNotExist = options.some(
+        (option) => option.text === '' || option.text === '[]',
+    );
+    if (isOptionTextNotExist) {
+        console.log('保存しようとした選択肢', options);
+        console.log('空の選択肢があります');
+        return NextResponse.json({ res: 'fail', error: 'optionText' });
+    }
+
+    const optionsObj = options.flatMap((option) => JSON.parse(option.text));
+    console.log('パースした選択肢', optionsObj);
+    const isOptionCodeNotExist = optionsObj.some((option) => {
+        if (option.type === 'code') {
+            return option.data.code === '';
+        }
+    });
+    if (isOptionCodeNotExist) {
+        console.log('保存しようとした選択肢', options);
+        console.log('空のコードブロックがあります');
+        return NextResponse.json({ res: 'fail', error: 'optionCode' });
+    }
+
     const explanationText = data.explanation;
     const categories = data.categories;
     const quizRes = await prisma.quiz.create({
@@ -27,8 +80,7 @@ export async function POST(req: NextRequest) {
             },
         },
     });
-
-    const options = data.options;
+    console.log('保存しようとした選択肢', options);
     for (let i = 0; options.length > i; i++) {
         const optionRes = await prisma.option.create({
             data: {
@@ -42,5 +94,5 @@ export async function POST(req: NextRequest) {
 
     console.log('クイズ保存結果', quizRes);
 
-    return NextResponse.json({ res: 'success' });
+    return NextResponse.json({ res: 'success', error: null });
 }
