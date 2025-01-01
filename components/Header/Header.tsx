@@ -27,13 +27,17 @@ export default async function Header() {
                                 </Link>
                             </li>
                             <li>
-                                <img
-                                    src={user?.imageUrl}
-                                    width={30}
-                                    height={30}
-                                    alt="profile image"
-                                    className="block rounded-full w-[40px] h-[40px] object-cover ml-5"
-                                />
+                                {user && (
+                                    <Link href={`/profile/${user?.id}`}>
+                                        <img
+                                            src={user?.imageUrl}
+                                            width={30}
+                                            height={30}
+                                            alt="profile image"
+                                            className="block rounded-full w-[40px] h-[40px] object-cover ml-5"
+                                        />
+                                    </Link>
+                                )}
                             </li>
                         </ul>
                     </nav>

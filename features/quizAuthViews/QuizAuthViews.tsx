@@ -21,7 +21,7 @@ import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { useTry } from './hooks/useTry/useTry';
 import Link from 'next/link';
 
-export default function QuizViews({ quizzes }: { quizzes: any }) {
+export default function QuizAuthViews({ quizzes }: { quizzes: any }) {
     const { handleClickOption, selectedOptionIds } = useOption();
     const { handleClickSubmit, quizResponse, loading } = useTry();
 
@@ -40,11 +40,11 @@ export default function QuizViews({ quizzes }: { quizzes: any }) {
             {renderQuizzes.map((quiz) => (
                 <div key={quiz.id} className="mt-[10px]">
                     <Drawer>
-                        <DrawerTrigger className="bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center">
-                            <div className="flex items-center w-[100%] py-7 overflow-hidden">
+                        <DrawerTrigger className="mt-1 bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center">
+                            <div className="w-[100%] py-7 overflow-hidden">
                                 <div>
-                                    <div className="w-full overflow-hidden flex items-center justify-between">
-                                        <div className="">
+                                    <div className="w-[100%] overflow-hidden">
+                                        <div className="flex items-center justify-between w-[100%]">
                                             <Link
                                                 href={`/profile/${quiz.user.id}`}
                                                 className="flex items-start duration-300 hover:opacity-50"
@@ -83,27 +83,33 @@ export default function QuizViews({ quizzes }: { quizzes: any }) {
                         </DrawerTrigger>
                         <DrawerContent className="md:min-h-[calc(100vh-80px)] md:max-h-[calc(100vh-80px)] min-h-[calc(100vh-60px)] max-h-[calc(100vh-60px)] md:px-10 bg-[#131313]">
                             <DrawerHeader className="pb-20 xl:w-[80%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
-                                <Link
-                                    href={`/profile/${quiz.user.id}`}
-                                    className="flex items-center duration-300 hover:opacity-50 w-fit"
-                                >
-                                    <img
-                                        src={quiz.user.image}
-                                        alt="profile image"
-                                        width={25}
-                                        height={25}
-                                        className="rounded-full"
-                                    />
-                                    <div className="ml-2">
-                                        <p className="text-gray-400 text-[13px]">
-                                            {quiz.user.username}
+                                <div className="flex justify-between">
+                                    <Link
+                                        href={`/profile/${quiz.user.id}`}
+                                        className="flex items-center duration-300 hover:opacity-50 w-fit"
+                                    >
+                                        <img
+                                            src={quiz.user.image}
+                                            alt="profile image"
+                                            width={25}
+                                            height={25}
+                                            className="rounded-full"
+                                        />
+                                        <div className="ml-2">
+                                            <p className="text-gray-400 text-[13px]">
+                                                {quiz.user.username}
+                                            </p>
+                                        </div>
+                                        <div className="w-[10px] h-[1px] bg-gray-600 ml-3"></div>
+                                        <p className="text-[11px] text-gray-500 ml-3">
+                                            {quiz.createdAt}
                                         </p>
-                                    </div>
-                                    <div className="w-[10px] h-[1px] bg-gray-600 ml-3"></div>
-                                    <p className="text-[11px] text-gray-500 ml-3">
-                                        {quiz.createdAt}
-                                    </p>
-                                </Link>
+                                    </Link>
+                                    <button className="text-[16px] text-[#555555] border border-[#555555] px-3 py-1 rounded-md hover:text-red-400 hover:border-red-400 duration-300">
+                                        削除する
+                                    </button>
+                                </div>
+
                                 <div className="md:mt-1 mt-1 flex md:justify-end justify-around">
                                     {quiz.id === quizResponse.quizId &&
                                         quizResponse.result === 'true' &&
