@@ -154,7 +154,7 @@ export default function QuizViews({ quizzes }: { quizzes: any }) {
                                 />
                             </DrawerHeader>
                             <DrawerFooter className="flex items-center">
-                                <DrawerClose className="text-[10px] text-gray-600 hover:text-white duration-300 border border-[#1c1c1c] w-[45%] py-2 rounded-md">
+                                <DrawerClose className="text-[10px] text-gray-600 hover:text-white duration-300 border border-[#1c1c1c] w-[10%] py-2 rounded-md">
                                     閉じる
                                 </DrawerClose>
                             </DrawerFooter>

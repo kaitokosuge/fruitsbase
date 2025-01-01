@@ -91,6 +91,24 @@ export default function QuizPost({
                 categories={categories}
                 handleClickCategory={handleClickCategory}
             />
+            {postResponse && (
+                <div className="sm:w-[650px] w-[350px] mx-auto pb-1">
+                    {postResponse.error === 'quizText' && (
+                        <p className="text-red-800  text-xs">
+                            クイズの本文を入力してください
+                        </p>
+                    )}
+                </div>
+            )}
+            {postResponse && (
+                <div className="sm:w-[650px] w-[350px] mx-auto pb-1">
+                    {postResponse.error === 'quizTextCode' && (
+                        <p className="text-red-800  text-xs">
+                            未入力のコードブロックがあります
+                        </p>
+                    )}
+                </div>
+            )}
             <QuestionEditor
                 id="question"
                 placeholder="クイズ本文"
@@ -100,7 +118,25 @@ export default function QuizPost({
                 <div className="sm:w-[650px] w-[350px] mx-auto">
                     {postResponse.error === 'option' && (
                         <p className="text-red-800  text-xs">
-                            選択肢は少なくとも一つが◎になるようにクイズを作成してください
+                            選択肢は少なくとも一つは◎になるようにクイズを作成してください
+                        </p>
+                    )}
+                </div>
+            )}
+            {postResponse && (
+                <div className="sm:w-[650px] w-[350px] mx-auto">
+                    {postResponse.error === 'optionCode' && (
+                        <p className="text-red-800  text-xs">
+                            未入力のコードブロックがあります
+                        </p>
+                    )}
+                </div>
+            )}
+            {postResponse && (
+                <div className="sm:w-[650px] w-[350px] mx-auto">
+                    {postResponse.error === 'optionText' && (
+                        <p className="text-red-800  text-xs">
+                            選択肢の文章を入力してください
                         </p>
                     )}
                 </div>
@@ -127,7 +163,6 @@ export default function QuizPost({
                     </button>
                 )}
             </div>
-
             <ExplanationEditor
                 id="explanation"
                 placeholder="クイズ解説"
