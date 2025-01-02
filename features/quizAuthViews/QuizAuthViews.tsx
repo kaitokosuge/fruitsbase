@@ -20,6 +20,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { useTry } from './hooks/useTry/useTry';
 import Link from 'next/link';
+import { deleteQuiz } from './repositories/deleteQuiz';
 
 export default function QuizAuthViews({ quizzes }: { quizzes: any }) {
     const { handleClickOption, selectedOptionIds } = useOption();
@@ -105,7 +106,18 @@ export default function QuizAuthViews({ quizzes }: { quizzes: any }) {
                                             {quiz.createdAt}
                                         </p>
                                     </Link>
-                                    <button className="text-[16px] text-[#555555] border border-[#555555] px-3 py-1 rounded-md hover:text-red-400 hover:border-red-400 duration-300">
+                                    <button
+                                        onClick={() => {
+                                            const isDelete = confirm(
+                                                'クイズを削除しますか？削除をすると復元できません',
+                                            );
+                                            if (!isDelete) {
+                                                return;
+                                            }
+                                            deleteQuiz(quiz.id, quiz.user.id);
+                                        }}
+                                        className="text-[16px] text-[#555555] border border-[#555555] px-3 py-1 rounded-md hover:text-red-400 hover:border-red-400 duration-300"
+                                    >
                                         削除する
                                     </button>
                                 </div>

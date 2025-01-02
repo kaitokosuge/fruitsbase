@@ -1,5 +1,5 @@
 import QuizPost from '@/features/quizPost/QuizPost';
-import prisma from '@/lib/prisma';
+// import prisma from '@/lib/prisma';
 import { auth } from '@clerk/nextjs/server';
 import React from 'react';
 
@@ -8,15 +8,16 @@ export default async function page() {
     if (!userId) {
         return redirectToSignIn();
     }
-    const categories = await prisma.category.findMany({
-        where: {
-            authorId: userId,
-        },
-    });
+    // const categories = await prisma.category.findMany({
+    //     where: {
+    //         authorId: userId,
+    //     },
+    // });
 
     return (
         <div>
-            <QuizPost categories={categories} />
+            {/* <QuizPost categories={categories} /> */}
+            <QuizPost />
         </div>
     );
 }

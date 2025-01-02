@@ -5,11 +5,8 @@ import { auth } from '@clerk/nextjs/server';
 import Header from '@/components/Header/Header';
 
 export default async function Home() {
-    const { userId, redirectToSignIn } = await auth();
-    if (!userId) {
-        return redirectToSignIn();
-    }
-    console.log('ユーザーid', userId);
+    const { userId } = await auth();
+
     const quizzes = await prisma.quiz.findMany({
         include: {
             Category_Quiz: {
@@ -21,14 +18,18 @@ export default async function Home() {
             author: true,
         },
     });
-    const authUser = await prisma.user.findUnique({
-        where: {
-            id: userId,
-        },
-        include: {
-            Category: true,
-        },
-    });
+    let authUser;
+    if (userId) {
+        authUser = await prisma.user.findUnique({
+            where: {
+                id: userId,
+            },
+            include: {
+                Category: true,
+            },
+        });
+    }
+
     console.log(authUser);
     return (
         <>

@@ -3,26 +3,28 @@ import { auth } from '@clerk/nextjs/server';
 import React from 'react';
 
 export default async function CategoryViews() {
-    const { userId, redirectToSignIn } = await auth();
-    if (!userId) {
-        return redirectToSignIn();
+    const { userId } = await auth();
+
+    let categories;
+    if (userId) {
+        categories = await prisma.category.findMany({
+            where: {
+                authorId: userId,
+            },
+        });
     }
-    const categories = await prisma.category.findMany({
-        where: {
-            authorId: userId,
-        },
-    });
 
     return (
         <div className="">
-            {categories.map((item) => (
-                <div
-                    key={item.id}
-                    className="flex items-center w-fit rounded-md mt-3"
-                >
-                    <div className="font-bold">{item.name}</div>
-                </div>
-            ))}
+            {categories &&
+                categories.map((item) => (
+                    <div
+                        key={item.id}
+                        className="flex items-center w-fit rounded-md mt-3"
+                    >
+                        <div className="font-bold">{item.name}</div>
+                    </div>
+                ))}
         </div>
     );
 }

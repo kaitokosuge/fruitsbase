@@ -21,7 +21,6 @@ export const SaveQuiz = async (
     });
     if (res.ok) {
         const data = await res.json();
-        console.log('data!', data);
         if (data.res === 'success') {
             redirect('/');
         }

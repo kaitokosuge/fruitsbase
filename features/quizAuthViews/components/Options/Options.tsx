@@ -27,7 +27,7 @@ export default function Options({
                             selectedOptionIds.some((id) => option.id === id)
                                 ? result.result === 'true' &&
                                   result.quizId === quiz.id
-                                    ? 'border-b border-b-[#404040] rounded-md text-left relative cursor-pointer bg-emerald-500 duration-200 md:pr-5'
+                                    ? 'border-b border-b-[#404040] rounded-md text-left relative cursor-pointer bg-emerald-600 duration-200 md:pr-5'
                                     : 'border-b border-b-[#404040] rounded-md text-left relative cursor-pointer bg-[#202020] duration-200 md:pr-5'
                                 : 'border-b border-b-[#404040] hover:rounded-md text-left relative cursor-pointer hover:bg-[#1a1a1a] duration-200 md:pr-5'
                         }
@@ -42,7 +42,7 @@ export default function Options({
                                         ? result.result === 'true' &&
                                           result.quizId === quiz.id
                                             ? 'absolute text-2xl font-bold text-white duration-300'
-                                            : 'absolute text-2xl font-bold text-emerald-500 duration-300'
+                                            : 'absolute text-2xl font-bold text-emerald-600 duration-300'
                                         : 'absolute text-2xl font-bold text-[#5e5e5e]'
                                 }
                             >

@@ -41,11 +41,6 @@ export default function ProfileCard({ authUser }: { authUser: AuthUser }) {
                             key={category.id}
                             className="flex items-center mt-4"
                         >
-                            {category.svg && (
-                                <div className="medium-svg">
-                                    {parse(category.svg)}
-                                </div>
-                            )}
                             <p className="text-[15px] font-bold ml-2 text-gray-300">
                                 {category.name}
                             </p>

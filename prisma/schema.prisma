@@ -26,56 +26,98 @@ model User {
   Quiz          Quiz[]
   Category    Category[]
   User_Attempt User_Attempt[]
+  Quiz_Like Quiz_Like[]
+  User_Correct User_Correct[]
+  Category_color Category_color[]
 }
 
 model Quiz {
   id          String   @id @default(cuid())
   question    String   @db.Text
   explanation String   @db.Text
-  author      User     @relation(fields: [authorId], references: [id])
+  author      User     @relation(fields: [authorId], references: [id],onDelete: Cascade)
   authorId    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   Option      Option[]
   Category_Quiz Category_Quiz[]
   User_Attempt User_Attempt[]
+  Quiz_Like Quiz_Like[]
+  User_Correct User_Correct[]
+  Category_Like Category_Like[]
 }
 
 model Option {
   id          String   @id @default(cuid())
   option      String
   is_correct  Boolean
-  quiz        Quiz     @relation(fields: [quizId], references: [id])
+  quiz        Quiz     @relation(fields: [quizId], references: [id],onDelete: Cascade)
   quizId      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
 model Category {
-  id          String   @id @default(cuid())
-  name        String
-  color       String?
-  svg         String?  @db.Text
-  author      User     @relation(fields: [authorId], references: [id])
-  authorId    String
-  Category_Quiz Category_Quiz[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id              String   @id @default(cuid())
+  name            String   @unique 
+  author          User?     @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  authorId        String?
+  Category_Quiz   Category_Quiz[]
+  Category_Like   Category_Like[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  Category_color  Category_color[]
+}
+
+model Category_color {
+  id              String   @id @default(cuid())
+  category        Category  @relation(fields: [categoryId], references: [id],onDelete: Cascade)
+  categoryId      String
+  author          User     @relation(fields: [authorId], references: [id],onDelete: Cascade)
+  authorId        String
+  color           String
+  sub_color       String? 
+}
+
+model Category_Like {
+  user            Quiz      @relation(fields: [userId], references: [id],onDelete: Cascade)
+  userId          String
+  category        Category  @relation(fields: [categoryId], references: [id],onDelete: Cascade)
+  categoryId      String
+  @@id([userId, categoryId])
 }
 
 model Category_Quiz{
-  quiz            Quiz     @relation(fields: [quizId], references: [id])
+  quiz            Quiz      @relation(fields: [quizId], references: [id],onDelete: Cascade)
   quizId          String
-  category        Category     @relation(fields: [categoryId], references: [id])
+  category        Category  @relation(fields: [categoryId], references: [id],onDelete: Cascade)
   categoryId      String
   @@id([quizId, categoryId])
 }
 
 model User_Attempt {
   id              String   @id @default(cuid())
-  quiz            Quiz     @relation(fields: [quizId], references: [id])
+  quiz            Quiz     @relation(fields: [quizId], references: [id],onDelete: Cascade)
   quizId          String
-  user            User     @relation(fields: [userId], references: [id])
+  user            User     @relation(fields: [userId], references: [id],onDelete: Cascade)
   userId          String
   createdAt       DateTime @default(now())
+}
+
+model User_Correct {
+  quiz            Quiz     @relation(fields: [quizId], references: [id],onDelete: Cascade)
+  quizId          String
+  user            User     @relation(fields: [userId], references: [id],onDelete: Cascade)
+  userId          String
+  createdAt       DateTime @default(now())
+  @@id([quizId, userId])
+}
+
+model Quiz_Like {
+  quiz            Quiz     @relation(fields: [quizId], references: [id],onDelete: Cascade)
+  quizId          String
+  user            User     @relation(fields: [userId], references: [id],onDelete: Cascade)
+  userId          String
+  createdAt       DateTime @default(now())
+  @@id([quizId, userId])
 }

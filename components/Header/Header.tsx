@@ -2,6 +2,7 @@
 import { currentUser } from '@clerk/nextjs/server';
 import Link from 'next/link';
 import React from 'react';
+import { SignInButton, SignedOut } from '@clerk/nextjs';
 
 export default async function Header() {
     const user = await currentUser();
@@ -10,15 +11,22 @@ export default async function Header() {
             <header className="border-b rounded-b-md border-[#2c2c2c] top-0 fixed w-full bg-[#171717] z-[1]">
                 <div className="flex justify-between items-center mx-auto w-[90%] md:py-4 py-2">
                     <h1>
-                        <img
-                            src="/fruitsbase-logo.png"
-                            alt="fruitsbase"
-                            className="w-[120px]"
-                        />
+                        <Link href="/">
+                            <img
+                                src="/fruitsbase-logo.png"
+                                alt="fruitsbase"
+                                className="md:w-[100px] w-[70px]"
+                            />
+                        </Link>
                     </h1>
                     <nav>
                         <ul className="flex items-center">
                             <li>
+                                <SignedOut>
+                                    <SignInButton />
+                                </SignedOut>
+                            </li>
+                            <li className="ml-5">
                                 <Link
                                     href="/create"
                                     className="block md:text-sm bg-[#313131] duration-300 hover:bg-blue-900 rounded-md px-4 md:py-3 py-2 font-bold"
@@ -28,9 +36,9 @@ export default async function Header() {
                             </li>
                             <li>
                                 {user && (
-                                    <Link href={`/profile/${user?.id}`}>
+                                    <Link href={`/profile/${user.id}`}>
                                         <img
-                                            src={user?.imageUrl}
+                                            src={user.imageUrl}
                                             width={30}
                                             height={30}
                                             alt="profile image"
