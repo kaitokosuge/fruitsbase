@@ -62,7 +62,7 @@ export default function QuizPost() {
                         <img
                             src="/fruitsbase-logo.png"
                             alt="Fruitsbase"
-                            className="md:w-[120px] w-[100px] block"
+                            className="md:w-[120px] w-[70px] block"
                         />
                     </h1>
                     <div className="flex items-center">

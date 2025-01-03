@@ -21,24 +21,16 @@ import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { useTry } from './hooks/useTry/useTry';
 import Link from 'next/link';
 import { deleteQuiz } from './repositories/deleteQuiz';
+import { Quiz } from '@/models/Quiz';
 
-export default function QuizAuthViews({ quizzes }: { quizzes: any }) {
+export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
     const { handleClickOption, selectedOptionIds } = useOption();
     const { handleClickSubmit, quizResponse, loading } = useTry();
-
-    const renderQuizzes = quizzes.map((quiz) => ({
-        id: quiz.id,
-        user: quiz.author,
-        question: quiz.question,
-        createdAt: formatDateToJST(quiz.createdAt),
-        categories: quiz.Category_Quiz,
-        options: quiz.Option,
-    }));
 
     return (
         <div className="pb-20">
             {/* <h2 className="text-xs text-gray-400">time line</h2> */}
-            {renderQuizzes.map((quiz) => (
+            {quizzes.map((quiz) => (
                 <div key={quiz.id} className="mt-[10px]">
                     <Drawer>
                         <DrawerTrigger className="mt-1 bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center">
@@ -47,22 +39,27 @@ export default function QuizAuthViews({ quizzes }: { quizzes: any }) {
                                     <div className="w-[100%] overflow-hidden">
                                         <div className="flex items-center justify-between w-[100%]">
                                             <Link
-                                                href={`/profile/${quiz.user.id}`}
+                                                href={`/profile/${quiz.author.id}`}
                                                 className="flex items-start duration-300 hover:opacity-50"
                                             >
-                                                <img
-                                                    src={quiz.user.image}
-                                                    alt="profile image"
-                                                    width={25}
-                                                    height={25}
-                                                    className="rounded-full"
-                                                />
+                                                {quiz.author.image && (
+                                                    <img
+                                                        src={quiz.author.image}
+                                                        alt="profile image"
+                                                        width={25}
+                                                        height={25}
+                                                        className="rounded-full"
+                                                    />
+                                                )}
+
                                                 <div className="ml-2">
                                                     <p className="text-gray-400 text-[13px]">
-                                                        {quiz.user.username}
+                                                        {quiz.author.username}
                                                     </p>
                                                     <p className="text-[10px] text-gray-500">
-                                                        {quiz.createdAt}
+                                                        {formatDateToJST(
+                                                            quiz.createdAt,
+                                                        )}
                                                     </p>
                                                 </div>
                                             </Link>
@@ -86,24 +83,26 @@ export default function QuizAuthViews({ quizzes }: { quizzes: any }) {
                             <DrawerHeader className="pb-20 xl:w-[80%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
                                 <div className="flex justify-between">
                                     <Link
-                                        href={`/profile/${quiz.user.id}`}
+                                        href={`/profile/${quiz.author.id}`}
                                         className="flex items-center duration-300 hover:opacity-50 w-fit"
                                     >
-                                        <img
-                                            src={quiz.user.image}
-                                            alt="profile image"
-                                            width={25}
-                                            height={25}
-                                            className="rounded-full"
-                                        />
+                                        {quiz.author.image && (
+                                            <img
+                                                src={quiz.author.image}
+                                                alt="profile image"
+                                                width={25}
+                                                height={25}
+                                                className="rounded-full"
+                                            />
+                                        )}
                                         <div className="ml-2">
                                             <p className="text-gray-400 text-[13px]">
-                                                {quiz.user.username}
+                                                {quiz.author.username}
                                             </p>
                                         </div>
                                         <div className="w-[10px] h-[1px] bg-gray-600 ml-3"></div>
                                         <p className="text-[11px] text-gray-500 ml-3">
-                                            {quiz.createdAt}
+                                            {formatDateToJST(quiz.createdAt)}
                                         </p>
                                     </Link>
                                     <button
@@ -114,7 +113,7 @@ export default function QuizAuthViews({ quizzes }: { quizzes: any }) {
                                             if (!isDelete) {
                                                 return;
                                             }
-                                            deleteQuiz(quiz.id, quiz.user.id);
+                                            deleteQuiz(quiz.id, quiz.author.id);
                                         }}
                                         className="text-[16px] text-[#555555] border border-[#555555] px-3 py-1 rounded-md hover:text-red-400 hover:border-red-400 duration-300"
                                     >
@@ -167,27 +166,39 @@ export default function QuizAuthViews({ quizzes }: { quizzes: any }) {
                                     question
                                 </DrawerTitle>
                                 <div className="font-normal md:text-[18px] text-[16px] text-left max-w-full">
-                                    {JSON.parse(quiz.question).map((item) => (
-                                        <div
-                                            key={item.id}
-                                            className="max-w-full"
-                                        >
-                                            {'code' in item.data ? (
-                                                <div className="text-[13px] mt-4 md:w-full w-[340px] mx-auto">
-                                                    <SyntaxHighlighter
-                                                        language="typescript"
-                                                        style={atomOneDark}
-                                                    >
-                                                        {item.data.code}
-                                                    </SyntaxHighlighter>
-                                                </div>
-                                            ) : (
-                                                <div className="mt-4">
-                                                    {item.data.text}
-                                                </div>
-                                            )}
-                                        </div>
-                                    ))}
+                                    {JSON.parse(quiz.question).map(
+                                        (
+                                            item:
+                                                | {
+                                                      id: string;
+                                                      data: { code: string };
+                                                  }
+                                                | {
+                                                      id: string;
+                                                      data: { text: string };
+                                                  },
+                                        ) => (
+                                            <div
+                                                key={item.id}
+                                                className="max-w-full"
+                                            >
+                                                {'code' in item.data ? (
+                                                    <div className="text-[13px] mt-4 md:w-full w-[340px] mx-auto">
+                                                        <SyntaxHighlighter
+                                                            language="typescript"
+                                                            style={atomOneDark}
+                                                        >
+                                                            {item.data.code}
+                                                        </SyntaxHighlighter>
+                                                    </div>
+                                                ) : (
+                                                    <div className="mt-4">
+                                                        {item.data.text}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ),
+                                    )}
                                 </div>
                                 <DrawerDescription></DrawerDescription>
 

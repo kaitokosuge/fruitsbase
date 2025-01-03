@@ -18,6 +18,7 @@ export default async function Home() {
             author: true,
         },
     });
+    console.log('クイズ一覧', quizzes);
     let authUser;
     if (userId) {
         authUser = await prisma.user.findUnique({
@@ -30,7 +31,7 @@ export default async function Home() {
         });
     }
 
-    console.log(authUser);
+    console.log('認証済みユーザー', authUser);
     return (
         <>
             <Header />
@@ -39,7 +40,7 @@ export default async function Home() {
                     <div className="flex justify-between">
                         <div className="lg:w-[300px] w-[250px] md:block hidden">
                             {/* <ProfileCard authUser={authUser} /> */}
-                            <div className="text-gray-400 lg:w-[300px] w-[250px] fixed bg-[#232323] px-4 py-4 rounded-md mt-[25px] h-[400px]">
+                            <div className="text-gray-600 lg:w-[300px] w-[250px] fixed bg-[#232323] px-4 py-4 rounded-md mt-[25px] h-[400px]">
                                 comming soon
                             </div>
                         </div>

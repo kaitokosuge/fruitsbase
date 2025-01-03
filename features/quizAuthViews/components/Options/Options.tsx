@@ -1,5 +1,6 @@
 'use client';
 import { DataItem } from '@/features/quizPost/hooks/useHandleOption/useHandleOption';
+import { Quiz } from '@/models/Quiz';
 import React from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
@@ -11,14 +12,14 @@ export default function Options({
     selectedOptionIds,
 }: {
     result: { result: string; quizId: string };
-    quiz: any;
+    quiz: Quiz;
     handleClickOption: (optionId: string, quizId: string) => void;
     selectedOptionIds: string[];
 }) {
     return (
         <div>
             <div className="grid mt-2 lg:grid-cols-1 grid-cols-1 gap-4 text-white">
-                {quiz.options.map((option, index: number) => (
+                {quiz.Option.map((option, index: number) => (
                     <button
                         onClick={() => {
                             handleClickOption(option.id, quiz.id);
