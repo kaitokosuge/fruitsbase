@@ -2,7 +2,8 @@ import prisma from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
-    const data = await req.json();
+    const data: { quizId: string; selectedOptions: string[] } =
+        await req.json();
     const triedQuiz = await prisma.quiz.findFirst({
         where: {
             id: data.quizId,

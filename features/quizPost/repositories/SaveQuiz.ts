@@ -20,7 +20,7 @@ export const SaveQuiz = async (
         }),
     });
     if (res.ok) {
-        const data = await res.json();
+        const data: { res: string; error: string | null } = await res.json();
         if (data.res === 'success') {
             redirect('/');
         }

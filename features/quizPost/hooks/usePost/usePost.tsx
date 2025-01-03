@@ -5,7 +5,7 @@ import { QuizOption } from '../../models/QuizOption';
 export const usePost = () => {
     type PostResult = {
         res: string;
-        error: string;
+        error: string | null;
     };
     const [loading, setLoading] = useState(false);
     const [postResponse, setPostResponse] = useState<PostResult>({
