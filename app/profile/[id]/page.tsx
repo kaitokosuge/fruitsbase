@@ -19,7 +19,11 @@ import {
 import { SignOut } from '@/features/signOut/SignOut';
 import { formatDateToJST } from '@/features/profileCardView/utiles/formatDateToJST';
 
-export default async function page({ params }: { params: { id: string } }) {
+export default async function page({
+    params,
+}: {
+    params: Promise<{ id: string }>;
+}) {
     const { id } = await params;
     const { userId } = await auth();
 
@@ -131,10 +135,14 @@ export default async function page({ params }: { params: { id: string } }) {
                             投稿したクイズ
                         </p>
                         <div>
-                            {userId === id && userId !== null ? (
-                                <QuizAuthViews quizzes={userData?.Quiz} />
+                            {userId === id && userId !== null && userData ? (
+                                <QuizAuthViews quizzes={userData.Quiz} />
                             ) : (
-                                <QuizViews quizzes={userData?.Quiz} />
+                                <>
+                                    {userData && (
+                                        <QuizViews quizzes={userData.Quiz} />
+                                    )}
+                                </>
                             )}
                         </div>
                     </div>
