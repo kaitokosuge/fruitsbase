@@ -48,9 +48,10 @@ export default function QuestionEditor({
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isWindowMade]);
+    // border-t border-[#252525]
     return (
         <div className="mx-auto min-h-[150px]">
-            <p className="sm:w-[650px] w-[350px] mx-auto text-gray-500 text-xs pt-4 border-t border-[#252525]">
+            <p className="sm:w-[650px] w-[350px] mx-auto text-gray-500 text-xs pt-4">
                 クイズ本文
             </p>
             <div

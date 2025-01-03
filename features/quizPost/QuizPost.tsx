@@ -4,10 +4,10 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { useHandleExplanation } from './hooks/useHandleExplanation/useHandleExplanation';
 import { useHandleOption } from './hooks/useHandleOption/useHandleOption';
-import Category from './components/Category/Category';
 import { useHandleCategory } from './hooks/useHandleCategory/useHandleCategory';
 import { useHandleQuestion } from './hooks/useHandleQuestion/useHandleQuestion';
-import { SaveQuiz } from './repositories/SaveQuiz';
+// import Category from './components/Category/Category';
+// import { SaveQuiz } from './repositories/SaveQuiz';
 import { usePost } from './hooks/usePost/usePost';
 
 const QuestionEditor = dynamic(
@@ -26,19 +26,21 @@ const Option = dynamic(() => import('./components/Options/Option'), {
     ssr: false,
 });
 
-export default function QuizPost({
-    categories,
-}: {
-    categories: {
-        id: string;
-        name: string;
-        color: string | null;
-        svg: string | null;
-        authorId: string;
-        createdAt: Date;
-        updatedAt: Date;
-    }[];
-}) {
+// {
+//     categories,
+// }: {
+//     categories: {
+//         id: string;
+//         name: string;
+//         color: string | null;
+//         svg: string | null;
+//         authorId: string;
+//         createdAt: Date;
+//         updatedAt: Date;
+//     }[];
+// }
+
+export default function QuizPost() {
     const { questionText, handleInputChange } = useHandleQuestion();
     const { explanationText, handleInputExChange } = useHandleExplanation();
     const {
@@ -48,7 +50,8 @@ export default function QuizPost({
         handleChangeIsCorrect,
         options,
     } = useHandleOption();
-    const { selectedIds, handleClickCategory } = useHandleCategory();
+    const { selectedIds } = useHandleCategory();
+    // const { selectedIds, handleClickCategory } = useHandleCategory();
     const { loading, postResponse, handleClickAnswer } = usePost();
 
     return (
@@ -59,16 +62,16 @@ export default function QuizPost({
                         <img
                             src="/fruitsbase-logo.png"
                             alt="Fruitsbase"
-                            className="md:w-[120px] w-[100px] block"
+                            className="md:w-[120px] w-[70px] block"
                         />
                     </h1>
                     <div className="flex items-center">
                         <p className="md:text-xs md:block hidden text-[#6a6a6a]">
                             知識をアウトプットしよう！
                         </p>
-                        <button className="ml-3 md:text-[17px] text-xs bg-[#333333] text-white px-3 md:py-3 py-1 block rounded-md font-bold hover:bg-blue-950 duration-200">
+                        {/* <button className="ml-3 md:text-[17px] text-xs bg-[#333333] text-white px-3 md:py-3 py-1 block rounded-md font-bold hover:bg-blue-950 duration-200">
                             プレビュー
-                        </button>
+                        </button> */}
                         <button
                             onClick={() =>
                                 handleClickAnswer(
@@ -86,11 +89,12 @@ export default function QuizPost({
                     </div>
                 </div>
             </div>
-            <Category
+            {/* <Category
                 selectedIds={selectedIds}
                 categories={categories}
                 handleClickCategory={handleClickCategory}
-            />
+            /> */}
+            <div className="md:pt-[80px] pt-[55px]"></div>
             {postResponse && (
                 <div className="sm:w-[650px] w-[350px] mx-auto pb-1">
                     {postResponse.error === 'quizText' && (

@@ -1,5 +1,6 @@
 'use client';
 import { DataItem } from '@/features/quizPost/hooks/useHandleOption/useHandleOption';
+import { Quiz } from '@/models/Quiz';
 import React from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
@@ -11,14 +12,14 @@ export default function Options({
     selectedOptionIds,
 }: {
     result: { result: string; quizId: string };
-    quiz: any;
+    quiz: Quiz;
     handleClickOption: (optionId: string, quizId: string) => void;
     selectedOptionIds: string[];
 }) {
     return (
         <div>
             <div className="grid mt-2 lg:grid-cols-1 grid-cols-1 gap-4 text-white">
-                {quiz.options.map((option, index: number) => (
+                {quiz.Option.map((option, index: number) => (
                     <button
                         onClick={() => {
                             handleClickOption(option.id, quiz.id);
@@ -27,7 +28,7 @@ export default function Options({
                             selectedOptionIds.some((id) => option.id === id)
                                 ? result.result === 'true' &&
                                   result.quizId === quiz.id
-                                    ? 'border-b border-b-[#404040] rounded-md text-left relative cursor-pointer bg-emerald-500 duration-200 md:pr-5'
+                                    ? 'border-b border-b-[#404040] rounded-md text-left relative cursor-pointer bg-emerald-600 duration-200 md:pr-5'
                                     : 'border-b border-b-[#404040] rounded-md text-left relative cursor-pointer bg-[#202020] duration-200 md:pr-5'
                                 : 'border-b border-b-[#404040] hover:rounded-md text-left relative cursor-pointer hover:bg-[#1a1a1a] duration-200 md:pr-5'
                         }
@@ -42,7 +43,7 @@ export default function Options({
                                         ? result.result === 'true' &&
                                           result.quizId === quiz.id
                                             ? 'absolute text-2xl font-bold text-white duration-300'
-                                            : 'absolute text-2xl font-bold text-emerald-500 duration-300'
+                                            : 'absolute text-2xl font-bold text-emerald-600 duration-300'
                                         : 'absolute text-2xl font-bold text-[#5e5e5e]'
                                 }
                             >

@@ -6,7 +6,6 @@ export const useHandleExplanation = () => {
     const [explanationText, setExplanationText] = useState<string>('{}');
     const handleInputExChange = (editor: EditorJS) => {
         editor.save().then((editorObj) => {
-            console.log(editorObj);
             const strEditorData = JSON.stringify(editorObj.blocks);
             setExplanationText(strEditorData);
         });

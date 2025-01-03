@@ -5,11 +5,8 @@ import { auth } from '@clerk/nextjs/server';
 import Header from '@/components/Header/Header';
 
 export default async function Home() {
-    const { userId, redirectToSignIn } = await auth();
-    if (!userId) {
-        return redirectToSignIn();
-    }
-    console.log('ユーザーid', userId);
+    const { userId } = await auth();
+
     const quizzes = await prisma.quiz.findMany({
         include: {
             Category_Quiz: {
@@ -21,15 +18,20 @@ export default async function Home() {
             author: true,
         },
     });
-    const authUser = await prisma.user.findUnique({
-        where: {
-            id: userId,
-        },
-        include: {
-            Category: true,
-        },
-    });
-    console.log(authUser);
+    console.log('クイズ一覧', quizzes);
+    let authUser;
+    if (userId) {
+        authUser = await prisma.user.findUnique({
+            where: {
+                id: userId,
+            },
+            include: {
+                Category: true,
+            },
+        });
+    }
+
+    console.log('認証済みユーザー', authUser);
     return (
         <>
             <Header />
@@ -38,7 +40,7 @@ export default async function Home() {
                     <div className="flex justify-between">
                         <div className="lg:w-[300px] w-[250px] md:block hidden">
                             {/* <ProfileCard authUser={authUser} /> */}
-                            <div className="text-gray-400 lg:w-[300px] w-[250px] fixed bg-[#232323] px-4 py-4 rounded-md mt-[25px] h-[400px]">
+                            <div className="text-gray-600 lg:w-[300px] w-[250px] fixed bg-[#232323] px-4 py-4 rounded-md mt-[25px] h-[400px]">
                                 comming soon
                             </div>
                         </div>

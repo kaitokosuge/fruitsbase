@@ -1,10 +1,5 @@
 import type { Metadata } from 'next';
-import {
-    ClerkProvider,
-    SignInButton,
-    SignedIn,
-    SignedOut,
-} from '@clerk/nextjs';
+import { ClerkProvider } from '@clerk/nextjs';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -22,10 +17,6 @@ export default function RootLayout({
         <ClerkProvider>
             <html lang="ja">
                 <body className="bg-[#171717] text-[#F0F0F0] w-screen min-h-screen">
-                    <SignedOut>
-                        <SignInButton />
-                    </SignedOut>
-                    <SignedIn></SignedIn>
                     {children}
                 </body>
             </html>
