@@ -17,16 +17,10 @@ export async function submitCategory(formData: FormData): Promise<void> {
         if (!categoryName || typeof categoryName !== 'string') {
             throw new Error();
         }
-        const categorySvg = formData.get('svg');
-        const removeScriptSvg = (input: string) => {
-            return input.replace(/<script.*?>.*?<\/script>/gi, '');
-        };
-        const safeSvg = removeScriptSvg(categorySvg as string);
 
         const result = await prisma.category.create({
             data: {
                 name: categoryName,
-                svg: safeSvg,
                 authorId: userId,
             },
         });
