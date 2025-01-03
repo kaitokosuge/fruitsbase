@@ -7,7 +7,7 @@ export async function DELETE(req: NextRequest) {
     if (!userId) {
         return redirectToSignIn();
     }
-    const data = await req.json();
+    const data: { quizId: string } = await req.json();
 
     const quizDeleteRes = await prisma.quiz.delete({
         where: {

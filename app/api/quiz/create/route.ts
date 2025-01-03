@@ -1,3 +1,5 @@
+import { ParsedEditordata } from '@/features/quizPost/models/ParsedEditordata';
+import { QuizOption } from '@/features/quizPost/models/QuizOption';
 import prisma from '@/lib/prisma';
 import { auth } from '@clerk/nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
@@ -9,7 +11,7 @@ export async function POST(req: NextRequest) {
     }
     const data = await req.json();
 
-    const options = data.options;
+    const options: QuizOption[] = data.options;
     const hasTrueOption = options.some((option) => option.is_correct === true);
 
     //クイズ本文バリデーション
@@ -21,7 +23,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ res: 'fail', error: 'quizText' });
     }
 
-    const questionObj = JSON.parse(questionText);
+    const questionObj: ParsedEditordata[] = JSON.parse(questionText);
     const isCodeExist = questionObj.some((question) => {
         if (question.type === 'code') {
             return question.data.code === '';
@@ -49,35 +51,38 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ res: 'fail', error: 'optionText' });
     }
 
-    const optionsObj = options.flatMap((option) => JSON.parse(option.text));
+    const optionsObj: ParsedEditordata[] = options.flatMap((option) =>
+        JSON.parse(option.text),
+    );
     console.log('パースした選択肢', optionsObj);
     const isOptionCodeNotExist = optionsObj.some((option) => {
         if (option.type === 'code') {
             return option.data.code === '';
         }
     });
+    console.log('保存しようとした選択肢', options);
     if (isOptionCodeNotExist) {
         console.log('保存しようとした選択肢', options);
         console.log('空のコードブロックがあります');
         return NextResponse.json({ res: 'fail', error: 'optionCode' });
     }
 
-    const explanationText = data.explanation;
-    const categories = data.categories;
+    const explanationText: string = data.explanation;
+    // const categories = data.categories;
     const quizRes = await prisma.quiz.create({
         data: {
             question: questionText,
             explanation: explanationText,
             authorId: userId,
-            Category_Quiz: {
-                create: categories.map((id: string) => ({
-                    category: {
-                        connect: {
-                            id: id,
-                        },
-                    },
-                })),
-            },
+            // Category_Quiz: {
+            //     create: categories.map((id: string) => ({
+            //         category: {
+            //             connect: {
+            //                 id: id,
+            //             },
+            //         },
+            //     })),
+            // },
         },
     });
     console.log('保存しようとした選択肢', options);
