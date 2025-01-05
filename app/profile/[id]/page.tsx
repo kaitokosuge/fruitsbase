@@ -5,7 +5,7 @@ import Header from '@/components/Header/Header';
 // import QuizViews from '@/features/quizViews/QuizViews';
 import UserDelete from '@/features/userDelete/UserDelete';
 import prisma from '@/lib/prisma';
-// import { auth } from '@clerk/nextjs/server';
+import { auth } from '@clerk/nextjs/server';
 import React from 'react';
 
 import {
@@ -25,8 +25,8 @@ export default async function page({
     params: Promise<{ id: string }>;
 }) {
     const { id } = await params;
-    // const { userId } = await auth();
-    const userId = 'user_2r4i4LxZWE3DZZNChEFKPhJ4u9Y';
+    const { userId } = await auth();
+    // const userId = 'user_2r4i4LxZWE3DZZNChEFKPhJ4u9Y';
 
     // const existingUserRecord = await prisma.user.findUnique({
     //     where: {
