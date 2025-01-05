@@ -28,22 +28,22 @@ export default async function page({
     const { userId } = await auth();
     // const userId = 'user_2r4i4LxZWE3DZZNChEFKPhJ4u9Y';
 
-    // const existingUserRecord = await prisma.user.findUnique({
-    //     where: {
-    //         id: id,
-    //     },
-    // });
-    // console.log('存在してる', existingUserRecord);
-    // if (!existingUserRecord) {
-    //     return (
-    //         <div>
-    //             <Header />
-    //             <p className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[60px] w-[90%] mx-auto">
-    //                 user not found
-    //             </p>
-    //         </div>
-    //     );
-    // }
+    const existingUserRecord = await prisma.user.findUnique({
+        where: {
+            id: id,
+        },
+    });
+    console.log('存在してる', existingUserRecord);
+    if (!existingUserRecord) {
+        return (
+            <div>
+                <Header />
+                <p className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[60px] w-[90%] mx-auto">
+                    user not found
+                </p>
+            </div>
+        );
+    }
     const userData = await prisma.user.findFirst({
         where: {
             id: id,
