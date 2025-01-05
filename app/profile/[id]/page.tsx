@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import Header from '@/components/Header/Header';
 // import CategoryViews from '@/features/categoryViews/CategoryViews';
-import QuizAuthViews from '@/features/quizAuthViews/QuizAuthViews';
-import QuizViews from '@/features/quizViews/QuizViews';
+// import QuizAuthViews from '@/features/quizAuthViews/QuizAuthViews'
+// import QuizViews from '@/features/quizViews/QuizViews';
 import UserDelete from '@/features/userDelete/UserDelete';
 import prisma from '@/lib/prisma';
-import { auth } from '@clerk/nextjs/server';
+// import { auth } from '@clerk/nextjs/server';
 import React from 'react';
 
 import {
@@ -25,42 +25,43 @@ export default async function page({
     params: Promise<{ id: string }>;
 }) {
     const { id } = await params;
-    const { userId } = await auth();
+    // const { userId } = await auth();
+    const userId = 'user_2r4i4LxZWE3DZZNChEFKPhJ4u9Y';
 
-    const existingUserRecord = await prisma.user.findUnique({
-        where: {
-            id: id,
-        },
-    });
-    console.log('存在してる', existingUserRecord);
-    if (!existingUserRecord) {
-        return (
-            <div>
-                <Header />
-                <p className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[60px] w-[90%] mx-auto">
-                    user not found
-                </p>
-            </div>
-        );
-    }
+    // const existingUserRecord = await prisma.user.findUnique({
+    //     where: {
+    //         id: id,
+    //     },
+    // });
+    // console.log('存在してる', existingUserRecord);
+    // if (!existingUserRecord) {
+    //     return (
+    //         <div>
+    //             <Header />
+    //             <p className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[60px] w-[90%] mx-auto">
+    //                 user not found
+    //             </p>
+    //         </div>
+    //     );
+    // }
     const userData = await prisma.user.findFirst({
         where: {
             id: id,
         },
-        include: {
-            Quiz: {
-                include: {
-                    Option: true,
-                    Category_Quiz: {
-                        include: {
-                            category: true,
-                        },
-                    },
-                    author: true,
-                },
-            },
-            Category: true,
-        },
+        // include: {
+        //     Quiz: {
+        //         include: {
+        //             Option: true,
+        //             Category_Quiz: {
+        //                 include: {
+        //                     category: true,
+        //                 },
+        //             },
+        //             author: true,
+        //         },
+        //     },
+        //     Category: true,
+        // },
     });
     return (
         <div>
@@ -135,7 +136,7 @@ export default async function page({
                             投稿したクイズ
                         </p>
                         <div>
-                            {userId === id && userId !== null && userData ? (
+                            {/* {userId === id && userId !== null && userData ? (
                                 <QuizAuthViews quizzes={userData.Quiz} />
                             ) : (
                                 <>
@@ -143,7 +144,7 @@ export default async function page({
                                         <QuizViews quizzes={userData.Quiz} />
                                     )}
                                 </>
-                            )}
+                            )} */}
                         </div>
                     </div>
                 </div>
