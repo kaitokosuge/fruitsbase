@@ -48,20 +48,20 @@ export default async function page({
         where: {
             id: id,
         },
-        // include: {
-        //     Quiz: {
-        //         include: {
-        //             Option: true,
-        //             Category_Quiz: {
-        //                 include: {
-        //                     category: true,
-        //                 },
-        //             },
-        //             author: true,
-        //         },
-        //     },
-        //     Category: true,
-        // },
+        include: {
+            Quiz: {
+                include: {
+                    Option: true,
+                    Category_Quiz: {
+                        include: {
+                            category: true,
+                        },
+                    },
+                    author: true,
+                },
+            },
+            Category: true,
+        },
     });
     return (
         <div>
