@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import Header from '@/components/Header/Header';
 // import CategoryViews from '@/features/categoryViews/CategoryViews';
-// import QuizAuthViews from '@/features/quizAuthViews/QuizAuthViews'
-// import QuizViews from '@/features/quizViews/QuizViews';
+import QuizAuthViews from '@/features/quizAuthViews/QuizAuthViews';
+import QuizViews from '@/features/quizViews/QuizViews';
 import UserDelete from '@/features/userDelete/UserDelete';
 import prisma from '@/lib/prisma';
 import { auth } from '@clerk/nextjs/server';
@@ -136,7 +136,7 @@ export default async function page({
                             投稿したクイズ
                         </p>
                         <div>
-                            {/* {userId === id && userId !== null && userData ? (
+                            {userId === id && userId !== null && userData ? (
                                 <QuizAuthViews quizzes={userData.Quiz} />
                             ) : (
                                 <>
@@ -144,7 +144,7 @@ export default async function page({
                                         <QuizViews quizzes={userData.Quiz} />
                                     )}
                                 </>
-                            )} */}
+                            )}
                         </div>
                     </div>
                 </div>
