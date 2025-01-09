@@ -4,7 +4,7 @@ import Header from '@/components/Header/Header';
 import UserDelete from '@/features/userDelete/UserDelete';
 import prisma from '@/lib/prisma';
 import { auth } from '@clerk/nextjs/server';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import {
     Dialog,
@@ -121,7 +121,15 @@ export default async function page({
                             投稿したクイズ
                         </p>
                         <div>
-                            <Container paramId={id} authId={userId} />
+                            <Suspense
+                                fallback={
+                                    <div className="text-xs font-bold mt-5 font-mono">
+                                        loading...
+                                    </div>
+                                }
+                            >
+                                <Container paramId={id} authId={userId} />
+                            </Suspense>
                         </div>
                     </div>
                 </div>

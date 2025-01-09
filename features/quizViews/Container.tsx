@@ -10,6 +10,10 @@ export default async function Container({
     paramId: string;
     authId: string | null;
 }) {
+    const delay = (ms: number): Promise<void> => {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    };
+    await delay(2000);
     const userData = await prisma.user.findFirst({
         where: {
             id: paramId,
