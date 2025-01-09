@@ -1,12 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import Header from '@/components/Header/Header';
 // import CategoryViews from '@/features/categoryViews/CategoryViews';
-import QuizAuthViews from '@/features/quizAuthViews/QuizAuthViews';
-import QuizViews from '@/features/quizViews/QuizViews';
 import UserDelete from '@/features/userDelete/UserDelete';
 import prisma from '@/lib/prisma';
 import { auth } from '@clerk/nextjs/server';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import {
     Dialog,
@@ -18,6 +16,7 @@ import {
 } from '@/components/ui/dialog';
 import { SignOut } from '@/features/signOut/SignOut';
 import { formatDateToJST } from '@/features/profileCardView/utiles/formatDateToJST';
+import Container from '@/features/quizViews/Container';
 
 export default async function page({
     params,
@@ -47,20 +46,6 @@ export default async function page({
     const userData = await prisma.user.findFirst({
         where: {
             id: id,
-        },
-        include: {
-            Quiz: {
-                include: {
-                    Option: true,
-                    Category_Quiz: {
-                        include: {
-                            category: true,
-                        },
-                    },
-                    author: true,
-                },
-            },
-            Category: true,
         },
     });
     return (
@@ -136,15 +121,15 @@ export default async function page({
                             投稿したクイズ
                         </p>
                         <div>
-                            {userId === id && userId !== null && userData ? (
-                                <QuizAuthViews quizzes={userData.Quiz} />
-                            ) : (
-                                <>
-                                    {userData && (
-                                        <QuizViews quizzes={userData.Quiz} />
-                                    )}
-                                </>
-                            )}
+                            <Suspense
+                                fallback={
+                                    <div className="text-xs font-bold mt-5 font-mono">
+                                        loading...
+                                    </div>
+                                }
+                            >
+                                <Container paramId={id} authId={userId} />
+                            </Suspense>
                         </div>
                     </div>
                 </div>
