@@ -1,13 +1,5 @@
 import type { NextConfig } from 'next';
 
-const nextConfig: NextConfig = {
-    /* config options here */
-    // experimental: {
-    //     dynamicIO: true,
-    // },
-    experimental: {
-        dynamicIO: true,
-    },
-};
+const nextConfig: NextConfig = {};
 
 export default nextConfig;
