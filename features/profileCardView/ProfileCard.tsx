@@ -2,7 +2,6 @@
 'use client';
 import React from 'react';
 import { AuthUser } from './models/AuthUser';
-import parse from 'html-react-parser';
 import {
     Dialog,
     DialogContent,
