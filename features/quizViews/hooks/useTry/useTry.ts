@@ -22,9 +22,6 @@ export const useTry = () => {
         }
         setLoading(true);
         const resultData = await tryQuiz(selectedOptionIds, quizId);
-        const delay = (ms: number) =>
-            new Promise((resolve) => setTimeout(resolve, ms));
-        await delay(500);
         setLoading(false);
 
         if (resultData) {
