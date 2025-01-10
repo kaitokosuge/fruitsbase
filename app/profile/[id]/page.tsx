@@ -2,7 +2,7 @@ import Header from '@/components/Header/Header';
 // import CategoryViews from '@/features/categoryViews/CategoryViews';
 import React, { Suspense } from 'react';
 
-import Container from '@/features/quizViews/Container';
+import QuizAuthContainer from '@/features/quizAuthViews/QuizAuthContainer';
 import BasicProfileContainer from '@/features/basicProfileView/BasicProfileContainer';
 import { auth } from '@clerk/nextjs/server';
 
@@ -45,7 +45,10 @@ export default async function page({
                                     </div>
                                 }
                             >
-                                <Container paramId={id} authId={userId} />
+                                <QuizAuthContainer
+                                    paramId={id}
+                                    authId={userId}
+                                />
                             </Suspense>
                         </div>
                     </div>

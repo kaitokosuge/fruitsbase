@@ -1,9 +1,9 @@
 import prisma from '@/lib/prisma';
 import React from 'react';
-import QuizAuthViews from '../quizAuthViews/QuizAuthViews';
-import QuizViews from './QuizViews';
+import QuizAuthViews from './QuizAuthViews';
+import QuizViews from '../quizViews/QuizViews';
 
-export default async function Container({
+export default async function QuizAuthContainer({
     paramId,
     authId,
 }: {
@@ -24,6 +24,9 @@ export default async function Container({
                         },
                     },
                     author: true,
+                },
+                orderBy: {
+                    updatedAt: 'desc',
                 },
             },
             Category: true,

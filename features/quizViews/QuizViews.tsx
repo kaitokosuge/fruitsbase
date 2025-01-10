@@ -38,6 +38,7 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
                                     <div className="w-full overflow-hidden flex items-center justify-between">
                                         <div className="">
                                             <Link
+                                                scroll={true}
                                                 href={`/profile/${quiz.author.id}`}
                                                 className="flex items-start duration-300 hover:opacity-50"
                                             >
@@ -81,6 +82,7 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
                         <DrawerContent className="md:min-h-[calc(100dvh-80px)] md:max-h-[calc(100dvh-80px)] min-h-[calc(100dvh-60px)] max-h-[calc(100dvh-60px)] md:px-10 bg-[#131313]">
                             <DrawerHeader className="pb-20 xl:w-[80%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
                                 <Link
+                                    scroll={true}
                                     href={`/profile/${quiz.author.id}`}
                                     className="flex items-center duration-300 hover:opacity-50 w-fit"
                                 >
