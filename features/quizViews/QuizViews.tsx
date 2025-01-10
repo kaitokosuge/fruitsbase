@@ -3,7 +3,6 @@
 import React from 'react';
 import {
     Drawer,
-    DrawerClose,
     DrawerContent,
     DrawerDescription,
     DrawerFooter,
@@ -184,7 +183,7 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
                                         ),
                                     )}
                                 </div>
-                                <DrawerDescription></DrawerDescription>
+                                <DrawerDescription className="hidden"></DrawerDescription>
 
                                 <Options
                                     result={quizResponse}
@@ -193,11 +192,7 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
                                     handleClickOption={handleClickOption}
                                 />
                             </DrawerHeader>
-                            <DrawerFooter className="flex items-center">
-                                <DrawerClose className="text-[10px] text-gray-600 hover:text-white duration-300 border border-[#1c1c1c] w-[10%] py-2 rounded-md">
-                                    閉じる
-                                </DrawerClose>
-                            </DrawerFooter>
+                            <DrawerFooter className="hidden opacity-80 items-center rounded-t-[10px] border-t border-[#68686833]"></DrawerFooter>
                         </DrawerContent>
                     </Drawer>
                 </div>

@@ -28,7 +28,7 @@ const DrawerOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
     <DrawerPrimitive.Overlay
         ref={ref}
-        className={cn('fixed inset-0 z-50 bg-black/20', className)}
+        className={cn('fixed inset-0 z-50 bg-black/30', className)}
         {...props}
     />
 ));
@@ -43,7 +43,7 @@ const DrawerContent = React.forwardRef<
         <DrawerPrimitive.Content
             ref={ref}
             className={cn(
-                'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border-t border-[#68686833] bg-background',
+                'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[15px] border-t border-[#45454533] bg-background',
                 className,
             )}
             {...props}
@@ -70,10 +70,7 @@ const DrawerFooter = ({
     className,
     ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
-    <div
-        className={cn('mt-auto flex flex-col gap-2 p-4', className)}
-        {...props}
-    />
+    <div className={cn('mt-auto px-4 py-3', className)} {...props} />
 );
 DrawerFooter.displayName = 'DrawerFooter';
 
