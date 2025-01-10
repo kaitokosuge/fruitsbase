@@ -45,6 +45,7 @@ export default async function Home() {
                             </div>
                         </div>
                         <div className="xl:w-[75%] lg:w-[65%] md:w-[60%] w-full">
+                            <p className="text-xs font-bold">タイムライン</p>
                             <QuizViews quizzes={quizzes} />
                         </div>
                     </div>
