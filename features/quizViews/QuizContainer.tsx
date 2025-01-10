@@ -17,6 +17,9 @@ export default async function QuizContainer() {
             Option: true,
             author: true,
         },
+        orderBy: {
+            updatedAt: 'desc',
+        },
     });
     return <QuizViews quizzes={quizzes} />;
 }
