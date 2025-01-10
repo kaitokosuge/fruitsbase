@@ -27,7 +27,7 @@ export default async function Header() {
                             <Link href="/" className="flex items-center">
                                 <img
                                     src="/timeline.svg"
-                                    className="md:w-[20px] w-[33px]"
+                                    className="md:w-[20px] w-[25px]"
                                 />
                                 <p className="font-bold text-xs text-[#afafaf] ml-1 md:block hidden">
                                     タイムライン
@@ -39,17 +39,17 @@ export default async function Header() {
                     <nav>
                         <ul className="flex items-center">
                             <li>
-                                <SignedOut>
-                                    <SignInButton />
-                                </SignedOut>
-                            </li>
-                            <li className="ml-5">
                                 <Link
                                     href="/create"
                                     className="block md:text-sm text-xs bg-[#313131] duration-300 hover:opacity-50 rounded-md px-4 md:py-3 py-2 font-bold"
                                 >
                                     クイズを作成
                                 </Link>
+                            </li>
+                            <li className="h-[40px] pt-2 ml-4 hover:opacity-50 duration-200">
+                                <SignedOut>
+                                    <SignInButton />
+                                </SignedOut>
                             </li>
                             <li>
                                 {user && (
