@@ -42,7 +42,7 @@ export default async function Header() {
                                             width={30}
                                             height={30}
                                             alt="profile image"
-                                            className="block rounded-full w-[40px] h-[40px] object-cover ml-5"
+                                            className="hover:opacity-50 duration-200 block rounded-full w-[40px] h-[40px] object-cover ml-5"
                                         />
                                     </Link>
                                 )}
