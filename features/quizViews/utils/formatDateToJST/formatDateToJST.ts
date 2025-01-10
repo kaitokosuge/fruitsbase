@@ -6,9 +6,5 @@ export const formatDateToJST = (inputDate: Date): string => {
     const month = String(jstDate.getMonth() + 1).padStart(2, '0');
     const day = String(jstDate.getDate()).padStart(2, '0');
 
-    const currentYear = new Date().getFullYear();
-
-    return year === currentYear
-        ? `${year}/${month}/${day}`
-        : `${year}/${month}/${day}`;
+    return `${year}/${month}/${day}`;
 };
