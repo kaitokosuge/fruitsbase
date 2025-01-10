@@ -1,37 +1,9 @@
-import QuizViews from './../features/quizViews/QuizViews';
-import prisma from '@/lib/prisma';
+import QuizContainer from '@/features/quizViews/QuizContainer';
 // import ProfileCard from '@/features/profileCardView/ProfileCard';
-import { auth } from '@clerk/nextjs/server';
 import Header from '@/components/Header/Header';
+import { Suspense } from 'react';
 
 export default async function Home() {
-    const { userId } = await auth();
-
-    const quizzes = await prisma.quiz.findMany({
-        include: {
-            Category_Quiz: {
-                include: {
-                    category: true,
-                },
-            },
-            Option: true,
-            author: true,
-        },
-    });
-    console.log('クイズ一覧', quizzes);
-    let authUser;
-    if (userId) {
-        authUser = await prisma.user.findUnique({
-            where: {
-                id: userId,
-            },
-            include: {
-                Category: true,
-            },
-        });
-    }
-
-    console.log('認証済みユーザー', authUser);
     return (
         <>
             <Header />
@@ -45,7 +17,16 @@ export default async function Home() {
                             </div>
                         </div>
                         <div className="xl:w-[75%] lg:w-[65%] md:w-[60%] w-full">
-                            <QuizViews quizzes={quizzes} />
+                            <p className="text-xs font-bold">タイムライン</p>
+                            <Suspense
+                                fallback={
+                                    <div className="text-xs font-bold mt-5 font-mono">
+                                        loading...
+                                    </div>
+                                }
+                            >
+                                <QuizContainer />
+                            </Suspense>
                         </div>
                     </div>
                 </div>

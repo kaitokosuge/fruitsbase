@@ -39,6 +39,7 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
                                     <div className="w-[100%] overflow-hidden">
                                         <div className="flex items-center justify-between w-[100%]">
                                             <Link
+                                                scroll={true}
                                                 href={`/profile/${quiz.author.id}`}
                                                 className="flex items-start duration-300 hover:opacity-50"
                                             >
@@ -83,6 +84,7 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
                             <DrawerHeader className="pb-20 xl:w-[80%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
                                 <div className="flex justify-between">
                                     <Link
+                                        scroll={true}
                                         href={`/profile/${quiz.author.id}`}
                                         className="flex items-center duration-300 hover:opacity-50 w-fit"
                                     >
