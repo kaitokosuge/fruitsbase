@@ -79,7 +79,7 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
                                 </div>
                             </div>
                         </DrawerTrigger>
-                        <DrawerContent className="md:min-h-[calc(100vh-80px)] md:max-h-[calc(100vh-80px)] min-h-[calc(100vh-60px)] max-h-[calc(100vh-60px)] md:px-10 bg-[#131313]">
+                        <DrawerContent className="md:min-h-[calc(100dvh-80px)] md:max-h-[calc(100dvh-80px)] min-h-[calc(100dvh-60px)] max-h-[calc(100dvh-60px)] md:px-10 bg-[#131313]">
                             <DrawerHeader className="pb-20 xl:w-[80%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
                                 <div className="flex justify-between">
                                     <Link
