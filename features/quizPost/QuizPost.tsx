@@ -9,6 +9,7 @@ import { useHandleQuestion } from './hooks/useHandleQuestion/useHandleQuestion';
 // import Category from './components/Category/Category';
 // import { SaveQuiz } from './repositories/SaveQuiz';
 import { usePost } from './hooks/usePost/usePost';
+import Link from 'next/link';
 
 const QuestionEditor = dynamic(
     () => import('./components/Editor/QuestionEditor'),
@@ -58,13 +59,16 @@ export default function QuizPost() {
         <div className="">
             <div className="border-b border-[#2c2c2c] fixed w-full bg-[#171717] z-[99]">
                 <div className="flex justify-between items-center mx-auto w-[90%] py-2">
-                    <h1 className="flex items-center">
-                        <img
-                            src="/fruitsbase-logo.png"
-                            alt="Fruitsbase"
-                            className="md:w-[120px] w-[70px] block"
-                        />
-                    </h1>
+                    <Link href="/">
+                        <h1 className="flex items-center">
+                            <img
+                                src="/fruitsbase-logo.png"
+                                alt="Fruitsbase"
+                                className="md:w-[120px] w-[70px] block"
+                            />
+                        </h1>
+                    </Link>
+
                     <div className="flex items-center">
                         <p className="md:text-xs md:block hidden text-[#6a6a6a]">
                             知識をアウトプットしよう！
