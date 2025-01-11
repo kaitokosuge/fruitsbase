@@ -68,7 +68,7 @@ export default async function Header() {
                     </nav>
                 </div>
             </header>
-            <div className="w-screen bg-[#171717] md:top-[77px] top-[56.5px] h-[3px] fixed z-[50]"></div>
+            <div className="w-screen bg-[#171717] md:top-[77px] top-[56.5px] h-[3.5px] fixed z-[50]"></div>
         </>
     );
 }

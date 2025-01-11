@@ -18,7 +18,7 @@ export default function Options({
 }) {
     return (
         <div>
-            <div className="grid mt-2 lg:grid-cols-1 grid-cols-1 gap-4 text-white">
+            <div className="grid md:mt-10 mt-5 lg:grid-cols-1 grid-cols-1 gap-4 text-white">
                 {quiz.Option.map((option, index: number) => (
                     <button
                         onClick={() => {
@@ -34,7 +34,7 @@ export default function Options({
                         }
                         key={index}
                     >
-                        <div className="overflow-scroll whitespace-nowrap py-7 pl-5 pr-5">
+                        <div className="overflow-scroll whitespace-nowrap py-3 pl-5 pr-5">
                             <p
                                 className={
                                     selectedOptionIds.some(

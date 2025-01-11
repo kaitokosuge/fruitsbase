@@ -18,7 +18,7 @@ export default function Options({
 }) {
     return (
         <div>
-            <div className="grid mt-2 lg:grid-cols-1 grid-cols-1 gap-4 text-white">
+            <div className="grid md:mt-10 mt-5 lg:grid-cols-1 grid-cols-1 gap-4 text-white">
                 {quiz.Option.map((option, index: number) => (
                     <button
                         onClick={() => {
@@ -29,12 +29,12 @@ export default function Options({
                                 ? result.result === 'true' &&
                                   result.quizId === quiz.id
                                     ? 'border-b border-b-[#404040] rounded-md text-left relative cursor-pointer bg-emerald-600 duration-200 md:pr-5'
-                                    : 'border-b border-b-[#404040] rounded-md text-left relative cursor-pointer bg-[#202020] duration-200 md:pr-5'
+                                    : 'border-b border-b-[#404040] rounded-md text-left relative cursor-pointer bg-[#313131] duration-200 md:pr-5'
                                 : 'border-b border-b-[#404040] hover:rounded-md text-left relative cursor-pointer hover:bg-[#1a1a1a] duration-200 md:pr-5'
                         }
                         key={index}
                     >
-                        <div className="overflow-scroll whitespace-nowrap py-7 pl-5 pr-5">
+                        <div className="overflow-scroll whitespace-nowrap py-3 pl-5 pr-5">
                             <p
                                 className={
                                     selectedOptionIds.some(
