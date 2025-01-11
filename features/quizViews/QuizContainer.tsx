@@ -3,7 +3,7 @@ import React from 'react';
 import QuizViews from './QuizViews';
 
 export default async function QuizContainer() {
-    const res = await fetch('http://localhost:3000/api/test', {
+    const res = await fetch('https://www.fruitsbase.com/api/test', {
         method: 'GET',
         next: { revalidate: 15 },
     });
