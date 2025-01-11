@@ -5,7 +5,7 @@ import QuizViews from './QuizViews';
 export default async function QuizContainer() {
     const res = await fetch('https://www.fruitsbase.com/api/test', {
         method: 'GET',
-        next: { revalidate: 15 },
+        next: { revalidate: 60 },
     });
     const data = await res.json();
     console.log('json placeholderから取得', data);
