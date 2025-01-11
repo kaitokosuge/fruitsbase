@@ -3,7 +3,6 @@
 import React from 'react';
 import {
     Drawer,
-    DrawerClose,
     DrawerContent,
     DrawerDescription,
     DrawerFooter,
@@ -35,139 +34,124 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
                     <Drawer>
                         <DrawerTrigger className="mt-1 bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center">
                             <div className="w-[100%] py-7 overflow-hidden">
-                                <div>
-                                    <div className="w-[100%] overflow-hidden">
-                                        <div className="flex items-center justify-between w-[100%]">
-                                            <Link
-                                                scroll={true}
-                                                href={`/profile/${quiz.author.id}`}
-                                                className="flex items-start duration-300 hover:opacity-50"
-                                            >
-                                                {quiz.author.image && (
-                                                    <img
-                                                        src={quiz.author.image}
-                                                        alt="profile image"
-                                                        width={25}
-                                                        height={25}
-                                                        className="rounded-full"
-                                                    />
-                                                )}
+                                <div className="w-[100%] overflow-hidden">
+                                    <div className="flex items-center justify-between w-[100%]">
+                                        <Link
+                                            scroll={true}
+                                            href={`/profile/${quiz.author.id}`}
+                                            className="flex items-start duration-300 hover:opacity-50"
+                                        >
+                                            {quiz.author.image && (
+                                                <img
+                                                    src={quiz.author.image}
+                                                    alt="profile image"
+                                                    width={25}
+                                                    height={25}
+                                                    className="rounded-full"
+                                                />
+                                            )}
 
-                                                <div className="ml-2">
-                                                    <p className="text-gray-400 text-[13px]">
-                                                        {quiz.author.username}
-                                                    </p>
-                                                    <p className="text-[10px] text-gray-500">
-                                                        {formatDateToJST(
-                                                            quiz.createdAt,
-                                                        )}
-                                                    </p>
-                                                </div>
-                                            </Link>
-                                        </div>
+                                            <div className="ml-2">
+                                                <p className="text-gray-400 text-[13px]">
+                                                    {quiz.author.username}
+                                                </p>
+                                                <p className="text-[10px] text-gray-500">
+                                                    {formatDateToJST(
+                                                        quiz.createdAt,
+                                                    )}
+                                                </p>
+                                            </div>
+                                        </Link>
                                     </div>
-                                    <div className="text-[17px] w-full whitespace-nowrap overflow-x-scroll font-bold pt-5">
-                                        <p className="w-fit">
-                                            {
-                                                JSON.parse(quiz.question)[0]
-                                                    .data.text
-                                            }
-                                        </p>
-                                    </div>
-                                    <div className="flex overflow-x-scroll items-center w-full mt-3">
-                                        <CategoryArea quiz={quiz} />
-                                    </div>
+                                </div>
+                                <div className="text-[17px] w-full whitespace-nowrap overflow-x-scroll font-bold pt-5">
+                                    <p className="w-fit">
+                                        {JSON.parse(quiz.question)[0].data.text}
+                                    </p>
+                                </div>
+                                <div className="flex overflow-x-scroll items-center w-full mt-3">
+                                    <CategoryArea quiz={quiz} />
                                 </div>
                             </div>
                         </DrawerTrigger>
                         <DrawerContent className="md:min-h-[calc(100dvh-80px)] md:max-h-[calc(100dvh-80px)] min-h-[calc(100dvh-60px)] max-h-[calc(100dvh-60px)] md:px-10 bg-[#131313]">
-                            <DrawerHeader className="pb-20 xl:w-[80%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
-                                <div className="flex justify-between">
-                                    <Link
-                                        scroll={true}
-                                        href={`/profile/${quiz.author.id}`}
-                                        className="flex items-center duration-300 hover:opacity-50 w-fit"
-                                    >
-                                        {quiz.author.image && (
-                                            <img
-                                                src={quiz.author.image}
-                                                alt="profile image"
-                                                width={25}
-                                                height={25}
-                                                className="rounded-full"
-                                            />
-                                        )}
-                                        <div className="ml-2">
-                                            <p className="text-gray-400 text-[13px]">
-                                                {quiz.author.username}
+                            <DrawerHeader className="px-4 pb-40 xl:w-[60%] lg:w-[65%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
+                                <div className="top-0 border-b rounded-[15px] border-[#2c2c2c] pt-5 px-5 pb-2 bg-[#131313] mx-auto fixed z-10 left-0 right-0 xl:w-[60%] lg:w-[65%] md:w-[95%] w-[100%]">
+                                    <div className="flex justify-between">
+                                        <Link
+                                            scroll={true}
+                                            href={`/profile/${quiz.author.id}`}
+                                            className="flex items-center duration-300 hover:opacity-50 w-fit"
+                                        >
+                                            {quiz.author.image && (
+                                                <img
+                                                    src={quiz.author.image}
+                                                    alt="profile image"
+                                                    width={25}
+                                                    height={25}
+                                                    className="rounded-full"
+                                                />
+                                            )}
+                                            <div className="ml-2">
+                                                <p className="text-gray-400 text-[13px]">
+                                                    {quiz.author.username}
+                                                </p>
+                                            </div>
+                                            <div className="w-[10px] h-[1px] bg-gray-600 ml-3"></div>
+                                            <p className="text-[11px] text-gray-500 ml-3">
+                                                {formatDateToJST(
+                                                    quiz.createdAt,
+                                                )}
                                             </p>
-                                        </div>
-                                        <div className="w-[10px] h-[1px] bg-gray-600 ml-3"></div>
-                                        <p className="text-[11px] text-gray-500 ml-3">
-                                            {formatDateToJST(quiz.createdAt)}
-                                        </p>
-                                    </Link>
-                                    <button
-                                        onClick={() => {
-                                            const isDelete = confirm(
-                                                'クイズを削除しますか？削除をすると復元できません',
-                                            );
-                                            if (!isDelete) {
-                                                return;
-                                            }
-                                            deleteQuiz(quiz.id, quiz.author.id);
-                                        }}
-                                        className="text-[16px] text-[#555555] border border-[#555555] px-3 py-1 rounded-md hover:text-red-400 hover:border-red-400 duration-300"
-                                    >
-                                        削除する
-                                    </button>
-                                </div>
-
-                                <div className="md:mt-1 mt-1 flex md:justify-end justify-around">
-                                    {quiz.id === quizResponse.quizId &&
-                                        quizResponse.result === 'true' &&
-                                        !loading && (
-                                            <div className="text-emerald-500 md:text-xl text-[20px] font-bold border w-full py-1 rounded-md border-emerald-500 text-center">
-                                                <p>正解です！</p>
-                                            </div>
-                                        )}
-                                    {quiz.id === quizResponse.quizId &&
-                                        quizResponse.result === 'false' &&
-                                        !loading && (
-                                            <div className="text-red-400 md:text-[18px] text-[15px] font-bold">
-                                                <p>不正解です</p>
-                                            </div>
-                                        )}
-                                </div>
-
-                                <div className="flex items-center justify-between md:mt-3 mt-2">
-                                    <div className="w-[180px] md:w-[400px]">
-                                        <CategoryArea quiz={quiz} />
+                                        </Link>
                                     </div>
-                                    <div className="flex items-center">
-                                        {loading && (
-                                            <div className="spinner-box">
-                                                <div className="circle-border">
-                                                    <div className="circle-core"></div>
+
+                                    <div className="md:mt-1 mt-1 flex md:justify-end justify-around">
+                                        {quiz.id === quizResponse.quizId &&
+                                            quizResponse.result === 'true' &&
+                                            !loading && (
+                                                <div className="text-emerald-500 md:text-xl text-[20px] font-bold border w-full py-1 rounded-md border-emerald-500 text-center mt-2">
+                                                    <p>正解です！</p>
                                                 </div>
-                                            </div>
-                                        )}
-                                        <AnswerBtn
-                                            handleClickSubmit={
-                                                handleClickSubmit
-                                            }
-                                            loading={loading}
-                                            quizId={quiz.id}
-                                            selectedOptionIds={
-                                                selectedOptionIds
-                                            }
-                                        />
+                                            )}
+                                        {quiz.id === quizResponse.quizId &&
+                                            quizResponse.result === 'false' &&
+                                            !loading && (
+                                                <div className="text-red-400 md:text-[18px] text-[15px] font-bold">
+                                                    <p>不正解です</p>
+                                                </div>
+                                            )}
+                                    </div>
+
+                                    <div className="flex items-center justify-between md:mt-3 mt-2">
+                                        <div className="w-[180px] md:w-[400px]">
+                                            <CategoryArea quiz={quiz} />
+                                        </div>
+                                        <div className="flex items-center">
+                                            {loading && (
+                                                <div className="spinner-box">
+                                                    <div className="circle-border">
+                                                        <div className="circle-core"></div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                            <AnswerBtn
+                                                handleClickSubmit={
+                                                    handleClickSubmit
+                                                }
+                                                loading={loading}
+                                                quizId={quiz.id}
+                                                selectedOptionIds={
+                                                    selectedOptionIds
+                                                }
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                                 <DrawerTitle className="hidden">
                                     question
                                 </DrawerTitle>
-                                <div className="font-normal md:text-[18px] text-[16px] text-left max-w-full">
+                                <div className="md:mt-[150px] mt-[140px] font-normal md:text-[18px] text-[16px] text-left max-w-full">
                                     {JSON.parse(quiz.question).map(
                                         (
                                             item:
@@ -211,10 +195,21 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
                                     handleClickOption={handleClickOption}
                                 />
                             </DrawerHeader>
-                            <DrawerFooter className="flex items-center">
-                                <DrawerClose className="text-[10px] text-gray-600 hover:text-white duration-300 border border-[#1c1c1c] w-[10%] py-2 rounded-md">
-                                    閉じる
-                                </DrawerClose>
+                            <DrawerFooter className="bg-[#161616] border-t border-t-[#2c2c2c] rounded-t-[10px] flex items-center justify-end">
+                                <button
+                                    onClick={() => {
+                                        const isDelete = confirm(
+                                            'クイズを削除しますか？削除をすると復元できません',
+                                        );
+                                        if (!isDelete) {
+                                            return;
+                                        }
+                                        deleteQuiz(quiz.id, quiz.author.id);
+                                    }}
+                                    className="w-fit text-[16px] text-[#555555] border border-[#555555] px-3 py-1 rounded-md hover:text-red-400 hover:border-red-400 duration-300"
+                                >
+                                    削除する
+                                </button>
                             </DrawerFooter>
                         </DrawerContent>
                     </Drawer>
