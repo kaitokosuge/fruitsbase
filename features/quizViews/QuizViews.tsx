@@ -79,7 +79,7 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
                             </div>
                         </DrawerTrigger>
                         <DrawerContent className="md:min-h-[calc(100dvh-80px)] md:max-h-[calc(100dvh-80px)] min-h-[calc(100dvh-60px)] max-h-[calc(100dvh-60px)] md:px-10 bg-[#131313]">
-                            <DrawerHeader className="pb-20 xl:w-[80%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
+                            <DrawerHeader className="p-5 md:pb-60 px-5 pb-20 xl:w-[60%] lg:w-[65%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
                                 <Link
                                     scroll={true}
                                     href={`/profile/${quiz.author.id}`}
