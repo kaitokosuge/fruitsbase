@@ -9,7 +9,7 @@ export default async function Header() {
     const user = await currentUser();
     return (
         <>
-            <header className="border-b rounded-b-md border-[#2c2c2c] top-0 fixed w-full bg-[#171717] z-[1]">
+            <header className="border-b rounded-b-[15px] border-[#2c2c2c] top-0 fixed w-full bg-[#171717] z-[1]">
                 <div className="flex justify-between items-center mx-auto w-[90%] md:py-4 py-2">
                     <ul className="flex items-center">
                         <li>
