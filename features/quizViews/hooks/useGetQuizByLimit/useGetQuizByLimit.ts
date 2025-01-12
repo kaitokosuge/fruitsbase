@@ -3,11 +3,10 @@ import { getQuizByLimit } from '../../repositories/getQuizByLimit';
 import { Quiz } from '@/models/Quiz';
 
 export const useGetQuizByLimit = (quizzes: Quiz[]) => {
-    const [callNumber, setCallNumber] = useState(2);
-    const [viewQuizzes, setViewQuizzes] = useState<Quiz[]>();
-    const [loading, setLoading] = useState(false);
+    const [callNumber, setCallNumber] = useState(1);
+    const [viewQuizzes, setViewQuizzes] = useState<Quiz[]>(quizzes);
+    const [getloading, setLoading] = useState(false);
 
-    setViewQuizzes(quizzes);
     const handleClickGetQuiz = async (callNum: number) => {
         setLoading(true);
         setCallNumber(callNumber + 1);
@@ -23,5 +22,6 @@ export const useGetQuizByLimit = (quizzes: Quiz[]) => {
 
         setLoading(false);
     };
-    return { viewQuizzes, handleClickGetQuiz, loading };
+
+    return { viewQuizzes, callNumber, handleClickGetQuiz, getloading };
 };
