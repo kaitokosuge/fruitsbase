@@ -105,7 +105,7 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
                             </div>
                         </DrawerTrigger>
                         <DrawerContent className="md:min-h-[calc(100dvh-80px)] md:max-h-[calc(100dvh-80px)] min-h-[calc(100dvh-60px)] max-h-[calc(100dvh-60px)] md:px-10 bg-[#131313]">
-                            <div className="h-[20px] w-screen bg-[#131313] rounded-t-[15px] fixed rigth-0 left-0 z-20"></div>
+                            <div className="h-[20px] w-[calc(100vw-10px)] bg-[#131313] rounded-t-[15px] fixed rigth-0 left-0 z-20"></div>
                             <DrawerHeader className="pt-10 md:pb-60 px-5 pb-40 xl:w-[60%] lg:w-[65%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
                                 <Link
                                     scroll={true}
