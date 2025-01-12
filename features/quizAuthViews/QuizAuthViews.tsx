@@ -92,81 +92,76 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
                             </div>
                         </DrawerTrigger>
                         <DrawerContent className="md:min-h-[calc(100dvh-80px)] md:max-h-[calc(100dvh-80px)] min-h-[calc(100dvh-60px)] max-h-[calc(100dvh-60px)] md:px-10 bg-[#131313]">
-                            <DrawerHeader className="px-4 pb-40 xl:w-[60%] lg:w-[65%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
-                                <div className="top-0 border-b rounded-[15px] border-[#2c2c2c] pt-5 px-5 pb-2 bg-[#131313] mx-auto fixed z-10 left-0 right-0 xl:w-[60%] lg:w-[65%] md:w-[95%] w-[100%]">
-                                    <div className="flex justify-between">
-                                        <Link
-                                            scroll={true}
-                                            href={`/profile/${quiz.author.id}`}
-                                            className="flex items-center duration-300 hover:opacity-50 w-fit"
-                                        >
-                                            {quiz.author.image && (
-                                                <img
-                                                    src={quiz.author.image}
-                                                    alt="profile image"
-                                                    width={25}
-                                                    height={25}
-                                                    className="rounded-full"
-                                                />
-                                            )}
-                                            <div className="ml-2">
-                                                <p className="text-gray-400 text-[13px]">
-                                                    {quiz.author.username}
-                                                </p>
+                            <DrawerHeader className="p-5 px-4 pb-40 xl:w-[60%] lg:w-[65%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
+                                <Link
+                                    scroll={true}
+                                    href={`/profile/${quiz.author.id}`}
+                                    className="flex items-center duration-300 hover:opacity-50 w-fit"
+                                >
+                                    {quiz.author.image && (
+                                        <img
+                                            src={quiz.author.image}
+                                            alt="profile image"
+                                            width={25}
+                                            height={25}
+                                            className="rounded-full"
+                                        />
+                                    )}
+                                    <div className="ml-2">
+                                        <p className="text-gray-400 text-[13px]">
+                                            {quiz.author.username}
+                                        </p>
+                                    </div>
+                                    <div className="w-[10px] h-[1px] bg-gray-600 ml-3"></div>
+                                    <p className="text-[11px] text-gray-500 ml-3">
+                                        {formatDateToJST(quiz.createdAt)}
+                                    </p>
+                                </Link>
+
+                                <div className="md:mt-1 mt-1 flex md:justify-end justify-around">
+                                    {quiz.id === quizResponse.quizId &&
+                                        quizResponse.result === 'true' &&
+                                        !loading && (
+                                            <div className="text-emerald-500 md:text-xl text-[20px] font-bold border w-full py-1 rounded-md border-emerald-500 text-center mt-2">
+                                                <p>正解です！</p>
                                             </div>
-                                            <div className="w-[10px] h-[1px] bg-gray-600 ml-3"></div>
-                                            <p className="text-[11px] text-gray-500 ml-3">
-                                                {formatDateToJST(
-                                                    quiz.createdAt,
-                                                )}
-                                            </p>
-                                        </Link>
-                                    </div>
+                                        )}
+                                    {quiz.id === quizResponse.quizId &&
+                                        quizResponse.result === 'false' &&
+                                        !loading && (
+                                            <div className="text-red-400 md:text-[18px] text-[15px] font-bold">
+                                                <p>不正解です</p>
+                                            </div>
+                                        )}
+                                </div>
 
-                                    <div className="md:mt-1 mt-1 flex md:justify-end justify-around">
-                                        {quiz.id === quizResponse.quizId &&
-                                            quizResponse.result === 'true' &&
-                                            !loading && (
-                                                <div className="text-emerald-500 md:text-xl text-[20px] font-bold border w-full py-1 rounded-md border-emerald-500 text-center mt-2">
-                                                    <p>正解です！</p>
-                                                </div>
-                                            )}
-                                        {quiz.id === quizResponse.quizId &&
-                                            quizResponse.result === 'false' &&
-                                            !loading && (
-                                                <div className="text-red-400 md:text-[18px] text-[15px] font-bold">
-                                                    <p>不正解です</p>
-                                                </div>
-                                            )}
+                                <div className="flex items-center justify-between md:mt-3 mt-2">
+                                    <div className="w-[180px] md:w-[400px]">
+                                        <CategoryArea quiz={quiz} />
                                     </div>
-
-                                    <div className="flex items-center justify-between md:mt-3 mt-2">
-                                        <div className="w-[180px] md:w-[400px]">
-                                            <CategoryArea quiz={quiz} />
-                                        </div>
-                                        <div className="flex items-center">
-                                            {loading && (
-                                                <div className="spinner-box">
-                                                    <div className="circle-border">
-                                                        <div className="circle-core"></div>
-                                                    </div>
+                                    <div className="flex items-center">
+                                        {loading && (
+                                            <div className="spinner-box">
+                                                <div className="circle-border">
+                                                    <div className="circle-core"></div>
                                                 </div>
-                                            )}
-                                            <AnswerBtn
-                                                handleClickSubmit={
-                                                    handleClickSubmit
-                                                }
-                                                loading={loading}
-                                                quizId={quiz.id}
-                                                selectedOptionIds={
-                                                    selectedOptionIds
-                                                }
-                                            />
-                                        </div>
+                                            </div>
+                                        )}
+                                        <AnswerBtn
+                                            handleClickSubmit={
+                                                handleClickSubmit
+                                            }
+                                            loading={loading}
+                                            quizId={quiz.id}
+                                            selectedOptionIds={
+                                                selectedOptionIds
+                                            }
+                                        />
                                     </div>
                                 </div>
+
                                 <DrawerTitle className=""></DrawerTitle>
-                                <div className="md:mt-[150px] mt-[140px] font-normal md:text-[18px] text-[16px] text-left max-w-full">
+                                <div className="font-normal md:text-[18px] text-[16px] text-left max-w-full">
                                     {JSON.parse(quiz.question).map(
                                         (
                                             item:
