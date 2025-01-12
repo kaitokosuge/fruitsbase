@@ -33,7 +33,7 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
                 <div key={quiz.id} className="mt-[10px]">
                     <Drawer>
                         <DrawerTrigger className="mt-1 bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center">
-                            <div className="w-[100%] py-7 overflow-hidden">
+                            <div className="w-[100%] py-5 overflow-hidden">
                                 <div className="w-[100%] overflow-hidden">
                                     <div className="flex items-center justify-between w-[100%]">
                                         <Link
@@ -64,10 +64,27 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
                                         </Link>
                                     </div>
                                 </div>
-                                <div className="text-[17px] w-full whitespace-nowrap overflow-x-scroll font-bold pt-5">
-                                    <p className="w-fit">
-                                        {JSON.parse(quiz.question)[0].data.text}
-                                    </p>
+                                <div className="text-[17px] w-full whitespace-nowrap font-bold pt-5">
+                                    {JSON.parse(quiz.question)[0].data.text ? (
+                                        <div className="w-fit">
+                                            {
+                                                JSON.parse(quiz.question)[0]
+                                                    .data.text
+                                            }
+                                        </div>
+                                    ) : (
+                                        <div className="w-full">
+                                            <SyntaxHighlighter
+                                                language="typescript"
+                                                style={atomOneDark}
+                                            >
+                                                {
+                                                    JSON.parse(quiz.question)[0]
+                                                        .data.code
+                                                }
+                                            </SyntaxHighlighter>
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="flex overflow-x-scroll items-center w-full mt-3">
                                     <CategoryArea quiz={quiz} />

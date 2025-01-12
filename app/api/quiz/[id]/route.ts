@@ -1,8 +1,13 @@
 import prisma from '@/lib/prisma';
+import { NextApiRequest } from 'next';
 import { NextResponse } from 'next/server';
 
-export async function GET() {
-    const quizzes = await prisma.quiz.findMany({
+export async function GET(req: NextApiRequest) {
+    const quizId = req.url?.split('/').pop();
+    const quiz = await prisma.quiz.findFirst({
+        where: {
+            id: quizId,
+        },
         include: {
             Category_Quiz: {
                 include: {
@@ -12,9 +17,6 @@ export async function GET() {
             Option: true,
             author: true,
         },
-        orderBy: {
-            updatedAt: 'desc',
-        },
     });
-    return NextResponse.json({ quizzes: quizzes });
+    return NextResponse.json({ quiz: quiz });
 }

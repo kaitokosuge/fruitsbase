@@ -27,15 +27,14 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
 
     return (
         <div className="pb-20">
-            {/* <h2 className="text-xs text-gray-400">time line</h2> */}
             {quizzes.map((quiz) => (
                 <div key={quiz.id} className="mt-[10px]">
                     <Drawer>
                         <DrawerTrigger className="bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center">
-                            <div className="flex items-center w-[100%] py-7 overflow-hidden">
-                                <div>
+                            <div className="flex items-center w-[100%] py-5 overflow-hidden">
+                                <div className="w-full">
                                     <div className="w-full overflow-hidden flex items-center justify-between">
-                                        <div className="">
+                                        <div className="flex items-start justify-between w-full">
                                             <Link
                                                 scroll={true}
                                                 href={`/profile/${quiz.author.id}`}
@@ -62,15 +61,42 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
                                                     </p>
                                                 </div>
                                             </Link>
+                                            <Link
+                                                scroll={true}
+                                                href={`/quiz/${quiz.id}`}
+                                                className="hover:opacity-50 duration-200"
+                                            >
+                                                <img
+                                                    src="/show.svg"
+                                                    alt="show page"
+                                                    className="md:w-[26px] w-[25px]"
+                                                />
+                                            </Link>
                                         </div>
                                     </div>
-                                    <div className="text-[17px] w-full whitespace-nowrap overflow-x-scroll font-bold pt-5">
-                                        <p className="w-fit">
-                                            {
-                                                JSON.parse(quiz.question)[0]
-                                                    .data.text
-                                            }
-                                        </p>
+                                    <div className="text-[17px] w-full whitespace-nowrap font-bold pt-5">
+                                        {JSON.parse(quiz.question)[0].data
+                                            .text ? (
+                                            <div className="w-fit">
+                                                {
+                                                    JSON.parse(quiz.question)[0]
+                                                        .data.text
+                                                }
+                                            </div>
+                                        ) : (
+                                            <div className="w-full">
+                                                <SyntaxHighlighter
+                                                    language="typescript"
+                                                    style={atomOneDark}
+                                                >
+                                                    {
+                                                        JSON.parse(
+                                                            quiz.question,
+                                                        )[0].data.code
+                                                    }
+                                                </SyntaxHighlighter>
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="flex overflow-x-scroll items-center w-full mt-3">
                                         <CategoryArea quiz={quiz} />
