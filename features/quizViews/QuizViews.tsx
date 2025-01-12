@@ -171,9 +171,7 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
                                         />
                                     </div>
                                 </div>
-                                <DrawerTitle className="hidden">
-                                    question
-                                </DrawerTitle>
+                                <DrawerTitle className=""></DrawerTitle>
                                 <div className="font-normal md:text-[18px] text-[16px] text-left max-w-full">
                                     {JSON.parse(quiz.question).map(
                                         (
@@ -209,8 +207,7 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
                                         ),
                                     )}
                                 </div>
-                                <DrawerDescription className="hidden"></DrawerDescription>
-
+                                <DrawerDescription className=""></DrawerDescription>
                                 <Options
                                     result={quizResponse}
                                     selectedOptionIds={selectedOptionIds}
