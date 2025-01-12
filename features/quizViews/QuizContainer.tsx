@@ -3,7 +3,7 @@ import QuizViews from './QuizViews';
 import { Quiz } from '@/models/Quiz';
 
 export default async function QuizContainer() {
-    const res = await fetch('http://localhost:3000/api/quiz', {
+    const res = await fetch(`${process.env.APP_URL}/api/quiz`, {
         method: 'GET',
         next: { revalidate: 60 },
     });
