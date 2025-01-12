@@ -6,6 +6,7 @@ export const useGetQuizByLimit = (quizzes: Quiz[]) => {
     const [callNumber, setCallNumber] = useState(1);
     const [viewQuizzes, setViewQuizzes] = useState<Quiz[]>(quizzes);
     const [getloading, setLoading] = useState(false);
+    const [isLoadable, setIsLoadable] = useState(true);
 
     const handleClickGetQuiz = async (callNum: number) => {
         setLoading(true);
@@ -14,6 +15,11 @@ export const useGetQuizByLimit = (quizzes: Quiz[]) => {
         if (!viewQuizzes) {
             return;
         }
+        console.log(nextQuizzes);
+        if (nextQuizzes.length === 0) {
+            setIsLoadable(false);
+        }
+
         if (nextQuizzes) {
             setViewQuizzes([...viewQuizzes, ...nextQuizzes]);
         } else {
@@ -23,5 +29,11 @@ export const useGetQuizByLimit = (quizzes: Quiz[]) => {
         setLoading(false);
     };
 
-    return { viewQuizzes, callNumber, handleClickGetQuiz, getloading };
+    return {
+        viewQuizzes,
+        callNumber,
+        handleClickGetQuiz,
+        getloading,
+        isLoadable,
+    };
 };

@@ -26,11 +26,16 @@ import GetMoreQuizBtn from './components/GetMoreQuizBtn/GetMoreQuizBtn';
 export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
     const { handleClickOption, selectedOptionIds } = useOption();
     const { handleClickSubmit, quizResponse, loading } = useTry();
-    const { viewQuizzes, handleClickGetQuiz, callNumber, getloading } =
-        useGetQuizByLimit(quizzes);
+    const {
+        viewQuizzes,
+        handleClickGetQuiz,
+        callNumber,
+        getloading,
+        isLoadable,
+    } = useGetQuizByLimit(quizzes);
 
     return (
-        <div className="pb-20">
+        <div className="pb-20 w-full">
             {viewQuizzes &&
                 viewQuizzes.map((quiz) => (
                     <div key={quiz.id} className="mt-[10px]">
@@ -240,10 +245,20 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
                     </div>
                 ))}
             <GetMoreQuizBtn
+                isLoadable={isLoadable}
                 callNumber={callNumber}
                 handleClickGetQuiz={handleClickGetQuiz}
             />
-            {getloading && <div className="font-mono">loading</div>}
+            {getloading && (
+                <div className="font-mono text-sm w-fit mx-auto mt-2">
+                    loading...
+                </div>
+            )}
+            {!isLoadable && (
+                <div className="font-mono text-sm w-fit mx-auto mt-2">
+                    🍾That&apos;s all,Thank you🍾
+                </div>
+            )}
         </div>
     );
 }
