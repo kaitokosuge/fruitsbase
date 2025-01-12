@@ -16,7 +16,7 @@ export default function QuizShow({ quiz }: { quiz: Quiz }) {
     const { handleClickOption, selectedOptionIds } = useOption();
     const { handleClickSubmit, quizResponse, loading } = useTry();
     return (
-        <div className="p-5 md:pb-[300px] pt-[100px] px-5 xl:w-[60%] lg:w-[65%] md:w-[95%] w-[100%] mx-auto">
+        <div className="p-5 md:pb-[300px] pb-[100px] md:pt-[100px] pt-[70px] px-5 xl:w-[60%] lg:w-[65%] md:w-[95%] w-[100%] mx-auto">
             <Link
                 scroll={true}
                 href={`/profile/${quiz.author.id}`}
