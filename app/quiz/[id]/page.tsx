@@ -12,7 +12,7 @@ export default async function page({
     console.log('idです', id);
     const res = await fetch(`http://localhost:3000/api/quiz/${id}`, {
         method: 'GET',
-        // next: { revalidate: 20 },
+        next: { revalidate: 20 },
     });
     if (!res.ok) {
         console.error(`API Error: ${res.status}`);

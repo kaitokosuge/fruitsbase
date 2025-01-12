@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import { currentUser } from '@clerk/nextjs/server';
 import Link from 'next/link';
@@ -28,6 +27,7 @@ export default async function Header() {
                                 <img
                                     src="/timeline.svg"
                                     className="md:w-[20px] w-[25px]"
+                                    alt="timeline"
                                 />
                                 <p className="font-bold text-xs text-[#afafaf] ml-1 md:block hidden">
                                     タイムライン
