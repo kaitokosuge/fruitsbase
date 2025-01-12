@@ -1,10 +1,12 @@
 import prisma from '@/lib/prisma';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET({ id }: { id: string }) {
+export async function GET(req: NextRequest) {
+    const userId = req.url?.split('/').pop();
+    console.log('ユーザーID', userId);
     const userData = await prisma.user.findFirst({
         where: {
-            id: id,
+            id: userId,
         },
         include: {
             Quiz: {
