@@ -165,9 +165,7 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
                                         </div>
                                     </div>
                                 </div>
-                                <DrawerTitle className="hidden">
-                                    question
-                                </DrawerTitle>
+                                <DrawerTitle className=""></DrawerTitle>
                                 <div className="md:mt-[150px] mt-[140px] font-normal md:text-[18px] text-[16px] text-left max-w-full">
                                     {JSON.parse(quiz.question).map(
                                         (
