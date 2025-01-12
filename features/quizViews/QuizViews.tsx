@@ -35,7 +35,7 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
     } = useGetQuizByLimit(quizzes);
 
     return (
-        <div className="pb-20 w-full">
+        <div className="pb-40 w-full">
             {viewQuizzes &&
                 viewQuizzes.map((quiz) => (
                     <div key={quiz.id} className="mt-[10px]">

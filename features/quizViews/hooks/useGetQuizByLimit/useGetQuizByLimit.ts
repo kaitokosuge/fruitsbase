@@ -15,7 +15,6 @@ export const useGetQuizByLimit = (quizzes: Quiz[]) => {
         if (!viewQuizzes) {
             return;
         }
-        console.log(nextQuizzes);
         if (nextQuizzes.length === 0) {
             setIsLoadable(false);
         }
