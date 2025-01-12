@@ -1,8 +1,18 @@
 import prisma from '@/lib/prisma';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+    const headerToken = req.headers.get('token');
+    console.log(headerToken);
+    if (headerToken !== 'fruitsbase') {
+        return;
+    }
+    const { searchParams } = new URL(req.url);
+    const page = Number(searchParams.get('page'));
+    console.log('リクエストURL page', page);
     const quizzes = await prisma.quiz.findMany({
+        skip: page * 10,
+        take: 10,
         include: {
             Category_Quiz: {
                 include: {
