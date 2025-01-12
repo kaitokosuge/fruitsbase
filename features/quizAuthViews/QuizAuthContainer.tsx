@@ -11,7 +11,7 @@ export default async function QuizAuthContainer({
     authId: string | null;
 }) {
     const id = paramId;
-    const res = await fetch(`http://localhost:3000/api/user/${id}`, {
+    const res = await fetch(`${process.env.APP_URL}/api/user/${id}`, {
         method: 'GET',
         next: { revalidate: 3 },
     });
