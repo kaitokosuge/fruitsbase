@@ -24,7 +24,7 @@ export default async function page({
                             <div className="md:w-[20%] w-full">
                                 <div className="flex items-center">
                                     <div className="w-[80px] h-[80px] rounded-full bg-gray-400"></div>
-                                    <h2 className="font-bold text-xl ml-5">
+                                    <h2 className="font-mono font-bold text-xl ml-5">
                                         loading...
                                     </h2>
                                 </div>
