@@ -30,7 +30,7 @@ export default async function BasicProfileContainer({
         return (
             <div>
                 <Header />
-                <p className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[60px] w-[90%] mx-auto">
+                <p className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[60px] w-[90%] mx-auto font-mono">
                     user not found
                 </p>
             </div>
