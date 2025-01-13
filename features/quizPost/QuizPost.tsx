@@ -10,6 +10,7 @@ import { useHandleQuestion } from './hooks/useHandleQuestion/useHandleQuestion';
 // import { SaveQuiz } from './repositories/SaveQuiz';
 import { usePost } from './hooks/usePost/usePost';
 import Link from 'next/link';
+import PostBtn from './components/PostBtn/PostBtn';
 
 const QuestionEditor = dynamic(
     () => import('./components/Editor/QuestionEditor'),
@@ -53,7 +54,7 @@ export default function QuizPost() {
     } = useHandleOption();
     const { selectedIds } = useHandleCategory();
     // const { selectedIds, handleClickCategory } = useHandleCategory();
-    const { loading, postResponse, handleClickAnswer } = usePost();
+    const { loading, postResponse, handleClickPost } = usePost();
 
     return (
         <div className="">
@@ -73,23 +74,24 @@ export default function QuizPost() {
                         <p className="md:text-xs md:block hidden text-[#6a6a6a]">
                             知識をアウトプットしよう！
                         </p>
+                        {loading && (
+                            <div className="spinner-box ml-1">
+                                <div className="circle-border">
+                                    <div className="circle-core"></div>
+                                </div>
+                            </div>
+                        )}
                         {/* <button className="ml-3 md:text-[17px] text-xs bg-[#333333] text-white px-3 md:py-3 py-1 block rounded-md font-bold hover:bg-blue-950 duration-200">
                             プレビュー
                         </button> */}
-                        <button
-                            onClick={() =>
-                                handleClickAnswer(
-                                    questionText,
-                                    selectedIds,
-                                    options,
-                                    explanationText,
-                                )
-                            }
-                            disabled={loading}
-                            className="md:text-[17px] text-xs ml-3 bg-[#333333] text-white px-3 md:py-3 py-1 block rounded-md font-bold hover:bg-blue-800 duration-200"
-                        >
-                            公開する
-                        </button>
+                        <PostBtn
+                            handleClickPost={handleClickPost}
+                            questionText={questionText}
+                            selectedIds={selectedIds}
+                            options={options}
+                            explanationText={explanationText}
+                            loading={loading}
+                        />
                     </div>
                 </div>
             </div>

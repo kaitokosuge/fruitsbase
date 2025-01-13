@@ -16,10 +16,6 @@ export const useTry = () => {
         selectedOptionIds: string[],
         quizId: string,
     ) => {
-        const isAnswer = confirm('解答しますか？');
-        if (!isAnswer) {
-            return;
-        }
         setLoading(true);
         const resultData = await tryQuiz(selectedOptionIds, quizId);
         const delay = (ms: number) =>

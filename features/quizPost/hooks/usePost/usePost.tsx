@@ -12,16 +12,12 @@ export const usePost = () => {
         res: '',
         error: '',
     });
-    const handleClickAnswer = async (
+    const handleClickPost = async (
         questionText: string,
         selectedIds: string[],
         options: QuizOption[],
         explanationText: string,
     ) => {
-        const isPost = confirm('公開しますか？');
-        if (!isPost) {
-            return;
-        }
         setLoading(true);
         const resultData = await SaveQuiz(
             questionText,
@@ -36,5 +32,5 @@ export const usePost = () => {
             alert('投稿に失敗しました');
         }
     };
-    return { loading, postResponse, handleClickAnswer };
+    return { loading, postResponse, handleClickPost };
 };
