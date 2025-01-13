@@ -1,6 +1,6 @@
 import React from 'react';
 import QuizAuthViews from './QuizAuthViews';
-import QuizViews from '../quizViews/QuizViews';
+import QuizViews from './QuizViews';
 import { Quiz } from '@/models/Quiz';
 
 export default async function QuizAuthContainer({
