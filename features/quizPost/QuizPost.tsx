@@ -74,6 +74,13 @@ export default function QuizPost() {
                         <p className="md:text-xs md:block hidden text-[#6a6a6a]">
                             知識をアウトプットしよう！
                         </p>
+                        {loading && (
+                            <div className="spinner-box ml-1">
+                                <div className="circle-border">
+                                    <div className="circle-core"></div>
+                                </div>
+                            </div>
+                        )}
                         {/* <button className="ml-3 md:text-[17px] text-xs bg-[#333333] text-white px-3 md:py-3 py-1 block rounded-md font-bold hover:bg-blue-950 duration-200">
                             プレビュー
                         </button> */}
