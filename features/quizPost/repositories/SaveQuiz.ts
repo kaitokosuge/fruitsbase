@@ -20,9 +20,10 @@ export const SaveQuiz = async (
         }),
     });
     if (res.ok) {
-        const data: { res: string; error: string | null } = await res.json();
+        const data: { res: string; error: string | null; quizId: string } =
+            await res.json();
         if (data.res === 'success') {
-            redirect('/');
+            redirect(`/quiz/${data.quizId}`);
         }
         return data;
     }

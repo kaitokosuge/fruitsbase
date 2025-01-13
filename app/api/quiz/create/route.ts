@@ -99,5 +99,9 @@ export async function POST(req: NextRequest) {
 
     console.log('クイズ保存結果', quizRes);
 
-    return NextResponse.json({ res: 'success', error: null });
+    return NextResponse.json({
+        res: 'success',
+        error: null,
+        quizId: quizRes.id,
+    });
 }

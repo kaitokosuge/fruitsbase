@@ -2,6 +2,7 @@ import QuizContainer from '@/features/quizViews/QuizContainer';
 // import ProfileCard from '@/features/profileCardView/ProfileCard';
 import Header from '@/components/Header/Header';
 import { Suspense } from 'react';
+import Footer from '@/components/Footer/Footer';
 
 export default async function Home() {
     return (
@@ -31,6 +32,7 @@ export default async function Home() {
                     </div>
                 </div>
             </main>
+            <Footer />
         </>
     );
 }

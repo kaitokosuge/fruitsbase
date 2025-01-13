@@ -117,10 +117,6 @@ export const useHandleOption = () => {
             alert('選択肢は2つ必要です');
             return;
         }
-        const isDelete = confirm('削除しますか？');
-        if (!isDelete) {
-            return;
-        }
         setOptions((prevOptions) =>
             prevOptions.filter((option) => option.id !== id),
         );
