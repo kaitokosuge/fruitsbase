@@ -2,7 +2,10 @@ import { clerkMiddleware } from '@clerk/nextjs/server';
 
 //サブドメインの Cookie 漏洩攻撃からアプリケーションを保護
 export default clerkMiddleware({
-    authorizedParties: [`${process.env.APP_URL}`],
+    authorizedParties: [
+        `${process.env.APP_URL}`,
+        'https://clerk.fruitsbase.com',
+    ],
 });
 
 export const config = {
