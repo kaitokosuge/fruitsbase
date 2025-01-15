@@ -109,7 +109,6 @@ model User_Correct {
   quizId          String
   user            User     @relation(fields: [userId], references: [id],onDelete: Cascade)
   userId          String
-  createdAt       DateTime @default(now())
   @@id([quizId, userId])
 }
 
