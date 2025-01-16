@@ -1,7 +1,4 @@
 export const formatDateToJST = (inputDate: Date): string => {
-    if (typeof window === 'undefined') {
-        return '';
-    }
     const jstDate = new Date(
         inputDate.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' }),
     );
