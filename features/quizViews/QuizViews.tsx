@@ -12,7 +12,9 @@ import {
 } from './../../components/ui/drawer';
 import Options from './components/Options/Options';
 import { useOption } from './hooks/useOption/useOption';
-import { formatDateToJST } from './utils/formatDateToJST/formatDateToJST';
+const PostDate = dynamic(() => import('./components/PostDate/PostDate'), {
+    ssr: false,
+});
 import AnswerBtn from './components/AnswerBtn/AnswerBtn';
 import CategoryArea from './components/CategoryArea/CategoryArea';
 import SyntaxHighlighter from 'react-syntax-highlighter';
@@ -22,6 +24,7 @@ import Link from 'next/link';
 import { Quiz } from '@/models/Quiz';
 import { useGetQuizByLimit } from './hooks/useGetQuizByLimit/useGetQuizByLimit';
 import GetMoreQuizBtn from './components/GetMoreQuizBtn/GetMoreQuizBtn';
+import dynamic from 'next/dynamic';
 
 export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
     const { handleClickOption, selectedOptionIds } = useOption();
@@ -71,9 +74,11 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
                                                             }
                                                         </p>
                                                         <p className="text-[10px] text-gray-500">
-                                                            {formatDateToJST(
-                                                                quiz.createdAt,
-                                                            )}
+                                                            <PostDate
+                                                                date={
+                                                                    quiz.createdAt
+                                                                }
+                                                            />
                                                         </p>
                                                     </div>
                                                 </Link>
@@ -145,7 +150,7 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
                                         </div>
                                         <div className="w-[10px] h-[1px] bg-gray-600 ml-3"></div>
                                         <p className="text-[11px] text-gray-500 ml-3">
-                                            {formatDateToJST(quiz.createdAt)}
+                                            <PostDate date={quiz.createdAt} />
                                         </p>
                                     </Link>
                                     <div className="md:mt-1 mt-1 flex md:justify-end justify-around">
