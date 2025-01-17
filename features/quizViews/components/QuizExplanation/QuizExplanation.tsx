@@ -8,9 +8,8 @@ export default function QuizExplanation({
 }: {
     explanation: string;
 }) {
-    console.log(explanation);
     return (
-        <div>
+        <div className="text-left">
             <p className="text-xs text-gray-300 mt-2">解説</p>
             <div className="mt-2">
                 {JSON.parse(explanation).map((item: EditorObject) => (
