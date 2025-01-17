@@ -35,7 +35,6 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
 
     return (
         <div className="pb-20">
-            {/* <h2 className="text-xs text-gray-400">time line</h2> */}
             {quizzes.map((quiz) => (
                 <div key={quiz.id} className="mt-[10px]">
                     <Drawer>
@@ -78,6 +77,17 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
                                                     />
                                                 </p>
                                             </div>
+                                        </Link>
+                                        <Link
+                                            scroll={true}
+                                            href={`/quiz/${quiz.id}`}
+                                            className="hover:opacity-50 duration-200"
+                                        >
+                                            <img
+                                                src="/show.svg"
+                                                alt="show page"
+                                                className="md:w-[26px] w-[25px]"
+                                            />
                                         </Link>
                                     </div>
                                 </div>
