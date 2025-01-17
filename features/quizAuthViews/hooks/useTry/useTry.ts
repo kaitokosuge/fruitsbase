@@ -5,11 +5,13 @@ export const useTry = () => {
     type QuizResult = {
         result: string;
         quizId: string;
+        explanation: string;
     };
     const [loading, setLoading] = useState(false);
     const [quizResponse, setQuizResponse] = useState<QuizResult>({
         result: '',
         quizId: '',
+        explanation: '',
     });
 
     const handleClickSubmit = async (
@@ -18,9 +20,6 @@ export const useTry = () => {
     ) => {
         setLoading(true);
         const resultData = await tryQuiz(selectedOptionIds, quizId);
-        const delay = (ms: number) =>
-            new Promise((resolve) => setTimeout(resolve, ms));
-        await delay(500);
         setLoading(false);
 
         if (resultData) {
