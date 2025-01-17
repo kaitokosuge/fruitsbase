@@ -20,5 +20,5 @@ export const useOption = () => {
             });
         }
     };
-    return { selectedOptionIds, handleClickOption };
+    return { selectedOptionIds, handleClickOption, setSelectedOptionIds };
 };
