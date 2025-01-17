@@ -7,7 +7,8 @@ export const tryQuiz = async (ids: string[], quizId: string) => {
         body: JSON.stringify({ selectedOptions: ids, quizId: quizId }),
     });
     if (res.ok) {
-        const data: { result: string; quizId: string } = await res.json();
+        const data: { result: string; quizId: string; explanation: string } =
+            await res.json();
         return data;
     }
 };
