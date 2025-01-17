@@ -24,18 +24,31 @@ import { useTry } from './hooks/useTry/useTry';
 import Link from 'next/link';
 import { deleteQuiz } from './repositories/deleteQuiz';
 import { Quiz } from '@/models/Quiz';
+import QuizExplanation from './components/QuizExplanation/QuizExplanation';
+import { EditorObject } from './types/EditorObject';
 
 export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
-    const { handleClickOption, selectedOptionIds } = useOption();
-    const { handleClickSubmit, quizResponse, loading } = useTry();
+    const { handleClickOption, selectedOptionIds, setSelectedOptionIds } =
+        useOption();
+    const { handleClickSubmit, quizResponse, setQuizResponse, loading } =
+        useTry();
 
     return (
         <div className="pb-20">
-            {/* <h2 className="text-xs text-gray-400">time line</h2> */}
             {quizzes.map((quiz) => (
                 <div key={quiz.id} className="mt-[10px]">
                     <Drawer>
-                        <DrawerTrigger className="mt-1 bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center">
+                        <DrawerTrigger
+                            onClick={() => {
+                                setSelectedOptionIds([]);
+                                setQuizResponse({
+                                    result: '',
+                                    quizId: '',
+                                    explanation: '',
+                                });
+                            }}
+                            className="mt-1 bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center"
+                        >
                             <div className="w-[100%] py-5 overflow-hidden">
                                 <div className="w-[100%] overflow-hidden">
                                     <div className="flex items-center justify-between w-[100%]">
@@ -64,6 +77,17 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
                                                     />
                                                 </p>
                                             </div>
+                                        </Link>
+                                        <Link
+                                            scroll={true}
+                                            href={`/quiz/${quiz.id}`}
+                                            className="hover:opacity-50 duration-200"
+                                        >
+                                            <img
+                                                src="/show.svg"
+                                                alt="show page"
+                                                className="md:w-[26px] w-[25px]"
+                                            />
                                         </Link>
                                     </div>
                                 </div>
@@ -138,6 +162,14 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
                                             </div>
                                         )}
                                 </div>
+                                {quizResponse.explanation &&
+                                    quizResponse.explanation !== '{}' && (
+                                        <QuizExplanation
+                                            explanation={
+                                                quizResponse.explanation
+                                            }
+                                        />
+                                    )}
 
                                 <div className="flex items-center justify-between md:mt-3 mt-2">
                                     <div className="w-[180px] md:w-[400px]">
@@ -167,17 +199,7 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
                                 <DrawerTitle className=""></DrawerTitle>
                                 <div className="font-normal md:text-[18px] text-[16px] text-left max-w-full">
                                     {JSON.parse(quiz.question).map(
-                                        (
-                                            item:
-                                                | {
-                                                      id: string;
-                                                      data: { code: string };
-                                                  }
-                                                | {
-                                                      id: string;
-                                                      data: { text: string };
-                                                  },
-                                        ) => (
+                                        (item: EditorObject) => (
                                             <div
                                                 key={item.id}
                                                 className="max-w-full"
