@@ -20,17 +20,31 @@ import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { useTry } from './hooks/useTry/useTry';
 import Link from 'next/link';
 import { Quiz } from '@/models/Quiz';
+import { EditorObject } from './types/EditorObject';
+import QuizExplanation from './components/QuizExplanation/QuizExplanation';
 
 export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
-    const { handleClickOption, selectedOptionIds } = useOption();
-    const { handleClickSubmit, quizResponse, loading } = useTry();
+    const { handleClickOption, selectedOptionIds, setSelectedOptionIds } =
+        useOption();
+    const { handleClickSubmit, quizResponse, setQuizResponse, loading } =
+        useTry();
 
     return (
         <div className="pb-40 w-full">
             {quizzes.map((quiz) => (
                 <div key={quiz.id} className="mt-[10px]">
                     <Drawer>
-                        <DrawerTrigger className="bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center">
+                        <DrawerTrigger
+                            onClick={() => {
+                                setSelectedOptionIds([]);
+                                setQuizResponse({
+                                    result: '',
+                                    quizId: '',
+                                    explanation: '',
+                                });
+                            }}
+                            className="bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center"
+                        >
                             <div className="flex items-center w-[100%] py-5 overflow-hidden">
                                 <div className="w-full">
                                     <div className="w-full overflow-hidden flex items-center justify-between">
@@ -147,6 +161,14 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
                                             </div>
                                         )}
                                 </div>
+                                {quizResponse.explanation &&
+                                    quizResponse.explanation !== '{}' && (
+                                        <QuizExplanation
+                                            explanation={
+                                                quizResponse.explanation
+                                            }
+                                        />
+                                    )}
 
                                 <div className="flex items-center justify-between md:mt-3 mt-2">
                                     <div className="w-[180px] md:w-[400px]">
@@ -175,21 +197,7 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
                                 <DrawerTitle className=""></DrawerTitle>
                                 <div className="font-normal md:text-[18px] text-[16px] text-left max-w-full">
                                     {JSON.parse(quiz.question).map(
-                                        (
-                                            item:
-                                                | {
-                                                      id: string;
-                                                      data: {
-                                                          code: string;
-                                                      };
-                                                  }
-                                                | {
-                                                      id: string;
-                                                      data: {
-                                                          text: string;
-                                                      };
-                                                  },
-                                        ) => (
+                                        (item: EditorObject) => (
                                             <div
                                                 key={item.id}
                                                 className="max-w-full"
