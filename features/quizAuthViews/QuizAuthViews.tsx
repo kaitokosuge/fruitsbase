@@ -28,8 +28,10 @@ import QuizExplanation from './components/QuizExplanation/QuizExplanation';
 import { EditorObject } from './types/EditorObject';
 
 export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
-    const { handleClickOption, selectedOptionIds } = useOption();
-    const { handleClickSubmit, quizResponse, loading } = useTry();
+    const { handleClickOption, selectedOptionIds, setSelectedOptionIds } =
+        useOption();
+    const { handleClickSubmit, quizResponse, setQuizResponse, loading } =
+        useTry();
 
     return (
         <div className="pb-20">
@@ -37,7 +39,17 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
             {quizzes.map((quiz) => (
                 <div key={quiz.id} className="mt-[10px]">
                     <Drawer>
-                        <DrawerTrigger className="mt-1 bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center">
+                        <DrawerTrigger
+                            onClick={() => {
+                                setSelectedOptionIds([]);
+                                setQuizResponse({
+                                    result: '',
+                                    quizId: '',
+                                    explanation: '',
+                                });
+                            }}
+                            className="mt-1 bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center"
+                        >
                             <div className="w-[100%] py-5 overflow-hidden">
                                 <div className="w-[100%] overflow-hidden">
                                     <div className="flex items-center justify-between w-[100%]">
