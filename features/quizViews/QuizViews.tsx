@@ -25,6 +25,7 @@ import { Quiz } from '@/models/Quiz';
 import { useGetQuizByLimit } from './hooks/useGetQuizByLimit/useGetQuizByLimit';
 import GetMoreQuizBtn from './components/GetMoreQuizBtn/GetMoreQuizBtn';
 import dynamic from 'next/dynamic';
+import QuizExplanation from './components/QuizExplanation/QuizExplanation';
 
 export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
     const { handleClickOption, selectedOptionIds } = useOption();
@@ -36,7 +37,7 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
         getloading,
         isLoadable,
     } = useGetQuizByLimit(quizzes);
-
+    console.log(quizResponse);
     return (
         <div className="pb-40 w-full">
             {viewQuizzes &&
@@ -169,7 +170,13 @@ export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
                                                 </div>
                                             )}
                                     </div>
-
+                                    {quizResponse.explanation && (
+                                        <QuizExplanation
+                                            explanation={
+                                                quizResponse.explanation
+                                            }
+                                        />
+                                    )}
                                     <div className="flex items-center justify-between md:mt-3 mt-2">
                                         <div className="w-[180px] md:w-[400px]">
                                             <CategoryArea quiz={quiz} />

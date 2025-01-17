@@ -59,6 +59,7 @@ export async function POST(req: NextRequest) {
                 return NextResponse.json({
                     result: 'true',
                     quizId: data.quizId,
+                    explanation: triedQuiz.explanation,
                 });
             }
             console.log('ここまで処理は通る');
