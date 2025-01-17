@@ -24,6 +24,8 @@ import { useTry } from './hooks/useTry/useTry';
 import Link from 'next/link';
 import { deleteQuiz } from './repositories/deleteQuiz';
 import { Quiz } from '@/models/Quiz';
+import QuizExplanation from './components/QuizExplanation/QuizExplanation';
+import { EditorObject } from './types/EditorObject';
 
 export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
     const { handleClickOption, selectedOptionIds } = useOption();
@@ -138,6 +140,14 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
                                             </div>
                                         )}
                                 </div>
+                                {quizResponse.explanation &&
+                                    quizResponse.explanation !== '{}' && (
+                                        <QuizExplanation
+                                            explanation={
+                                                quizResponse.explanation
+                                            }
+                                        />
+                                    )}
 
                                 <div className="flex items-center justify-between md:mt-3 mt-2">
                                     <div className="w-[180px] md:w-[400px]">
@@ -167,17 +177,7 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
                                 <DrawerTitle className=""></DrawerTitle>
                                 <div className="font-normal md:text-[18px] text-[16px] text-left max-w-full">
                                     {JSON.parse(quiz.question).map(
-                                        (
-                                            item:
-                                                | {
-                                                      id: string;
-                                                      data: { code: string };
-                                                  }
-                                                | {
-                                                      id: string;
-                                                      data: { text: string };
-                                                  },
-                                        ) => (
+                                        (item: EditorObject) => (
                                             <div
                                                 key={item.id}
                                                 className="max-w-full"
