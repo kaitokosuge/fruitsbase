@@ -5,11 +5,13 @@ export const useTry = () => {
     type QuizResult = {
         result: string;
         quizId: string;
+        explanation: string;
     };
     const [loading, setLoading] = useState(false);
     const [quizResponse, setQuizResponse] = useState<QuizResult>({
         result: '',
         quizId: '',
+        explanation: '',
     });
 
     const handleClickSubmit = async (

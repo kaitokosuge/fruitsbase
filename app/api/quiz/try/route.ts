@@ -6,6 +6,7 @@ export async function POST(req: NextRequest) {
     const { userId } = await auth();
     const data: { quizId: string; selectedOptions: string[] } =
         await req.json();
+
     const triedQuiz = await prisma.quiz.findFirst({
         where: {
             id: data.quizId,
@@ -14,7 +15,10 @@ export async function POST(req: NextRequest) {
             Option: true,
         },
     });
-    const trueIds = triedQuiz?.Option.filter((option) => option.is_correct).map(
+    if (!triedQuiz) {
+        return;
+    }
+    const trueIds = triedQuiz.Option.filter((option) => option.is_correct).map(
         (option) => option.id,
     );
 
@@ -55,6 +59,7 @@ export async function POST(req: NextRequest) {
                 return NextResponse.json({
                     result: 'true',
                     quizId: data.quizId,
+                    explanation: triedQuiz.explanation,
                 });
             }
             console.log('ここまで処理は通る');
@@ -68,5 +73,9 @@ export async function POST(req: NextRequest) {
             console.log('データが保存されました:', correctUser);
         }
     }
-    return NextResponse.json({ result: 'true', quizId: data.quizId });
+    return NextResponse.json({
+        result: 'true',
+        quizId: data.quizId,
+        explanation: triedQuiz.explanation,
+    });
 }
