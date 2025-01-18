@@ -3,14 +3,14 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
     req: NextRequest,
-    { params }: { params: { id: string } },
+    context: { params: { id: string } },
 ) {
     const headerToken = req.headers.get('token');
     console.log(headerToken);
     if (headerToken !== 'fruitsbase') {
         return;
     }
-    const userId = params.id;
+    const userId = context.params.id;
     console.log('ユーザーid', userId);
     const { searchParams } = new URL(req.url);
     const page = Number(searchParams.get('page')) - 1;
