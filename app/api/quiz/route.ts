@@ -2,9 +2,6 @@ import prisma from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
-    const delay = (ms: number) =>
-        new Promise((resolve) => setTimeout(resolve, ms));
-    await delay(2000);
     const headerToken = req.headers.get('token');
     console.log(headerToken);
     if (headerToken !== 'fruitsbase') {
