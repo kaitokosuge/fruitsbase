@@ -11,7 +11,7 @@ export default async function ProfileQuizzesViewContainer({
 }) {
     const { userId } = await auth();
     const res = await fetch(
-        `/api/user/${paramId}/quizzes`,
+        `${process.env.APP_URL}/api/user/${paramId}/quizzes`,
         {
             method: 'GET',
             next: { revalidate: 3 },
