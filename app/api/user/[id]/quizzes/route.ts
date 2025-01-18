@@ -3,18 +3,19 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
     req: NextRequest,
-    context: { params: { id: string } },
+    { params }: { params: Promise<{ id: string }> },
 ) {
     const headerToken = req.headers.get('token');
     console.log(headerToken);
     if (headerToken !== 'fruitsbase') {
         return;
     }
-    const userId = context.params.id;
-    console.log('ユーザーid', userId);
+
+    const userId = (await params).id;
+
     const { searchParams } = new URL(req.url);
     const page = Number(searchParams.get('page')) - 1;
-    console.log(page);
+
     const quizzes = await prisma.quiz.findMany({
         where: {
             authorId: userId,
