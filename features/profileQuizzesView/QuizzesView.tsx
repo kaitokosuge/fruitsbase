@@ -22,16 +22,26 @@ import Link from 'next/link';
 import { Quiz } from '@/models/Quiz';
 import { EditorObject } from './types/EditorObject';
 import QuizExplanation from './components/QuizExplanation/QuizExplanation';
+import { useGetQuizPaginateLimit } from './hooks/useGetQuizByPaginateLimit/useGetQuizByPaginateLimit';
 
-export default function QuizzesView({ paramUserId }: { paramUserId: string }) {
+export default function QuizzesView({
+    paramUserId,
+    quizzes,
+    quizCount,
+}: {
+    paramUserId: string;
+    quizzes: Quiz[];
+    quizCount: number;
+}) {
     const { handleClickOption, selectedOptionIds, setSelectedOptionIds } =
         useOption();
     const { handleClickSubmit, quizResponse, setQuizResponse, loading } =
         useTry();
-
+    const { viewQuizzes, handleClickPaginateIndex, selectIndex } =
+        useGetQuizPaginateLimit(quizzes);
     return (
         <div className="pb-40 w-full">
-            {quizzes.map((quiz) => (
+            {viewQuizzes.map((quiz) => (
                 <div key={quiz.id} className="mt-[10px]">
                     <Drawer>
                         <DrawerTrigger
@@ -233,6 +243,26 @@ export default function QuizzesView({ paramUserId }: { paramUserId: string }) {
                     </Drawer>
                 </div>
             ))}
+            <div className="w-fit mx-auto mt-5 flex items-center">
+                {Array.from(
+                    { length: Math.ceil(quizCount / 10) },
+                    (_, i) => i + 1,
+                ).map((count) => (
+                    <button
+                        key={count}
+                        className={
+                            selectIndex === count
+                                ? 'bg-blue-950 w-[30px] h-[30px] rounded-md border border-[#393939] hover:opacity-50 duration-200 mr-2'
+                                : 'w-[30px] h-[30px] rounded-md border border-[#393939] hover:opacity-50 duration-200 mr-2'
+                        }
+                        onClick={() =>
+                            handleClickPaginateIndex(count, paramUserId)
+                        }
+                    >
+                        {count}
+                    </button>
+                ))}
+            </div>
         </div>
     );
 }

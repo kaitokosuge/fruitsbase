@@ -40,7 +40,11 @@ export default async function ProfileQuizzesViewContainer({
                 />
             ) : (
                 <>
-                    <QuizzesView paramUserId={paramId} />
+                    <QuizzesView
+                        paramUserId={paramId}
+                        quizzes={data.quizzes}
+                        quizCount={data.quizCount}
+                    />
                 </>
             )}
         </div>
