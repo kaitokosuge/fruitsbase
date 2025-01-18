@@ -14,7 +14,7 @@ export async function GET(
     const userId = (await params).id;
 
     const { searchParams } = new URL(req.url);
-    const page = Number(searchParams.get('page')) - 1;
+    const page = Number(searchParams.get('page'));
 
     const quizzes = await prisma.quiz.findMany({
         where: {
