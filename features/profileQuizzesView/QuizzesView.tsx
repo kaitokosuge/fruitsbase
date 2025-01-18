@@ -251,12 +251,12 @@ export default function QuizzesView({
                     <button
                         key={count}
                         className={
-                            selectIndex === count
+                            selectIndex === count - 1
                                 ? 'bg-blue-950 w-[30px] h-[30px] rounded-md border border-[#393939] hover:opacity-50 duration-200 mr-2'
                                 : 'w-[30px] h-[30px] rounded-md border border-[#393939] hover:opacity-50 duration-200 mr-2'
                         }
                         onClick={() =>
-                            handleClickPaginateIndex(count, paramUserId)
+                            handleClickPaginateIndex(count - 1, paramUserId)
                         }
                     >
                         {count}
