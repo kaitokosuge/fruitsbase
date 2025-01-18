@@ -1,19 +1,15 @@
 import Header from '@/components/Header/Header';
 // import CategoryViews from '@/features/categoryViews/CategoryViews';
 import React, { Suspense } from 'react';
-
-import QuizAuthContainer from '@/features/quizAuthViews/QuizAuthContainer';
 import BasicProfileContainer from '@/features/basicProfileView/BasicProfileContainer';
-import { auth } from '@clerk/nextjs/server';
+import ProfileQuizzesViewContainer from '@/features/profileQuizzesView/ProfileQuizzesViewContainer';
 
 export default async function page({
     params,
 }: {
     params: Promise<{ id: string }>;
 }) {
-    const { userId } = await auth();
     const { id } = await params;
-
     return (
         <div>
             <Header />
@@ -31,7 +27,7 @@ export default async function page({
                             </div>
                         }
                     >
-                        <BasicProfileContainer paramId={id} authId={userId} />
+                        <BasicProfileContainer paramId={id} />
                     </Suspense>
                     <div className="md:w-[70%] w-full">
                         <p className="text-gray-400 border-b border-blue-900 w-fit pb-1 md:mt-0 mt-10">
@@ -45,10 +41,7 @@ export default async function page({
                                     </div>
                                 }
                             >
-                                <QuizAuthContainer
-                                    paramId={id}
-                                    authId={userId}
-                                />
+                                <ProfileQuizzesViewContainer paramId={id} />
                             </Suspense>
                         </div>
                     </div>

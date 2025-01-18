@@ -9,7 +9,7 @@ import {
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger,
-} from './../../components/ui/drawer';
+} from '../../components/ui/drawer';
 import Options from './components/Options/Options';
 import { useOption } from './hooks/useOption/useOption';
 import { formatDateToJST } from './utils/formatDateToJST/formatDateToJST';
@@ -23,7 +23,7 @@ import { Quiz } from '@/models/Quiz';
 import { EditorObject } from './types/EditorObject';
 import QuizExplanation from './components/QuizExplanation/QuizExplanation';
 
-export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
+export default function QuizzesView({ paramUserId }: { paramUserId: string }) {
     const { handleClickOption, selectedOptionIds, setSelectedOptionIds } =
         useOption();
     const { handleClickSubmit, quizResponse, setQuizResponse, loading } =
