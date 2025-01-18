@@ -9,7 +9,7 @@ import {
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger,
-} from './../../components/ui/drawer';
+} from '../../components/ui/drawer';
 import Options from './components/Options/Options';
 import { useOption } from './hooks/useOption/useOption';
 import dynamic from 'next/dynamic';
@@ -23,19 +23,29 @@ import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { useTry } from './hooks/useTry/useTry';
 import Link from 'next/link';
 import { deleteQuiz } from './repositories/deleteQuiz';
-import { Quiz } from '@/models/Quiz';
 import QuizExplanation from './components/QuizExplanation/QuizExplanation';
 import { EditorObject } from './types/EditorObject';
+import { useGetQuizPaginateLimit } from './hooks/useGetQuizByPaginateLimit/useGetQuizByPaginateLimit';
+import { Quiz } from '@/models/Quiz';
 
-export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
+export default function AuthQuizzesView({
+    paramUserId,
+    quizzes,
+    quizCount,
+}: {
+    paramUserId: string;
+    quizzes: Quiz[];
+    quizCount: number;
+}) {
     const { handleClickOption, selectedOptionIds, setSelectedOptionIds } =
         useOption();
     const { handleClickSubmit, quizResponse, setQuizResponse, loading } =
         useTry();
-
+    const { viewQuizzes, handleClickPaginateIndex, selectIndex } =
+        useGetQuizPaginateLimit(quizzes);
     return (
         <div className="pb-20">
-            {quizzes.map((quiz) => (
+            {viewQuizzes.map((quiz) => (
                 <div key={quiz.id} className="mt-[10px]">
                     <Drawer>
                         <DrawerTrigger
@@ -251,6 +261,27 @@ export default function QuizAuthViews({ quizzes }: { quizzes: Quiz[] }) {
                     </Drawer>
                 </div>
             ))}
+
+            <div className="w-fit mx-auto mt-5 flex items-center">
+                {Array.from(
+                    { length: Math.ceil(quizCount / 10) },
+                    (_, i) => i + 1,
+                ).map((count) => (
+                    <button
+                        key={count}
+                        className={
+                            selectIndex === count
+                                ? 'bg-blue-950 w-[30px] h-[30px] rounded-md border border-[#393939] hover:opacity-50 duration-200 mr-2'
+                                : 'w-[30px] h-[30px] rounded-md border border-[#393939] hover:opacity-50 duration-200 mr-2'
+                        }
+                        onClick={() =>
+                            handleClickPaginateIndex(count, paramUserId)
+                        }
+                    >
+                        {count}
+                    </button>
+                ))}
+            </div>
         </div>
     );
 }

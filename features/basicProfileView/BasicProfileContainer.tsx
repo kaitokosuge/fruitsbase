@@ -12,21 +12,38 @@ import { SignOut } from '@/features/signOut/SignOut';
 import { formatDateToJST } from '@/features/profileCardView/utiles/formatDateToJST';
 import UserDelete from '@/features/userDelete/UserDelete';
 import Header from '@/components/Header/Header';
-import prisma from '@/lib/prisma';
+import { User } from '@/models/User';
+import { auth } from '@clerk/nextjs/server';
 
 export default async function BasicProfileContainer({
     paramId,
-    authId,
 }: {
     paramId: string;
-    authId: string | null;
 }) {
-    const existingUserRecord = await prisma.user.findFirst({
-        where: {
-            id: paramId,
+    const { userId } = await auth();
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/user/${paramId}`,
+        {
+            method: 'GET',
+            next: { revalidate: 3 },
+            headers: {
+                token: 'fruitsbase',
+            },
         },
-    });
-    if (!existingUserRecord) {
+    );
+    if (!res.ok) {
+        return (
+            <div>
+                <Header />
+                <p className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[60px] w-[90%] mx-auto font-mono">
+                    error
+                </p>
+            </div>
+        );
+    }
+
+    const resData: { userData: User } = await res.json();
+    if (!resData.userData) {
         return (
             <div>
                 <Header />
@@ -39,15 +56,15 @@ export default async function BasicProfileContainer({
     return (
         <div className="md:w-[20%] w-full">
             <div className="flex items-center">
-                {existingUserRecord?.image && (
+                {resData.userData.image && (
                     <img
-                        src={existingUserRecord?.image}
+                        src={resData.userData.image}
                         alt="profile"
                         className="w-[80px] h-[80px] rounded-full"
                     />
                 )}
                 <h2 className="font-bold text-xl ml-5">
-                    {existingUserRecord?.username}
+                    {resData.userData.username}
                 </h2>
             </div>
             {/* <p className="text-gray-400 border-b border-blue-900 w-fit pb-1 mt-10">
@@ -56,7 +73,7 @@ export default async function BasicProfileContainer({
                             <div className="mt-3">
                                 <CategoryViews />
                             </div> */}
-            {authId === paramId && authId !== null && existingUserRecord && (
+            {userId === paramId && userId !== null && resData.userData && (
                 <Dialog>
                     <DialogTrigger className="mt-5 block text-sm border border-[#383838] rounded-md px-2 py-1 cursor-pointer">
                         Settings
@@ -65,15 +82,15 @@ export default async function BasicProfileContainer({
                         <DialogHeader className="text-left">
                             <DialogTitle className="flex items-center justify-between">
                                 <div className="flex items-center">
-                                    {existingUserRecord?.image && (
+                                    {resData.userData?.image && (
                                         <img
-                                            src={existingUserRecord.image}
+                                            src={resData.userData.image}
                                             alt="profile"
                                             className="rounded-full w-[40px]"
                                         />
                                     )}
                                     <p className="font-bold text-[20px] ml-3">
-                                        {existingUserRecord?.username}
+                                        {resData.userData.username}
                                     </p>
                                 </div>
                                 <SignOut />
@@ -82,14 +99,14 @@ export default async function BasicProfileContainer({
                                 <span className="block mt-5">
                                     メールアドレス:
                                     <span className="text-[#a8a8a8] font-bold">
-                                        {existingUserRecord?.email}
+                                        {resData.userData.email}
                                     </span>
                                 </span>
                                 <span className="block mt-5">
                                     Fruitsbaseを始めた日:
                                     <span className="text-[#a8a8a8] font-bold">
                                         {formatDateToJST(
-                                            existingUserRecord?.createdAt,
+                                            resData.userData.createdAt,
                                         )}
                                     </span>
                                 </span>
