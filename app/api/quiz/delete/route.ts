@@ -9,6 +9,21 @@ export async function DELETE(req: NextRequest) {
     }
     const data: { quizId: string } = await req.json();
 
+    const checkQuiz = await prisma.quiz.findFirst({
+        where: {
+            id: data.quizId,
+        },
+    });
+
+    //存在しなかったらreturn。returnするだけでいい？
+    if (!checkQuiz) {
+        return;
+    }
+    //ユーザーIDが異なったらreturn。returnするだけでいい？
+    if (checkQuiz.authorId !== userId) {
+        return;
+    }
+
     const quizDeleteRes = await prisma.quiz.delete({
         where: {
             id: data.quizId,
