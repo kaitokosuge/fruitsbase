@@ -9,13 +9,13 @@ export default function QuizExplanation({
     explanation: string;
 }) {
     return (
-        <div className="text-left">
+        <div className="text-left p-5 rounded-md border border-emerald-800 text-gray-400 mt-2">
             <p className="text-xs text-gray-300 mt-3">解説</p>
             <div className="mt-2">
                 {JSON.parse(explanation).map((item: EditorObject) => (
                     <div key={item.id} className="max-w-full">
                         {'code' in item.data ? (
-                            <div className="text-[13px] mt-2 md:w-full w-[340px] mx-auto">
+                            <div className="text-[13px] mt-2 md:w-full w-[300px] mx-auto">
                                 <SyntaxHighlighter
                                     language="typescript"
                                     style={atomOneDark}
