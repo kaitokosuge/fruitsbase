@@ -9,7 +9,7 @@ import {
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger,
-} from './../../components/ui/drawer';
+} from '../../components/ui/drawer';
 import Options from './components/Options/Options';
 import { useOption } from './hooks/useOption/useOption';
 const PostDate = dynamic(() => import('./components/PostDate/PostDate'), {

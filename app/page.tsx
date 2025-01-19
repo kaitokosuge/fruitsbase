@@ -1,4 +1,4 @@
-import QuizContainer from '@/features/quizViews/QuizContainer';
+import QuizContainer from '@/features/timelineQuizView/QuizContainer';
 // import ProfileCard from '@/features/profileCardView/ProfileCard';
 import Header from '@/components/Header/Header';
 import { Suspense } from 'react';
