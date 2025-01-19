@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { ClerkProvider } from '@clerk/nextjs';
 import './globals.css';
+import { jaJP } from '@clerk/localizations';
 
 export const metadata: Metadata = {
     title: 'Fruitsbase',
@@ -14,7 +15,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <ClerkProvider>
+        <ClerkProvider localization={jaJP}>
             <html lang="ja">
                 <body className="bg-[#171717] text-[#F0F0F0] w-screen min-h-screen">
                     {children}
