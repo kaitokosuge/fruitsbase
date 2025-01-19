@@ -10,7 +10,7 @@ export default function QuizExplanation({
 }) {
     return (
         <div className="text-left">
-            <p className="text-xs text-gray-300 mt-2">解説</p>
+            <p className="text-xs text-gray-300 mt-3">解説</p>
             <div className="mt-2">
                 {JSON.parse(explanation).map((item: EditorObject) => (
                     <div key={item.id} className="max-w-full">
