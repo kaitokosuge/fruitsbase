@@ -13,6 +13,7 @@
         "check:all": "npm run lint && npm run format"
     },
     "dependencies": {
+        "@clerk/localizations": "^3.9.11",
         "@clerk/nextjs": "^6.9.1",
         "@editorjs/code": "^2.9.3",
         "@editorjs/editorjs": "^2.30.7",
