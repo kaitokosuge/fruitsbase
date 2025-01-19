@@ -2,7 +2,7 @@ import { auth } from '@clerk/nextjs/server';
 import React from 'react';
 import AuthQuizzesView from './AuthQuizzesView';
 import QuizzesView from './QuizzesView';
-import { Quiz } from '@/models/Quiz';
+import { PublicQuiz } from '@/models/PublicQuiz';
 
 export default async function ProfileQuizzesViewContainer({
     paramId,
@@ -29,7 +29,7 @@ export default async function ProfileQuizzesViewContainer({
             </div>
         );
     }
-    const data: { quizzes: Quiz[]; quizCount: number } = await res.json();
+    const data: { quizzes: PublicQuiz[]; quizCount: number } = await res.json();
     return (
         <div>
             {paramId === userId && userId !== null ? (
