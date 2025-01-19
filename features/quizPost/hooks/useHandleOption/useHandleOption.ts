@@ -103,7 +103,7 @@ export const useHandleOption = () => {
         if (newId !== null) {
             const newOption: QuizOption = {
                 text: '',
-                is_correct: false,
+                is_correct: true,
                 id: newId,
             };
             setOptions((prevOptions) => [...prevOptions, newOption]);
