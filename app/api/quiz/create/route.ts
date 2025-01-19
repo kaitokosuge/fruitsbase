@@ -12,6 +12,9 @@ export async function POST(req: NextRequest) {
     const data = await req.json();
 
     const options: QuizOption[] = data.options;
+    if (options.length < 2 || 6 < options.length) {
+        return;
+    }
     const hasTrueOption = options.some((option) => option.is_correct === true);
 
     //クイズ本文バリデーション
