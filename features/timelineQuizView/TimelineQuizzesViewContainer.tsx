@@ -2,7 +2,7 @@ import React from 'react';
 import QuizViews from './QuizViews';
 import { PublicQuiz } from '@/models/PublicQuiz';
 
-export default async function QuizContainer() {
+export default async function TimelineQuizzesViewContainer() {
     const res = await fetch(`${process.env.APP_URL}/api/quiz`, {
         method: 'GET',
         next: { revalidate: 60 },

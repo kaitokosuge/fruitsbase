@@ -1,8 +1,8 @@
-import QuizContainer from '@/features/timelineQuizView/QuizContainer';
 // import ProfileCard from '@/features/profileCardView/ProfileCard';
 import Header from '@/components/Header/Header';
 import { Suspense } from 'react';
 import Footer from '@/components/Footer/Footer';
+import TimelineQuizzesViewContainer from '@/features/timelineQuizView/TimelineQuizzesViewContainer';
 
 export default async function Home() {
     return (
@@ -26,7 +26,7 @@ export default async function Home() {
                                     </div>
                                 }
                             >
-                                <QuizContainer />
+                                <TimelineQuizzesViewContainer />
                             </Suspense>
                         </div>
                     </div>
