@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import prisma from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -16,7 +17,7 @@ export async function GET(
     const { searchParams } = new URL(req.url);
     const page = Number(searchParams.get('page'));
 
-    const quizzes = await prisma.quiz.findMany({
+    const rawQuizzes = await prisma.quiz.findMany({
         where: {
             authorId: userId,
         },
@@ -35,7 +36,11 @@ export async function GET(
             updatedAt: 'desc',
         },
     });
-
+    //explanationとis_correctを除外
+    const quizzes = rawQuizzes.map(({ explanation, Option, ...quizProp }) => ({
+        ...quizProp,
+        Option: Option.map(({ is_correct, ...optionProp }) => optionProp),
+    }));
     const quizCount = await prisma.quiz.count({
         where: {
             authorId: userId,

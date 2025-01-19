@@ -45,7 +45,7 @@ export default function QuizShow({ quiz }: { quiz: Quiz }) {
                     <PostDate date={quiz.createdAt} />
                 </p>
             </Link>
-            <div className="md:mt-2 mt-1 flex md:justify-end justify-around">
+            <div className="md:mt-2 mt-2 flex md:justify-end justify-around">
                 {quiz.id === quizResponse.quizId &&
                     quizResponse.result === 'true' &&
                     !loading && (

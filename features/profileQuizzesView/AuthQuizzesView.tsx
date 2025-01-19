@@ -26,7 +26,7 @@ import { deleteQuiz } from './repositories/deleteQuiz';
 import QuizExplanation from './components/QuizExplanation/QuizExplanation';
 import { EditorObject } from './types/EditorObject';
 import { useGetQuizPaginateLimit } from './hooks/useGetQuizByPaginateLimit/useGetQuizByPaginateLimit';
-import { Quiz } from '@/models/Quiz';
+import { PublicQuiz } from '@/models/PublicQuiz';
 
 export default function AuthQuizzesView({
     paramUserId,
@@ -34,7 +34,7 @@ export default function AuthQuizzesView({
     quizCount,
 }: {
     paramUserId: string;
-    quizzes: Quiz[];
+    quizzes: PublicQuiz[];
     quizCount: number;
 }) {
     const { handleClickOption, selectedOptionIds, setSelectedOptionIds } =

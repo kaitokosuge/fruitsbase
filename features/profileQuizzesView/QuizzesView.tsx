@@ -19,10 +19,10 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { useTry } from './hooks/useTry/useTry';
 import Link from 'next/link';
-import { Quiz } from '@/models/Quiz';
 import { EditorObject } from './types/EditorObject';
 import QuizExplanation from './components/QuizExplanation/QuizExplanation';
 import { useGetQuizPaginateLimit } from './hooks/useGetQuizByPaginateLimit/useGetQuizByPaginateLimit';
+import { PublicQuiz } from '@/models/PublicQuiz';
 
 export default function QuizzesView({
     paramUserId,
@@ -30,7 +30,7 @@ export default function QuizzesView({
     quizCount,
 }: {
     paramUserId: string;
-    quizzes: Quiz[];
+    quizzes: PublicQuiz[];
     quizCount: number;
 }) {
     const { handleClickOption, selectedOptionIds, setSelectedOptionIds } =
