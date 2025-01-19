@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { getQuizByLimit } from '../../repositories/getQuizByLimit';
-import { Quiz } from '@/models/Quiz';
+import { PublicQuiz } from '@/models/PublicQuiz';
 
-export const useGetQuizByLimit = (quizzes: Quiz[]) => {
+export const useGetQuizByLimit = (quizzes: PublicQuiz[]) => {
     const [callNumber, setCallNumber] = useState(1);
-    const [viewQuizzes, setViewQuizzes] = useState<Quiz[]>(quizzes);
+    const [viewQuizzes, setViewQuizzes] = useState<PublicQuiz[]>(quizzes);
     const [getloading, setLoading] = useState(false);
     const [isLoadable, setIsLoadable] = useState(true);
 

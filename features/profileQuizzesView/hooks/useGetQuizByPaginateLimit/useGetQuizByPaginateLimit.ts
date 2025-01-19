@@ -1,11 +1,11 @@
-import { Quiz } from '@/models/Quiz';
 import { useState } from 'react';
 import { getQuizByPaginateLimit } from '../../repositories/getQuizByPaginateLimit';
+import { PublicQuiz } from '@/models/PublicQuiz';
 
-export const useGetQuizPaginateLimit = (quizzes: Quiz[]) => {
-    const [viewQuizzes, setViewQuizzes] = useState<Quiz[]>(quizzes);
+export const useGetQuizPaginateLimit = (quizzes: PublicQuiz[]) => {
+    const [viewQuizzes, setViewQuizzes] = useState<PublicQuiz[]>(quizzes);
     const [getloading, setGetLoading] = useState(false);
-    const [selectIndex, setSelectIndex] = useState(1);
+    const [selectIndex, setSelectIndex] = useState(0);
 
     const handleClickPaginateIndex = async (
         paginateIndex: number,

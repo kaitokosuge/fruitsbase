@@ -1,7 +1,7 @@
-import { Quiz } from '@/models/Quiz';
+import { PublicQuiz } from '@/models/PublicQuiz';
 import React from 'react';
 
-export default function CategoryArea({ quiz }: { quiz: Quiz }) {
+export default function CategoryArea({ quiz }: { quiz: PublicQuiz }) {
     return (
         <div className="flex items-center overflow-x-scroll">
             {quiz.Category_Quiz.map((category) => (
