@@ -1,5 +1,5 @@
 import Header from '@/components/Header/Header';
-import QuizShow from '@/features/quizShow/QuizShow';
+import QuizShow from '@/features/detailQuizView/QuizShow';
 import { Quiz } from '@/models/Quiz';
 import React from 'react';
 
