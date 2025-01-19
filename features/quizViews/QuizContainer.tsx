@@ -1,6 +1,6 @@
 import React from 'react';
 import QuizViews from './QuizViews';
-import { Quiz } from '@/models/Quiz';
+import { PublicQuiz } from '@/models/PublicQuiz';
 
 export default async function QuizContainer() {
     const res = await fetch(`${process.env.APP_URL}/api/quiz`, {
@@ -10,6 +10,6 @@ export default async function QuizContainer() {
             token: 'fruitsbase',
         },
     });
-    const data: { quizzes: Quiz[] } = await res.json();
+    const data: { quizzes: PublicQuiz[] } = await res.json();
     return <QuizViews quizzes={data.quizzes} />;
 }

@@ -21,14 +21,14 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { useTry } from './hooks/useTry/useTry';
 import Link from 'next/link';
-import { Quiz } from '@/models/Quiz';
 import { useGetQuizByLimit } from './hooks/useGetQuizByLimit/useGetQuizByLimit';
 import GetMoreQuizBtn from './components/GetMoreQuizBtn/GetMoreQuizBtn';
 import dynamic from 'next/dynamic';
 import QuizExplanation from './components/QuizExplanation/QuizExplanation';
 import { EditorObject } from './types/EditorObject';
+import { PublicQuiz } from '@/models/PublicQuiz';
 
-export default function QuizViews({ quizzes }: { quizzes: Quiz[] }) {
+export default function QuizViews({ quizzes }: { quizzes: PublicQuiz[] }) {
     const { handleClickOption, selectedOptionIds, setSelectedOptionIds } =
         useOption();
     const { handleClickSubmit, quizResponse, setQuizResponse, loading } =
