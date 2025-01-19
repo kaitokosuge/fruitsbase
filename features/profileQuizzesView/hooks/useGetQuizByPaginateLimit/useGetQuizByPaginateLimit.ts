@@ -5,7 +5,7 @@ import { getQuizByPaginateLimit } from '../../repositories/getQuizByPaginateLimi
 export const useGetQuizPaginateLimit = (quizzes: Quiz[]) => {
     const [viewQuizzes, setViewQuizzes] = useState<Quiz[]>(quizzes);
     const [getloading, setGetLoading] = useState(false);
-    const [selectIndex, setSelectIndex] = useState(1);
+    const [selectIndex, setSelectIndex] = useState(0);
 
     const handleClickPaginateIndex = async (
         paginateIndex: number,
