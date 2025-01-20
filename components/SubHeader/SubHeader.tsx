@@ -1,13 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import { User } from '@clerk/nextjs/server';
+import { SignedOut, SignInButton } from '@clerk/nextjs';
 import Link from 'next/link';
 import React from 'react';
-import { SignInButton, SignedOut } from '@clerk/nextjs';
 
-export default function Header({ user }: { user: User | null }) {
+export default function SubHeader() {
     return (
         <>
-            <header className="border-b rounded-b-[15px] border-[#2c2c2c] top-0 fixed w-full bg-[#171717] z-[1]">
+            <header className="border-b rounded-b-[15px] border-[#2c2c2c] top-0 fixed w-full bg-[#171717] left-0">
                 <div className="flex justify-between items-center mx-auto w-[90%] md:py-4 py-2">
                     <ul className="flex items-center">
                         <li>
@@ -49,19 +48,6 @@ export default function Header({ user }: { user: User | null }) {
                                 <SignedOut>
                                     <SignInButton />
                                 </SignedOut>
-                            </li>
-                            <li>
-                                {user && (
-                                    <Link href={`/profile/${user.id}`}>
-                                        <img
-                                            src={user.imageUrl}
-                                            width={30}
-                                            height={30}
-                                            alt="profile image"
-                                            className="hover:opacity-50 duration-200 block rounded-full w-[40px] h-[40px] object-cover"
-                                        />
-                                    </Link>
-                                )}
                             </li>
                         </ul>
                     </nav>

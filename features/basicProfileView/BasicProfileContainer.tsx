@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import {
@@ -11,9 +12,9 @@ import {
 import { SignOut } from '@/features/signOut/SignOut';
 import { formatDateToJST } from '@/features/profileCardView/utiles/formatDateToJST';
 import UserDelete from '@/features/userDelete/UserDelete';
-import Header from '@/components/Header/Header';
 import { User } from '@/models/User';
 import { auth } from '@clerk/nextjs/server';
+import SubHeader from '@/components/SubHeader/SubHeader';
 
 export default async function BasicProfileContainer({
     paramId,
@@ -34,22 +35,22 @@ export default async function BasicProfileContainer({
     if (!res.ok) {
         return (
             <div>
-                <Header />
-                <p className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[60px] w-[90%] mx-auto font-mono">
-                    error
-                </p>
+                <SubHeader />
+                <div className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[60px] w-[90%] mx-auto font-mono">
+                    <img src="/error-tell.svg" />
+                </div>
             </div>
         );
     }
 
-    const resData: { userData: User } = await res.json();
+    const resData: { userData: User | null } = await res.json();
     if (!resData.userData) {
         return (
             <div>
-                <Header />
-                <p className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[60px] w-[90%] mx-auto font-mono">
-                    user not found
-                </p>
+                <SubHeader />
+                <div className="bg-[#171717] text-[#F0F0F0] w-[90%] mx-auto font-mono">
+                    <img src="/not-found-user.svg" className="w-[200px]" />
+                </div>
             </div>
         );
     }

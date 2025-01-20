@@ -60,7 +60,7 @@ export default function QuizViews({ quizzes }: { quizzes: PublicQuiz[] }) {
                             >
                                 <div className="flex items-center w-[100%] py-5 overflow-hidden">
                                     <div className="w-full">
-                                        <div className="w-full overflow-hidden flex items-center justify-between">
+                                        <div className="w-full overflow-hidden flex items-center justify-between hidden-scrollbar">
                                             <div className="flex items-start justify-between w-full">
                                                 <Link
                                                     scroll={true}
@@ -134,7 +134,7 @@ export default function QuizViews({ quizzes }: { quizzes: PublicQuiz[] }) {
                                                 </div>
                                             )}
                                         </div>
-                                        <div className="flex overflow-x-scroll items-center w-full mt-3">
+                                        <div className="flex overflow-x-scroll items-center w-full mt-3 hidden-scrollbar">
                                             <CategoryArea quiz={quiz} />
                                         </div>
                                     </div>
@@ -142,7 +142,7 @@ export default function QuizViews({ quizzes }: { quizzes: PublicQuiz[] }) {
                             </DrawerTrigger>
                             <DrawerContent className="md:min-h-[calc(100dvh-80px)] md:max-h-[calc(100dvh-80px)] min-h-[calc(100dvh-60px)] max-h-[calc(100dvh-60px)] md:px-10 bg-[#131313]">
                                 <div className="h-[20px] w-[calc(100vw-10px)] bg-[#131313] rounded-t-[15px] fixed rigth-0 left-0 z-20"></div>
-                                <DrawerHeader className="pt-10 md:pb-60 px-5 pb-40 xl:w-[60%] lg:w-[65%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
+                                <DrawerHeader className="pt-10 md:pb-60 px-5 pb-40 xl:w-[60%] lg:w-[65%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll hidden-scrollbar">
                                     <Link
                                         scroll={true}
                                         href={`/profile/${quiz.author.id}`}
