@@ -1,11 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import { currentUser } from '@clerk/nextjs/server';
+import { User } from '@clerk/nextjs/server';
 import Link from 'next/link';
 import React from 'react';
 import { SignInButton, SignedOut } from '@clerk/nextjs';
 
-export default async function Header() {
-    const user = await currentUser();
+export default function Header({ user }: { user: User | null }) {
     return (
         <>
             <header className="border-b rounded-b-[15px] border-[#2c2c2c] top-0 fixed w-full bg-[#171717] z-[1]">

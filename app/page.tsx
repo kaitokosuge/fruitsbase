@@ -1,13 +1,15 @@
 // import ProfileCard from '@/features/profileCardView/ProfileCard';
-import Header from '@/components/Header/Header';
+import Header from './../components/Header/Header';
 import { Suspense } from 'react';
-import Footer from '@/components/Footer/Footer';
-import TimelineQuizzesViewContainer from '@/features/timelineQuizView/TimelineQuizzesViewContainer';
+import Footer from './../components/Footer/Footer';
+import TimelineQuizzesViewContainer from './../features/timelineQuizView/TimelineQuizzesViewContainer';
+import { currentUser } from '@clerk/nextjs/server';
 
 export default async function Home() {
+    const user = await currentUser();
     return (
-        <>
-            <Header />
+        <div>
+            <Header user={user} />
             <main className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[50px]">
                 <div className="w-[90%] mx-auto pt-5">
                     <div className="flex justify-between">
@@ -33,6 +35,6 @@ export default async function Home() {
                 </div>
             </main>
             <Footer />
-        </>
+        </div>
     );
 }
