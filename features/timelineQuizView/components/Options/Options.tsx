@@ -34,7 +34,7 @@ export default function Options({
                         }
                         key={index}
                     >
-                        <div className="overflow-scroll whitespace-nowrap py-3 pl-5 pr-5">
+                        <div className="overflow-scroll whitespace-nowrap py-3 pl-5 pr-5 hidden-scrollbar">
                             <p
                                 className={
                                     selectedOptionIds.some(
