@@ -3,7 +3,7 @@ import { PublicQuiz } from '@/models/PublicQuiz';
 
 export default function CategoryArea({ quiz }: { quiz: PublicQuiz }) {
     return (
-        <div className="flex items-center overflow-x-scroll">
+        <div className="flex items-center overflow-x-scroll hidden-scrollbar">
             {quiz.Category_Quiz.map((category) => (
                 <div
                     key={category.category.name}

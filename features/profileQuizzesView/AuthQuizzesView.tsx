@@ -59,8 +59,8 @@ export default function AuthQuizzesView({
                             }}
                             className="mt-1 bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center"
                         >
-                            <div className="w-[100%] py-5 overflow-hidden">
-                                <div className="w-[100%] overflow-hidden">
+                            <div className="w-[100%] py-5 overflow-hidden hidden-scrollbar">
+                                <div className="w-[100%] overflow-hidden hidden-scrollbar">
                                     <div className="flex items-center justify-between w-[100%]">
                                         <Link
                                             scroll={true}
@@ -123,14 +123,14 @@ export default function AuthQuizzesView({
                                         </div>
                                     )}
                                 </div>
-                                <div className="flex overflow-x-scroll items-center w-full mt-3">
+                                <div className="flex overflow-x-scroll items-center w-full mt-3 hidden-scrollbar">
                                     <CategoryArea quiz={quiz} />
                                 </div>
                             </div>
                         </DrawerTrigger>
                         <DrawerContent className="md:min-h-[calc(100dvh-80px)] md:max-h-[calc(100dvh-80px)] min-h-[calc(100dvh-60px)] max-h-[calc(100dvh-60px)] md:px-10 bg-[#131313]">
                             <div className="h-[20px] w-[calc(100vw-10px)] bg-[#131313] rounded-t-[15px] fixed rigth-0 left-0 z-20"></div>
-                            <DrawerHeader className="p-5 px-4 pb-40 xl:w-[60%] lg:w-[65%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll">
+                            <DrawerHeader className="p-5 px-4 pb-40 xl:w-[60%] lg:w-[65%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll hidden-scrollbar">
                                 <Link
                                     scroll={true}
                                     href={`/profile/${quiz.author.id}`}
