@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
         },
     });
     if (userData === null) {
-        return NextResponse.json({ userData: [] });
+        return NextResponse.json({ userData: null });
     }
     return NextResponse.json({ userData: userData });
 }
