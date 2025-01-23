@@ -261,7 +261,6 @@ export default function AuthQuizzesView({
                     </Drawer>
                 </div>
             ))}
-
             <div className="w-fit mx-auto mt-5 flex items-center">
                 {Array.from(
                     { length: Math.ceil(quizCount / 10) },
