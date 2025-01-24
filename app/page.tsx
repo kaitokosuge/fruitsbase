@@ -8,7 +8,7 @@ import { currentUser } from '@clerk/nextjs/server';
 export default async function Home() {
     const user = await currentUser();
     return (
-        <div>
+        <div className="bg-[#171717] text-[#F0F0F0]">
             <Header user={user} />
             <main className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[50px]">
                 <div className="w-[90%] mx-auto pt-5">

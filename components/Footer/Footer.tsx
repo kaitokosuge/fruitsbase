@@ -10,11 +10,27 @@ export default function Footer() {
                     <img
                         src="/fruitsbase-logo.png"
                         alt="fruitsbase"
-                        className="md:w-[150px] w-[100px]"
+                        className="md:w-[150px] w-[150px]"
                     />
                 </Link>
+                <div className="flex">
+                    <small className="font-mono">&copy;2025Fruitsbase</small>
+                </div>
+            </div>
+            <div className="flex justify-between items-center mx-auto w-[90%] md:pb-10 pb-5 pl-1 text-gray-500">
                 <div>
-                    <small className="font-mono">&copy;Fruitsbase</small>
+                    <Link
+                        href="/privacy"
+                        className="text-[10px] mr-5 duration-200 hover:opacity-55 block"
+                    >
+                        プライバシーポリシー
+                    </Link>
+                    <Link
+                        href="/"
+                        className="text-[10px] mr-5 duration-200 hover:opacity-55 block mt-2"
+                    >
+                        タイムライン
+                    </Link>
                 </div>
             </div>
         </footer>
