@@ -13,7 +13,7 @@ export default async function page({
     const { id } = await params;
     const user = await currentUser();
     return (
-        <div>
+        <div className="bg-[#171717] text-[#F0F0F0] min-h-screen">
             <Header user={user} />
             <div className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[50px] w-[90%] mx-auto">
                 <div className="flex flex-wrap justify-between w-full mt-10">

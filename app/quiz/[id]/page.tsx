@@ -23,7 +23,7 @@ export default async function page({
     const data: { quiz: Quiz } = await res.json();
     const user = await currentUser();
     return (
-        <div>
+        <div className="bg-[#171717] text-[#F0F0F0]">
             <Header user={user} />
             <QuizShow quiz={data.quiz} />
         </div>
