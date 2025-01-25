@@ -15,30 +15,22 @@ export default function AnswerBtn({
 }) {
     return (
         <div>
-            {Boolean(isTrue) ? (
-                <>
-                    <button
-                        disabled={false}
-                        className="ml-3 bg-[#333333] text-white px-5 py-1 block rounded-md font-bold opacity-40 duration-200"
-                    >
-                        解答する
-                    </button>
-                </>
-            ) : (
-                <button
-                    disabled={loading}
-                    onClick={() => {
-                        if (selectedOptionIds.length === 0) {
-                            alert('選択肢は最低1つ選んでください');
-                            return;
-                        }
-                        handleClickSubmit(selectedOptionIds, quizId);
-                    }}
-                    className="ml-3 bg-[#333333] text-white px-5 py-1 block rounded-md font-bold opacity-40 hover:opacity-100 duration-200"
-                >
-                    解答する
-                </button>
-            )}
+            <button
+                disabled={loading}
+                onClick={() => {
+                    if (isTrue === 'true') {
+                        return;
+                    }
+                    if (selectedOptionIds.length === 0) {
+                        alert('選択肢は最低1つ選んでください');
+                        return;
+                    }
+                    handleClickSubmit(selectedOptionIds, quizId);
+                }}
+                className="ml-3 bg-[#333333] text-white px-5 py-1 block rounded-md font-bold opacity-40 hover:opacity-100 duration-200"
+            >
+                解答する
+            </button>
         </div>
     );
 }
