@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma';
 import { auth } from '@clerk/nextjs/server';
+import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function DELETE(req: NextRequest) {
@@ -29,6 +30,7 @@ export async function DELETE(req: NextRequest) {
             id: data.quizId,
         },
     });
+    revalidatePath(`/profile/${userId}`);
     console.log('クイズ削除結果', quizDeleteRes);
     return NextResponse.json({ result: 'success' });
 }
