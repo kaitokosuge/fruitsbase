@@ -5,6 +5,13 @@ import BasicProfileContainer from '@/features/basicProfileView/BasicProfileConta
 import ProfileQuizzesViewContainer from '@/features/profileQuizzesView/ProfileQuizzesViewContainer';
 import { currentUser } from '@clerk/nextjs/server';
 
+export async function generateMetadata() {
+    const user = await currentUser();
+    return {
+        title: `${user?.username}のプロフィール`,
+    };
+}
+
 export default async function page({
     params,
 }: {
@@ -12,6 +19,7 @@ export default async function page({
 }) {
     const { id } = await params;
     const user = await currentUser();
+
     return (
         <div className="bg-[#171717] text-[#F0F0F0] min-h-screen">
             <Header user={user} />
