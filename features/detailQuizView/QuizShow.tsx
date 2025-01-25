@@ -81,6 +81,7 @@ export default function QuizShow({ quiz }: { quiz: Quiz }) {
                         loading={loading}
                         quizId={quiz.id}
                         selectedOptionIds={selectedOptionIds}
+                        isTrue={quizResponse.result}
                     />
                 </div>
             </div>

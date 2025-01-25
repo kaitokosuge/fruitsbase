@@ -212,6 +212,7 @@ export default function QuizViews({ quizzes }: { quizzes: PublicQuiz[] }) {
                                                 selectedOptionIds={
                                                     selectedOptionIds
                                                 }
+                                                isTrue={quizResponse.result}
                                             />
                                         </div>
                                     </div>
