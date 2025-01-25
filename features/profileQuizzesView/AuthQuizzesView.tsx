@@ -202,6 +202,7 @@ export default function AuthQuizzesView({
                                             selectedOptionIds={
                                                 selectedOptionIds
                                             }
+                                            isTrue={quizResponse.result}
                                         />
                                     </div>
                                 </div>

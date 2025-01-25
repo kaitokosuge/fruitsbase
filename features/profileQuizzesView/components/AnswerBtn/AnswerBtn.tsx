@@ -5,17 +5,22 @@ export default function AnswerBtn({
     quizId,
     loading,
     handleClickSubmit,
+    isTrue,
 }: {
     selectedOptionIds: string[];
     quizId: string;
     loading: boolean;
     handleClickSubmit: (selectedOptionIds: string[], quizId: string) => void;
+    isTrue: string;
 }) {
     return (
         <div>
             <button
                 disabled={loading}
                 onClick={() => {
+                    if (isTrue === 'true') {
+                        return;
+                    }
                     if (selectedOptionIds.length === 0) {
                         alert('選択肢は最低1つ選んでください');
                         return;

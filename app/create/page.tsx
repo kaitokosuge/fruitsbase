@@ -15,7 +15,7 @@ export default async function page() {
     // });
 
     return (
-        <div>
+        <div className="bg-[#171717] text-[#F0F0F0]">
             {/* <QuizPost categories={categories} /> */}
             <QuizPost />
         </div>

@@ -22,6 +22,9 @@ export default function Options({
                 {quiz.Option.map((option, index: number) => (
                     <button
                         onClick={() => {
+                            if (result.result === 'true') {
+                                return;
+                            }
                             handleClickOption(option.id, quiz.id);
                         }}
                         className={

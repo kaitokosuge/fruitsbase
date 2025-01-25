@@ -3,6 +3,7 @@ import { QuizOption } from '@/features/quizPost/models/QuizOption';
 import prisma from '@/lib/prisma';
 import { auth } from '@clerk/nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 
 export async function POST(req: NextRequest) {
     const { userId, redirectToSignIn } = await auth();
@@ -101,10 +102,11 @@ export async function POST(req: NextRequest) {
     }
 
     console.log('クイズ保存結果', quizRes);
-
+    revalidatePath(`/profile/${userId}`);
     return NextResponse.json({
         res: 'success',
         error: null,
         quizId: quizRes.id,
+        userId: userId,
     });
 }

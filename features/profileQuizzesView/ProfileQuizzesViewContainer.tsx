@@ -14,7 +14,7 @@ export default async function ProfileQuizzesViewContainer({
         `${process.env.APP_URL}/api/user/${paramId}/quizzes`,
         {
             method: 'GET',
-            next: { revalidate: 3 },
+            next: { revalidate: 30 },
             headers: {
                 token: 'fruitsbase',
             },

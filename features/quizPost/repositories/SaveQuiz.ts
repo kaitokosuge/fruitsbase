@@ -20,8 +20,12 @@ export const SaveQuiz = async (
         }),
     });
     if (res.ok) {
-        const data: { res: string; error: string | null; quizId: string } =
-            await res.json();
+        const data: {
+            res: string;
+            error: string | null;
+            quizId: string;
+            userId: string;
+        } = await res.json();
         if (data.res === 'success') {
             redirect(`/quiz/${data.quizId}`);
         }

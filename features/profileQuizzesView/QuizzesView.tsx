@@ -206,6 +206,7 @@ export default function QuizzesView({
                                             selectedOptionIds={
                                                 selectedOptionIds
                                             }
+                                            isTrue={quizResponse.result}
                                         />
                                     </div>
                                 </div>
