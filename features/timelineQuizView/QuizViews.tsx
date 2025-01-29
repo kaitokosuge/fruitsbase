@@ -217,7 +217,7 @@ export default function QuizViews({ quizzes }: { quizzes: PublicQuiz[] }) {
                                         </div>
                                     </div>
                                     <DrawerTitle className=""></DrawerTitle>
-                                    <div className="font-normal md:text-[18px] text-[16px] text-left max-w-full">
+                                    <div className="font-normal md:text-[18px] text-[15px] text-left max-w-full text-[#F0F0F0]">
                                         {JSON.parse(quiz.question).map(
                                             (item: EditorObject) => (
                                                 <div
