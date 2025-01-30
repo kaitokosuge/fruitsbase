@@ -3,6 +3,8 @@ import { ClerkProvider } from '@clerk/nextjs';
 import './globals.css';
 import { jaJP } from '@clerk/localizations';
 
+import { Analytics } from '@vercel/analytics/react';
+
 export const metadata: Metadata = {
     title: 'Fruitsbase',
     description:
@@ -19,6 +21,7 @@ export default function RootLayout({
             <html lang="ja">
                 <body className="bg-[#171717] text-[#F0F0F0] w-screen min-h-screen">
                     {children}
+                    <Analytics />
                 </body>
             </html>
         </ClerkProvider>
