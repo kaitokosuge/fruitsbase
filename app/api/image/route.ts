@@ -48,5 +48,5 @@ export async function POST(req: NextRequest) {
         },
     });
 
-    return NextResponse.json(userNewImage);
+    return NextResponse.json(userNewImage.image);
 }
