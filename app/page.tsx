@@ -3,13 +3,15 @@ import Header from './../components/Header/Header';
 import { Suspense } from 'react';
 import Footer from './../components/Footer/Footer';
 import TimelineQuizzesViewContainer from './../features/timelineQuizView/TimelineQuizzesViewContainer';
-import { currentUser } from '@clerk/nextjs/server';
+import { auth } from '@clerk/nextjs/server';
+import { getUserData } from './profile/_features/repositories/getUserData/getUserData';
 
 export default async function Home() {
-    const user = await currentUser();
+    const { userId } = await auth();
+    const userData = await getUserData(userId);
     return (
         <div className="bg-[#171717] text-[#F0F0F0]">
-            <Header user={user} />
+            <Header user={userData} />
             <main className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[50px]">
                 <div className="w-[90%] mx-auto pt-5">
                     <div className="flex justify-between">
