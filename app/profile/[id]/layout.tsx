@@ -1,6 +1,6 @@
 import Header from '@/components/Header/Header';
-import { User } from '@/models/User';
 import React from 'react';
+import { getUserData } from '../_features/repositories/getUserData/getUserData';
 
 export default async function layout({
     params,
@@ -10,21 +10,11 @@ export default async function layout({
     params: Promise<{ id: string }>;
 }>) {
     const { id } = await params;
-    const res = await fetch(
-        `${process.env.NEXT_PUBLIC_APP_URL}/api/user/${id}`,
-        {
-            method: 'GET',
-            next: { revalidate: 3 },
-            headers: {
-                token: 'fruitsbase',
-            },
-        },
-    );
-    const data: { userData: User } = await res.json();
+    const userData = await getUserData(id);
 
     return (
         <div>
-            <Header user={data.userData} />
+            <Header user={userData} />
             {children}
         </div>
     );
