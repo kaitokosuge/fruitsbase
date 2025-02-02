@@ -2,14 +2,6 @@
 import React, { Suspense } from 'react';
 import BasicProfileContainer from '@/features/basicProfileView/BasicProfileContainer';
 import ProfileQuizzesViewContainer from '@/features/profileQuizzesView/ProfileQuizzesViewContainer';
-import { currentUser } from '@clerk/nextjs/server';
-
-export async function generateMetadata() {
-    const user = await currentUser();
-    return {
-        title: `${user?.username}のプロフィール`,
-    };
-}
 
 export default async function page({
     params,
