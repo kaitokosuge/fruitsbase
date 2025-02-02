@@ -1,4 +1,3 @@
-import Header from '@/components/Header/Header';
 // import CategoryViews from '@/features/categoryViews/CategoryViews';
 import React, { Suspense } from 'react';
 import BasicProfileContainer from '@/features/basicProfileView/BasicProfileContainer';
@@ -18,11 +17,9 @@ export default async function page({
     params: Promise<{ id: string }>;
 }) {
     const { id } = await params;
-    const user = await currentUser();
 
     return (
         <div className="bg-[#171717] text-[#F0F0F0] min-h-screen">
-            <Header user={user} />
             <div className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[50px] w-[90%] mx-auto">
                 <div className="flex flex-wrap justify-between w-full mt-10">
                     <Suspense
