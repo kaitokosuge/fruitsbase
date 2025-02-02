@@ -59,9 +59,11 @@ export default async function BasicProfileContainer({
             <div className="flex items-center">
                 {resData.userData.image && (
                     <img
+                        width={80}
+                        height={80}
                         src={resData.userData.image}
                         alt="profile"
-                        className="w-[80px] h-[80px] rounded-full"
+                        className="w-[80px] h-[80px] rounded-full object-cover"
                     />
                 )}
                 <h2 className="font-bold text-xl ml-5">
