@@ -1,7 +1,8 @@
+import { getUserData } from '@/app/profile/_features/repositories/getUserData/getUserData';
 import Header from '@/components/Header/Header';
 import QuizShow from '@/features/detailQuizView/QuizShow';
 import { Quiz } from '@/models/Quiz';
-import { currentUser } from '@clerk/nextjs/server';
+import { auth } from '@clerk/nextjs/server';
 import React from 'react';
 
 export default async function page({
@@ -21,10 +22,11 @@ export default async function page({
         console.error('Error body:', errorText);
     }
     const data: { quiz: Quiz } = await res.json();
-    const user = await currentUser();
+    const { userId } = await auth();
+    const userData = await getUserData(userId);
     return (
         <div className="bg-[#171717] text-[#F0F0F0]">
-            <Header user={user} />
+            <Header user={userData} />
             <QuizShow quiz={data.quiz} />
         </div>
     );
