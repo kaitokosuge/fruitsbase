@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { User } from '@clerk/nextjs/server';
 import Link from 'next/link';
 import React from 'react';
 import { SignInButton, SignedOut } from '@clerk/nextjs';
+import { User } from '@/models/User';
 
 export default function Header({ user }: { user: User | null }) {
     return (
@@ -53,13 +53,15 @@ export default function Header({ user }: { user: User | null }) {
                             <li>
                                 {user && (
                                     <Link href={`/profile/${user.id}`}>
-                                        <img
-                                            src={user.imageUrl}
-                                            width={30}
-                                            height={30}
-                                            alt="profile image"
-                                            className="hover:opacity-50 duration-200 block rounded-full w-[40px] h-[40px] object-cover"
-                                        />
+                                        {user.image && (
+                                            <img
+                                                src={user.image}
+                                                width={30}
+                                                height={30}
+                                                alt="profile image"
+                                                className="hover:opacity-50 duration-200 block rounded-full w-[40px] h-[40px] object-cover"
+                                            />
+                                        )}
                                     </Link>
                                 )}
                             </li>
