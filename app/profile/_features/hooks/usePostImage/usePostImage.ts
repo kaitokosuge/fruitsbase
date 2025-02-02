@@ -46,7 +46,7 @@ export const usePostImage = () => {
         formData.append('image', compressedFile);
 
         try {
-            const response = await fetch('/api/post', {
+            const response = await fetch('/api/image', {
                 method: 'POST',
                 body: formData,
             });
