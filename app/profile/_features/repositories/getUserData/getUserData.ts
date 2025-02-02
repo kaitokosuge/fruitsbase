@@ -1,6 +1,9 @@
 import { User } from '@/models/User';
 
-export const getUserData = async (id: string): Promise<User | null> => {
+export const getUserData = async (id: string | null): Promise<User | null> => {
+    if (!id) {
+        return null;
+    }
     const res = await fetch(
         `${process.env.NEXT_PUBLIC_APP_URL}/api/user/${id}`,
         {

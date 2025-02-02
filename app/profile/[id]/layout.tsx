@@ -2,6 +2,7 @@ import Header from '@/components/Header/Header';
 import React from 'react';
 import { getUserData } from '../_features/repositories/getUserData/getUserData';
 import { Metadata } from 'next';
+import { auth } from '@clerk/nextjs/server';
 
 export async function generateMetadata({
     params,
@@ -17,14 +18,13 @@ export async function generateMetadata({
 }
 
 export default async function layout({
-    params,
     children,
 }: Readonly<{
     children: React.ReactNode;
     params: Promise<{ id: string }>;
 }>) {
-    const { id } = await params;
-    const userData = await getUserData(id);
+    const { userId } = await auth();
+    const userData = await getUserData(userId);
 
     return (
         <div>
