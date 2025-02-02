@@ -1,13 +1,15 @@
 import Footer from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
-import { currentUser } from '@clerk/nextjs/server';
+import { auth } from '@clerk/nextjs/server';
 import React from 'react';
+import { getUserData } from '../profile/_features/repositories/getUserData/getUserData';
 
 export default async function page() {
-    const user = await currentUser();
+    const { userId } = await auth();
+    const userData = await getUserData(userId);
     return (
         <div>
-            <Header user={user} />
+            <Header user={userData} />
             <h2 className="md:w-[80%] w-[90%] mx-auto md:mt-[150px] mt-[80px] font-bold">
                 プライバシーポリシー
             </h2>
