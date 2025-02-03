@@ -36,6 +36,7 @@ export const usePostImage = (userImage: string | null | undefined) => {
         setImageUpload(true);
         if (!imageFile) {
             alert('画像ファイルを選択してください。');
+            setImageUpload(false);
             return;
         }
 
