@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import imageCompression from 'browser-image-compression';
 
-export const usePostImage = () => {
+export const usePostImage = (userImage: string | null | undefined) => {
     //投稿画像データ
     const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -11,8 +11,10 @@ export const usePostImage = () => {
     //プレビュー画像データ
     const [previewImage, setPreviewImage] = useState<string | null>(null);
 
-    //保存された画像のパス
-    const [savedImage, setSavedImage] = useState<string>('');
+    //ページに表示する画像
+    const [viewImage, setViewImage] = useState<string | null | undefined>(
+        userImage,
+    );
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -52,11 +54,11 @@ export const usePostImage = () => {
             });
 
             if (response.ok) {
-                const data = await response.json();
+                const data: string = await response.json();
                 console.log(data);
-                setSavedImage(data);
                 setPreviewImage(null);
                 setImageFile(null);
+                setViewImage(data);
                 alert('画像が正常にアップロードされました。');
             } else {
                 alert('画像のアップロードに失敗しました。');
@@ -72,8 +74,8 @@ export const usePostImage = () => {
     return {
         imageUpLoad,
         previewImage,
-        savedImage,
         handleFileChange,
         handleSubmit,
+        viewImage,
     };
 };

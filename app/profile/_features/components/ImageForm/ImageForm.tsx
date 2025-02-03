@@ -12,58 +12,55 @@ export default function ImageForm({
     const {
         imageUpLoad,
         previewImage,
-        savedImage,
+        viewImage,
         handleFileChange,
         handleSubmit,
-    } = usePostImage();
+    } = usePostImage(userImage);
+
     return (
         <div className="mx-auto w-[350px] sm:w-[600px] md:w-[650px] flex text-[#7b7b7b]">
             {imageUpLoad && <>ロード中</>}
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="image" className="text-xs">
-                        画像ファイル:
+            <form onSubmit={handleSubmit} className="w-full">
+                <div className="w-full">
+                    <label htmlFor="image" className="text-md font-bold">
+                        プロフィール画像
                     </label>
-                    {userImage && (
-                        <img
-                            src={userImage}
-                            alt="profile"
-                            className="w-[150px] h-[150px] rounded-full object-cover"
+                    <div className="flex items-center w-full">
+                        {viewImage && (
+                            <img
+                                src={viewImage}
+                                alt="profile"
+                                className="w-[150px] h-[150px] rounded-full object-cover mt-2"
+                            />
+                        )}
+                        <input
+                            type="file"
+                            id="image"
+                            accept="image/*"
+                            onChange={handleFileChange}
+                            className="rounded-md block ml-10"
+                            required
                         />
-                    )}
-                    <input
-                        type="file"
-                        id="image"
-                        accept="image/*"
-                        onChange={handleFileChange}
-                        className="rounded-md  "
-                        required
-                    />
+                    </div>
                 </div>
                 {previewImage && (
-                    <img
-                        src={previewImage}
-                        className="block rounded-full bg-black object-contain w-[75px] h-[75px]"
-                    />
+                    <div className="flex items-center">
+                        <img
+                            src={previewImage}
+                            className="w-[150px] h-[150px] rounded-full object-cover mt-2"
+                        />
+                        <p className="ml-10">新しいプロフィール画像</p>
+                    </div>
                 )}
 
                 <button
                     type="submit"
                     disabled={imageUpLoad}
-                    className="block md:text-sm text-xs bg-[#313131] duration-300 hover:opacity-50 rounded-md px-4 md:py-3 py-2 font-bold"
+                    className="mt-5 block md:text-sm text-xs bg-[#313131] duration-300 hover:opacity-50 rounded-md px-4 md:py-3 py-2 font-bold"
                 >
                     アップロード
                 </button>
             </form>
-            {savedImage && (
-                <div className="">
-                    <img
-                        src={savedImage}
-                        alt="profile image"
-                        className="block rounded-full bg-black object-contain w-[35px] h-[35px]"
-                    />
-                </div>
-            )}
         </div>
     );
 }
