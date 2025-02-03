@@ -57,10 +57,16 @@ export default async function BasicProfileContainer({
                         className="w-[80px] h-[80px] rounded-full object-cover"
                     />
                 )}
-                <h2 className="font-bold text-xl ml-5">
+                <h2 className="font-bold text-xl ml-5 overflow-hidden whitespace-nowrap">
                     {resData.userData.username}
                 </h2>
             </div>
+            {resData.userData.bio && (
+                <p className="text-xs text-[#aaaaaa] mt-5">
+                    {resData.userData.bio}
+                </p>
+            )}
+
             {/* <p className="text-gray-400 border-b border-blue-900 w-fit pb-1 mt-10">
                                 カテゴリー
                             </p>
