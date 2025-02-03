@@ -4,7 +4,11 @@
 import React from 'react';
 import { usePostImage } from '../../hooks/usePostImage/usePostImage';
 
-export default function ImageForm() {
+export default function ImageForm({
+    userImage,
+}: {
+    userImage: string | null | undefined;
+}) {
     const {
         imageUpLoad,
         previewImage,
@@ -20,6 +24,13 @@ export default function ImageForm() {
                     <label htmlFor="image" className="text-xs">
                         画像ファイル:
                     </label>
+                    {userImage && (
+                        <img
+                            src={userImage}
+                            alt="profile"
+                            className="w-[150px] h-[150px] rounded-full object-cover"
+                        />
+                    )}
                     <input
                         type="file"
                         id="image"
