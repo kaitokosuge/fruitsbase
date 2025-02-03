@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma';
 import { auth } from '@clerk/nextjs/server';
+import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
@@ -17,5 +18,6 @@ export async function POST(req: NextRequest) {
             name: `${data.name}`,
         },
     });
+    revalidatePath(`/profile/${userId}/setting`);
     return NextResponse.json(userNewName);
 }
