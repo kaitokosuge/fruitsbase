@@ -1,20 +1,11 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/components/ui/dialog';
-import { SignOut } from '@/features/signOut/SignOut';
-import { formatDateToJST } from '@/features/profileCardView/utiles/formatDateToJST';
-import UserDelete from '@/features/userDelete/UserDelete';
 import { User } from '@/models/User';
 import { auth } from '@clerk/nextjs/server';
 import SubHeader from '@/components/SubHeader/SubHeader';
+import Link from 'next/link';
+import { SignOut } from '../signOut/SignOut';
 
 export default async function BasicProfileContainer({
     paramId,
@@ -77,47 +68,15 @@ export default async function BasicProfileContainer({
                                 <CategoryViews />
                             </div> */}
             {userId === paramId && userId !== null && resData.userData && (
-                <Dialog>
-                    <DialogTrigger className="mt-5 block text-sm border border-[#383838] rounded-md px-2 py-1 cursor-pointer">
-                        Settings
-                    </DialogTrigger>
-                    <DialogContent className="text-left bg-[#2c2c2c] border-none min-w-[60%] px-10 pb-10">
-                        <DialogHeader className="text-left">
-                            <DialogTitle className="flex items-center justify-between">
-                                <div className="flex items-center">
-                                    {resData.userData?.image && (
-                                        <img
-                                            src={resData.userData.image}
-                                            alt="profile"
-                                            className="rounded-full w-[40px]"
-                                        />
-                                    )}
-                                    <p className="font-bold text-[20px] ml-3">
-                                        {resData.userData.username}
-                                    </p>
-                                </div>
-                                <SignOut />
-                            </DialogTitle>
-                            <DialogDescription className="mt-10">
-                                <span className="block mt-5">
-                                    メールアドレス:
-                                    <span className="text-[#a8a8a8] font-bold">
-                                        {resData.userData.email}
-                                    </span>
-                                </span>
-                                <span className="block mt-5">
-                                    Fruitsbaseを始めた日:
-                                    <span className="text-[#a8a8a8] font-bold">
-                                        {formatDateToJST(
-                                            resData.userData.createdAt,
-                                        )}
-                                    </span>
-                                </span>
-                            </DialogDescription>
-                        </DialogHeader>
-                        <UserDelete />
-                    </DialogContent>
-                </Dialog>
+                <div className="flex">
+                    <Link
+                        href={`/profile/${userId}/setting`}
+                        className="text-xs mt-5 block text-[#727272] hover:text-white duration-300 border border-[#383838] rounded-md px-2 py-1 cursor-pointer w-fit"
+                    >
+                        プロフィールの編集 →
+                    </Link>
+                    <SignOut />
+                </div>
             )}
         </div>
     );

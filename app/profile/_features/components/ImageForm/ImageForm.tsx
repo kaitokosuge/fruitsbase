@@ -18,7 +18,7 @@ export default function ImageForm({
     } = usePostImage(userImage);
 
     return (
-        <div className="mx-auto w-[350px] sm:w-[600px] md:w-[650px] flex text-[#7b7b7b] mt-5 pb-5 border-b border-[#515151]">
+        <div className="mx-auto w-[350px] sm:w-[600px] md:w-[650px] flex text-[#7b7b7b] md:mt-10 mt-5 pb-5 border-b border-[#515151]">
             <form onSubmit={handleSubmit} className="w-full mx-auto">
                 <div className="">
                     <div className="flex items-center">
