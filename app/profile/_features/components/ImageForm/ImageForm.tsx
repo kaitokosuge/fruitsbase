@@ -44,7 +44,7 @@ export default function ImageForm({
                             <img
                                 src={viewImage}
                                 alt="profile"
-                                className="min-w-[150px] min-h-[150px] max-h-[150px] max-w-[150px] rounded-full object-cover mt-2"
+                                className="min-w-[130px] min-h-[130px] max-h-[130px] max-w-[130px] rounded-full object-cover mt-2"
                             />
                         )}
                         <input
@@ -61,7 +61,7 @@ export default function ImageForm({
                     <div className="flex items-center">
                         <img
                             src={previewImage}
-                            className="w-[150px] h-[150px] rounded-full object-cover mt-2"
+                            className="w-[130px] h-[130px] rounded-full object-cover mt-2"
                         />
                         <p className="md:ml-10 ml-5 text-xs">
                             新しいプロフィール画像
