@@ -4,6 +4,7 @@ import { auth } from '@clerk/nextjs/server';
 import { getUserData } from '../../_features/repositories/getUserData/getUserData';
 
 import UserDelete from '@/features/userDelete/UserDelete';
+import BasicForm from '../../_features/components/BasicForm/BasicForm';
 
 export default async function Page() {
     const { userId } = await auth();
@@ -11,6 +12,7 @@ export default async function Page() {
     if (!userData) {
         return;
     }
+
     return (
         <div className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[50px] w-[90%] mx-auto">
             <h2 className="text-white text-4xl pt-10 mx-auto w-[350px] sm:w-[600px] md:w-[650px]">
@@ -22,6 +24,7 @@ export default async function Page() {
                 </span>
             </div>
             <ImageForm userImage={userData?.image} />
+            <BasicForm userData={userData} />
             <UserDelete />
         </div>
     );
