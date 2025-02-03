@@ -13,6 +13,7 @@
         "check:all": "npm run lint && npm run format"
     },
     "dependencies": {
+        "@aws-sdk/client-s3": "^3.740.0",
         "@clerk/localizations": "^3.9.11",
         "@clerk/nextjs": "^6.9.1",
         "@editorjs/code": "^2.9.3",
@@ -22,6 +23,7 @@
         "@radix-ui/react-popover": "^1.1.4",
         "@vercel/analytics": "^1.4.1",
         "axios": "^1.7.9",
+        "browser-image-compression": "^2.0.2",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "html-react-parser": "^5.2.2",

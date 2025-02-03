@@ -14,9 +14,9 @@ export const SignOut = () => {
                 }
                 signOut({ redirectUrl: '/' });
             }}
-            className="text-xs border rounded-md px-3 py-1 opacity-50 hover:opacity-100 duration-300"
+            className="text-xs mt-5 ml-2 block text-[#727272] hover:text-white duration-300 border border-[#383838] rounded-md px-2 py-1 cursor-pointer w-fit"
         >
-            Sign out→
+            Sign out
         </button>
     );
 };
