@@ -19,13 +19,27 @@ export default function ImageForm({
 
     return (
         <div className="mx-auto w-[350px] sm:w-[600px] md:w-[650px] flex text-[#7b7b7b] mt-5 pb-5 border-b border-[#515151]">
-            {imageUpLoad && <>ロード中</>}
-            <form onSubmit={handleSubmit} className="w-full">
-                <div className="w-full">
-                    <label htmlFor="image" className="text-md font-bold">
-                        プロフィール画像
-                    </label>
-                    <div className="flex items-center w-full mt-3">
+            <form onSubmit={handleSubmit} className="w-full mx-auto">
+                <div className="">
+                    <div className="flex items-center">
+                        <label
+                            htmlFor="image"
+                            className="text-md font-bold block"
+                        >
+                            プロフィール画像
+                        </label>
+                        <div>
+                            {imageUpLoad && (
+                                <div className="spinner-box ml-5">
+                                    <div className="circle-border">
+                                        <div className="circle-core"></div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="flex items-center mt-3 overflow-hidden">
                         {viewImage && (
                             <img
                                 src={viewImage}
@@ -38,7 +52,7 @@ export default function ImageForm({
                             id="image"
                             accept="image/*"
                             onChange={handleFileChange}
-                            className="rounded-md block md:ml-10 ml-5 text-xs file:w-[150px] file:block w-fit file:bg-[#313131] file:text-white file:mb-3 file:px-3 file:py-2 file:rounded-md file:border-none file:cursor-pointer file:duration-300 file:hover:opacity-70"
+                            className="rounded-md block md:ml-10 ml-5 text-xs file:w-[140px] file:block file:bg-[#313131] file:text-white file:mb-3 file:px-3 file:py-2 file:rounded-md file:border-none file:cursor-pointer file:duration-300 file:hover:opacity-70"
                             required
                         />
                     </div>
@@ -49,7 +63,9 @@ export default function ImageForm({
                             src={previewImage}
                             className="w-[150px] h-[150px] rounded-full object-cover mt-2"
                         />
-                        <p className="ml-10">新しいプロフィール画像</p>
+                        <p className="md:ml-10 ml-5 text-xs">
+                            新しいプロフィール画像
+                        </p>
                     </div>
                 )}
 

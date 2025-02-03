@@ -60,7 +60,6 @@ export const usePostImage = (userImage: string | null | undefined) => {
                 setPreviewImage(null);
                 setImageFile(null);
                 setViewImage(data);
-                alert('画像が正常にアップロードされました。');
             } else {
                 alert('画像のアップロードに失敗しました。');
             }
