@@ -14,7 +14,7 @@ export default async function Page() {
     }
 
     return (
-        <div className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[50px] w-[90%] mx-auto">
+        <div className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[50px] w-[90%] mx-auto pb-20">
             <h2 className="text-white text-4xl pt-10 mx-auto w-[350px] sm:w-[600px] md:w-[650px]">
                 {userData.username}&ensp;
             </h2>
