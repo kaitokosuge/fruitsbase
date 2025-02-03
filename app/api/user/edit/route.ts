@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
         data: {
             username: data.username,
             bio: data.bio,
-            name: `@${data.name}`,
+            name: `${data.name}`,
         },
     });
     return NextResponse.json(userNewName);
