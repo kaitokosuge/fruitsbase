@@ -10,6 +10,7 @@ export default function BasicForm({ userData }: { userData: User }) {
         name: userData?.name,
         bio: userData?.bio,
     });
+    const [basicLoading, setbasicLoading] = useState(false);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.name === 'username') {
             setBasicUserData((prev) => {
@@ -27,7 +28,19 @@ export default function BasicForm({ userData }: { userData: User }) {
             });
         }
     };
-    console.log(basicUserData);
+    const handleSubmit = async () => {
+        setbasicLoading(true);
+        const res = await fetch('/api/user/edit', {
+            method: 'POST',
+            body: JSON.stringify(basicUserData),
+        });
+        if (!res.ok) {
+            alert('更新に失敗しました');
+            setbasicLoading(false);
+        }
+        setbasicLoading(false);
+    };
+
     return (
         <div className="mx-auto w-[350px] sm:w-[600px] md:w-[650px]  text-[#7b7b7b] md:mt-10 mt-5 pb-5 border-b border-[#515151]">
             <div className="w-full">
@@ -70,7 +83,7 @@ export default function BasicForm({ userData }: { userData: User }) {
             </div>
 
             {/* ユーザーID */}
-            <div className="w-full mt-5">
+            {/* <div className="w-full mt-5">
                 {basicUserData.name ? (
                     <div className="w-full">
                         <label
@@ -107,9 +120,9 @@ export default function BasicForm({ userData }: { userData: User }) {
                         />
                     </div>
                 )}
-            </div>
+            </div> */}
 
-            {/* ユーザーID */}
+            {/* 自己紹介 */}
             <div className="w-full mt-5">
                 {basicUserData.bio ? (
                     <div className="w-full">
@@ -147,6 +160,23 @@ export default function BasicForm({ userData }: { userData: User }) {
                         />
                     </div>
                 )}
+            </div>
+            <div className="flex items-center">
+                <button
+                    onClick={handleSubmit}
+                    className="text-white mt-5 block md:text-sm text-xs bg-[#313131] duration-300 hover:opacity-50 rounded-md px-4 md:py-3 py-2 font-bold"
+                >
+                    変更する
+                </button>
+                <div>
+                    {basicLoading && (
+                        <div className="spinner-box ml-5">
+                            <div className="circle-border">
+                                <div className="circle-core"></div>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );
