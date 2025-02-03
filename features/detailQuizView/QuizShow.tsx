@@ -32,7 +32,7 @@ export default function QuizShow({ quiz }: { quiz: Quiz }) {
                         alt="profile image"
                         width={25}
                         height={25}
-                        className="rounded-full"
+                        className="rounded-full object-cover w-[25px] h-[25px]"
                     />
                 )}
                 <div className="ml-2">
