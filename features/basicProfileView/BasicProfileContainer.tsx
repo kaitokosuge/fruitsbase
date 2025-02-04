@@ -46,7 +46,7 @@ export default async function BasicProfileContainer({
         );
     }
     return (
-        <div className="md:w-[20%] w-full">
+        <div className="md:w-[350px] w-full">
             <div className="flex items-center">
                 {resData.userData.image && (
                     <img

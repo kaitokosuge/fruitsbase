@@ -16,7 +16,7 @@ export default async function page({
                 <div className="flex flex-wrap justify-between w-full mt-10">
                     <Suspense
                         fallback={
-                            <div className="md:w-[20%] w-full">
+                            <div className="md:w-[380px] w-full">
                                 <div className="flex items-center">
                                     <div className="w-[80px] h-[80px] rounded-full bg-gray-400"></div>
                                     <h2 className="font-mono font-bold text-xl ml-5">
@@ -28,7 +28,7 @@ export default async function page({
                     >
                         <BasicProfileContainer paramId={id} />
                     </Suspense>
-                    <div className="md:w-[70%] w-full">
+                    <div className="md:w-[calc(100%-380px)] w-full">
                         <p className="text-gray-400 border-b border-blue-900 w-fit pb-1 md:mt-0 mt-10">
                             投稿したクイズ
                         </p>
