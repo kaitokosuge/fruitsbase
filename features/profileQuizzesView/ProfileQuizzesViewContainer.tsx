@@ -5,6 +5,7 @@ import React from 'react';
 import AuthQuizzesView from './AuthQuizzesView';
 import QuizzesView from './QuizzesView';
 import { PublicQuiz } from '@/models/PublicQuiz';
+import { User } from '@/models/User';
 
 export default async function ProfileQuizzesViewContainer({
     paramId,
@@ -22,6 +23,7 @@ export default async function ProfileQuizzesViewContainer({
             },
         },
     );
+
     if (!res.ok) {
         return (
             <div>
@@ -32,9 +34,22 @@ export default async function ProfileQuizzesViewContainer({
         );
     }
     const data: { quizzes: PublicQuiz[]; quizCount: number } = await res.json();
+
+    const userRes = await fetch(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/user/${paramId}`,
+        {
+            method: 'GET',
+            next: { revalidate: 3 },
+            headers: {
+                token: 'fruitsbase',
+            },
+        },
+    );
+    const userData: { userData: User | null } = await userRes.json();
+
     return (
         <div>
-            {paramId === userId && userId !== null ? (
+            {userData.userData?.id === userId && userId !== null ? (
                 <AuthQuizzesView
                     paramUserId={paramId}
                     quizzes={data.quizzes}
