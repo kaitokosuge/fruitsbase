@@ -40,7 +40,7 @@ export default function Header({ user }: { user: User | null }) {
                             <li>
                                 <Link
                                     href="/create"
-                                    className="block md:text-sm text-xs bg-[#313131] duration-300 hover:opacity-50 rounded-md px-4 md:py-3 py-2 font-bold"
+                                    className="border-t border-t-[#494949] block md:text-sm text-xs bg-[#313131] duration-300 hover:opacity-50 rounded-md px-4 md:py-3 py-2 font-bold"
                                 >
                                     クイズを作成
                                 </Link>
@@ -69,7 +69,7 @@ export default function Header({ user }: { user: User | null }) {
                     </nav>
                 </div>
             </header>
-            <div className="w-screen bg-[#171717] md:top-[77px] top-[56.5px] h-[3.5px] fixed z-[50]"></div>
+            <div className="w-screen bg-[#171717] md:top-[78px] top-[57px] h-[3.5px] fixed z-[50]"></div>
         </>
     );
 }
