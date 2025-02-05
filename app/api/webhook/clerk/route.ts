@@ -5,6 +5,7 @@ import { clerkClient } from '@clerk/nextjs/server';
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 import { NextResponse } from 'next/server';
+import { v4 as uuidv4 } from 'uuid';
 
 export async function POST(req: Request) {
     const SIGNING_SECRET = process.env.SIGNING_SECRET;
@@ -69,7 +70,7 @@ export async function POST(req: Request) {
                         clerkId: evt.data.id,
                         image: JSON.parse(body).data.image_url,
                         username: JSON.parse(body).data.first_name,
-                        name: 'helloo',
+                        name: uuidv4(),
                         email: JSON.parse(body).data.email_addresses[0]
                             .email_address,
                     },
@@ -83,7 +84,7 @@ export async function POST(req: Request) {
                     clerkId: evt.data.id,
                     image: JSON.parse(body).data.image_url,
                     username: JSON.parse(body).data.username,
-                    name: 'helloo',
+                    name: uuidv4(),
                     email: JSON.parse(body).data.email_addresses[0]
                         .email_address,
                 },
