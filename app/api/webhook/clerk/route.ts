@@ -3,6 +3,8 @@ import { headers } from 'next/headers';
 import { WebhookEvent } from '@clerk/nextjs/server';
 import { clerkClient } from '@clerk/nextjs/server';
 import prisma from '@/lib/prisma';
+import { Prisma } from '@prisma/client';
+import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
     const SIGNING_SECRET = process.env.SIGNING_SECRET;
@@ -57,75 +59,70 @@ export async function POST(req: Request) {
 
     if (eventType === 'user.created') {
         console.log('createが動いたよ');
+
         try {
             const resdata = await JSON.parse(body).data.username;
             if (resdata === null) {
-                await prisma.user.create({
+                const userRecord = await prisma.user.create({
                     data: {
                         id: evt.data.id,
                         clerkId: evt.data.id,
                         image: JSON.parse(body).data.image_url,
                         username: JSON.parse(body).data.first_name,
-                        name: 'hello',
+                        name: 'helloo',
                         email: JSON.parse(body).data.email_addresses[0]
                             .email_address,
                     },
                 });
+                console.log('ユーザー情報の保存結果', userRecord);
                 return new Response('User has been created!', { status: 200 });
             }
-            await prisma.user.create({
+            const userRecord = await prisma.user.create({
                 data: {
                     id: evt.data.id,
                     clerkId: evt.data.id,
                     image: JSON.parse(body).data.image_url,
                     username: JSON.parse(body).data.username,
-                    name: 'hello',
+                    name: 'helloo',
                     email: JSON.parse(body).data.email_addresses[0]
                         .email_address,
                 },
             });
+            console.log('ユーザー情報の保存結果', userRecord);
             return new Response('User has been created!', { status: 200 });
         } catch (err) {
             console.log('ユーザー作成に失敗しました');
-            console.log('catchしたエラー', err);
+
+            if (err instanceof Prisma.PrismaClientKnownRequestError) {
+                console.log('Prisma エラーコード:', err.code);
+            }
+
             const client = await clerkClient();
-            await client.users.deleteUser(evt.data.id);
-            return new Response('Filed to create the user!', { status: 500 });
+            let deleted = false;
+            for (let attempt = 0; attempt < 3; attempt++) {
+                try {
+                    const deleteUser = await client.users.deleteUser(
+                        evt.data.id,
+                    );
+                    console.log('削除すべきユーザーレコード', deleteUser);
+                    deleted = true;
+                    break; //成功したら抜ける
+                } catch (deleteErr) {
+                    console.log(
+                        `ユーザー削除失敗 (試行 ${attempt + 1}/3):`,
+                        deleteErr,
+                    );
+                }
+            }
+            if (!deleted) {
+                console.log(
+                    '最終試行でも削除できませんでした。手動対応が必要です。',
+                );
+            }
+            return;
         }
     }
 
-    if (eventType === 'user.updated') {
-        console.log('updateが動いたよ');
-        try {
-            const resdata = await JSON.parse(body).data.username;
-            if (resdata === null) {
-                await prisma.user.update({
-                    where: {
-                        id: evt.data.id,
-                    },
-                    data: {
-                        image: JSON.parse(body).data.image_url,
-                        username: JSON.parse(body).data.first_name,
-                    },
-                });
-                return new Response('User has been created!', { status: 200 });
-            }
-            await prisma.user.update({
-                where: {
-                    id: evt.data.id,
-                },
-                data: {
-                    username: JSON.parse(body).data.username,
-                    image: JSON.parse(body).data.image_url,
-                },
-            });
-            return new Response('User has been updated!', { status: 200 });
-        } catch (err) {
-            console.log('ユーザーアップデートに失敗しました');
-            console.log('catchしたエラー', err);
-            return new Response('Filed to updated the user!', { status: 500 });
-        }
-    }
     if (eventType === 'user.deleted') {
         console.log('deleteが動いたよ');
         try {
@@ -138,8 +135,10 @@ export async function POST(req: Request) {
         } catch (error) {
             console.log('ユーザーデータの削除に失敗しました');
             console.log('catchしたエラー', error);
-            return new Response('Filed to deleted the user!', { status: 500 });
+            return new NextResponse('Filed to deleted the user!', {
+                status: 500,
+            });
         }
     }
-    return new Response('Webhook received', { status: 200 });
+    return new NextResponse('Webhook received', { status: 200 });
 }
