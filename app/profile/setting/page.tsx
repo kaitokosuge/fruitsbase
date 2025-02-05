@@ -1,10 +1,10 @@
 import React from 'react';
-import ImageForm from '../../_features/components/ImageForm/ImageForm';
+import ImageForm from '../_features/components/ImageForm/ImageForm';
 import { auth } from '@clerk/nextjs/server';
-import { getUserData } from '../../_features/repositories/getUserData/getUserData';
+import { getUserData } from '../_features/repositories/getUserData/getUserData';
 
 import UserDelete from '@/features/userDelete/UserDelete';
-import BasicForm from '../../_features/components/BasicForm/BasicForm';
+import BasicForm from '../_features/components/BasicForm/BasicForm';
 
 export default async function Page() {
     const { userId } = await auth();

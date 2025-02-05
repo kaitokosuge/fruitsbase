@@ -26,7 +26,7 @@ export default async function page({
                             </div>
                         }
                     >
-                        <BasicProfileContainer paramId={id} />
+                        <BasicProfileContainer paramName={id} />
                     </Suspense>
                     <div className="md:w-[calc(100%-380px)] w-full">
                         <p className="text-gray-400 border-b border-blue-900 w-fit pb-1 md:mt-0 mt-10">
