@@ -73,7 +73,7 @@ export default async function BasicProfileContainer({
                             <div className="mt-3">
                                 <CategoryViews />
                             </div> */}
-            {resData.userData.name === paramName &&
+            {resData.userData.id === userId &&
                 userId !== null &&
                 resData.userData && (
                     <div className="flex">
