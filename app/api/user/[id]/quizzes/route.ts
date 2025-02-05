@@ -12,14 +12,24 @@ export async function GET(
         return;
     }
 
-    const userId = (await params).id;
+    const userName = (await params).id;
+
+    const user = await prisma.user.findUnique({
+        where: {
+            name: userName,
+        },
+        select: { id: true },
+    });
+    if (!user) {
+        return;
+    }
 
     const { searchParams } = new URL(req.url);
     const page = Number(searchParams.get('page'));
 
     const rawQuizzes = await prisma.quiz.findMany({
         where: {
-            authorId: userId,
+            authorId: user.id,
         },
         skip: page * 10,
         take: 10,
@@ -43,7 +53,7 @@ export async function GET(
     }));
     const quizCount = await prisma.quiz.count({
         where: {
-            authorId: userId,
+            authorId: user.id,
         },
     });
     return NextResponse.json({ quizzes: quizzes, quizCount: quizCount });
