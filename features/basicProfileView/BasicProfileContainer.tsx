@@ -8,13 +8,13 @@ import Link from 'next/link';
 import { SignOut } from '../signOut/SignOut';
 
 export default async function BasicProfileContainer({
-    paramId,
+    paramName,
 }: {
-    paramId: string;
+    paramName: string;
 }) {
     const { userId } = await auth();
     const res = await fetch(
-        `${process.env.NEXT_PUBLIC_APP_URL}/api/user/${paramId}`,
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/user/${paramName}`,
         {
             method: 'GET',
             next: { revalidate: 3 },
@@ -46,7 +46,7 @@ export default async function BasicProfileContainer({
         );
     }
     return (
-        <div className="md:w-[20%] w-full">
+        <div className="md:w-[350px] w-full">
             <div className="flex items-center">
                 {resData.userData.image && (
                     <img
@@ -73,17 +73,19 @@ export default async function BasicProfileContainer({
                             <div className="mt-3">
                                 <CategoryViews />
                             </div> */}
-            {userId === paramId && userId !== null && resData.userData && (
-                <div className="flex">
-                    <Link
-                        href={`/profile/${userId}/setting`}
-                        className="text-xs mt-5 block text-[#727272] hover:text-white duration-300 border border-[#383838] rounded-md px-2 py-1 cursor-pointer w-fit"
-                    >
-                        プロフィールの編集 →
-                    </Link>
-                    <SignOut />
-                </div>
-            )}
+            {resData.userData.id === userId &&
+                userId !== null &&
+                resData.userData && (
+                    <div className="flex">
+                        <Link
+                            href={`/profile/setting`}
+                            className="text-xs mt-5 block text-[#727272] hover:text-white duration-300 border border-[#383838] rounded-md px-2 py-1 cursor-pointer w-fit"
+                        >
+                            プロフィールの編集 →
+                        </Link>
+                        <SignOut />
+                    </div>
+                )}
         </div>
     );
 }

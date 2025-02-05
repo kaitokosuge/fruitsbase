@@ -57,14 +57,14 @@ export default function AuthQuizzesView({
                                     explanation: '',
                                 });
                             }}
-                            className="mt-1 bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center"
+                            className="border-t border-t-[#303030] mt-1 bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center"
                         >
                             <div className="w-[100%] py-5 overflow-hidden hidden-scrollbar">
                                 <div className="w-[100%] overflow-hidden hidden-scrollbar">
                                     <div className="flex items-center justify-between w-[100%]">
                                         <Link
                                             scroll={true}
-                                            href={`/profile/${quiz.author.id}`}
+                                            href={`/profile/${quiz.author.name}`}
                                             className="flex items-start duration-300 hover:opacity-50"
                                         >
                                             {quiz.author.image && (
@@ -133,7 +133,7 @@ export default function AuthQuizzesView({
                             <DrawerHeader className="p-5 px-4 pb-40 xl:w-[60%] lg:w-[65%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll hidden-scrollbar">
                                 <Link
                                     scroll={true}
-                                    href={`/profile/${quiz.author.id}`}
+                                    href={`/profile/${quiz.author.name}`}
                                     className="flex items-center duration-300 hover:opacity-50 w-fit"
                                 >
                                     {quiz.author.image && (

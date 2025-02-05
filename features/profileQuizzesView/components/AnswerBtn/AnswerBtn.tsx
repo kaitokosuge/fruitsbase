@@ -27,7 +27,7 @@ export default function AnswerBtn({
                     }
                     handleClickSubmit(selectedOptionIds, quizId);
                 }}
-                className="ml-3 bg-[#333333] text-white px-5 py-1 block rounded-md font-bold opacity-40 hover:opacity-100 duration-200"
+                className="border-t border-t-[#494949] ml-3 bg-[#333333] text-white px-5 py-1 block rounded-md font-bold opacity-40 hover:opacity-100 duration-200"
             >
                 解答する
             </button>
