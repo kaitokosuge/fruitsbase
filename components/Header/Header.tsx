@@ -52,7 +52,7 @@ export default function Header({ user }: { user: User | null }) {
                             </li>
                             <li>
                                 {user && (
-                                    <Link href={`/profile/${user.id}`}>
+                                    <Link href={`/profile/${user.name}`}>
                                         {user.image && (
                                             <img
                                                 src={user.image}
