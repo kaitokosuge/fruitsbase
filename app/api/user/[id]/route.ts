@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
     const userId = req.url?.split('/').pop();
     const userData = await prisma.user.findFirst({
         where: {
-            id: userId,
+            name: userId,
         },
     });
     if (userData === null) {
