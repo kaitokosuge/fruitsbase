@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import { auth } from '@clerk/nextjs/server';
 import React from 'react';
 import AuthQuizzesView from './AuthQuizzesView';
@@ -23,9 +25,9 @@ export default async function ProfileQuizzesViewContainer({
     if (!res.ok) {
         return (
             <div>
-                <p className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[60px] w-[90%] mx-auto font-mono">
-                    error
-                </p>
+                <div className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[60px] w-[90%] mx-auto font-mono">
+                    <img src="/not-found-user.svg" />
+                </div>
             </div>
         );
     }

@@ -10,6 +10,12 @@ export async function POST(req: NextRequest) {
     }
     const data = await req.json();
     console.log(data);
+    const isValidId = (name: string): boolean => {
+        return /^[a-zA-Z0-9_-]{3,30}$/.test(name);
+    };
+    if (!isValidId(data.name)) {
+        return NextResponse.json({ error: '無効なIDです' }, { status: 400 });
+    }
     const userNewName = await prisma.user.update({
         where: { id: userId },
         data: {
