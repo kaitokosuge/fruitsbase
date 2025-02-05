@@ -17,7 +17,7 @@ model User {
   id            String    @id @default(cuid())
   clerkId       String    @unique
   username      String?   
-  name          String?   @unique
+  name          String    @unique
   bio           String?
   image         String?
   createdAt     DateTime  @default(now())

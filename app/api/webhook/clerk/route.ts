@@ -66,6 +66,7 @@ export async function POST(req: Request) {
                         clerkId: evt.data.id,
                         image: JSON.parse(body).data.image_url,
                         username: JSON.parse(body).data.first_name,
+                        name: 'hello',
                         email: JSON.parse(body).data.email_addresses[0]
                             .email_address,
                     },
@@ -78,6 +79,7 @@ export async function POST(req: Request) {
                     clerkId: evt.data.id,
                     image: JSON.parse(body).data.image_url,
                     username: JSON.parse(body).data.username,
+                    name: 'hello',
                     email: JSON.parse(body).data.email_addresses[0]
                         .email_address,
                 },
