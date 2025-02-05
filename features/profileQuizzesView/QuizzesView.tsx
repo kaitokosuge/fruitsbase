@@ -64,7 +64,7 @@ export default function QuizzesView({
                                         <div className="flex items-start justify-between w-full">
                                             <Link
                                                 scroll={true}
-                                                href={`/profile/${quiz.author.id}`}
+                                                href={`/profile/${quiz.author.name}`}
                                                 className="flex items-start duration-300 hover:opacity-50"
                                             >
                                                 {quiz.author.image && (
@@ -138,7 +138,7 @@ export default function QuizzesView({
                             <DrawerHeader className="pt-10 md:pb-60 px-5 pb-40 xl:w-[60%] lg:w-[65%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll hidden-scrollbar">
                                 <Link
                                     scroll={true}
-                                    href={`/profile/${quiz.author.id}`}
+                                    href={`/profile/${quiz.author.name}`}
                                     className="flex items-center duration-300 hover:opacity-50 w-fit"
                                 >
                                     {quiz.author.image && (
