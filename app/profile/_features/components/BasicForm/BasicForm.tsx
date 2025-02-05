@@ -83,7 +83,7 @@ export default function BasicForm({ userData }: { userData: User }) {
             </div>
 
             {/* ユーザーID */}
-            {/* <div className="w-full mt-5">
+            <div className="w-full mt-5">
                 {basicUserData.name ? (
                     <div className="w-full">
                         <label
@@ -120,7 +120,7 @@ export default function BasicForm({ userData }: { userData: User }) {
                         />
                     </div>
                 )}
-            </div> */}
+            </div>
 
             {/* 自己紹介 */}
             <div className="w-full mt-5">
