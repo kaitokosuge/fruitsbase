@@ -56,7 +56,7 @@ export default function QuizViews({ quizzes }: { quizzes: PublicQuiz[] }) {
                                         explanation: '',
                                     });
                                 }}
-                                className="border-t border-t-[#484848] bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center"
+                                className="border-t border-t-[#303030] bg-[#292929] w-full text-left px-5 rounded-md flex justify-between items-center"
                             >
                                 <div className="flex items-center w-[100%] py-5 overflow-hidden">
                                     <div className="w-full">
