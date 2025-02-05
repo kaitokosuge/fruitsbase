@@ -35,7 +35,9 @@ export default function BasicForm({ userData }: { userData: User }) {
             body: JSON.stringify(basicUserData),
         });
         if (!res.ok) {
-            alert('更新に失敗しました');
+            alert(
+                '更新に失敗しました。ユーザーID（URL）に半角英数字を入力しているか確認してください',
+            );
             setbasicLoading(false);
         }
         setbasicLoading(false);
