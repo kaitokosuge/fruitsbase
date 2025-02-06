@@ -12,9 +12,10 @@ import {
 } from '../../components/ui/drawer';
 import Options from './components/Options/Options';
 import { useOption } from './hooks/useOption/useOption';
-const PostDate = dynamic(() => import('./components/PostDate/PostDate'), {
-    ssr: false,
-});
+// const PostDate = dynamic(() => import('./components/PostDate/PostDate'), {
+//     ssr: false,
+// });
+import PostDate from './components/PostDate/PostDate';
 import AnswerBtn from './components/AnswerBtn/AnswerBtn';
 import CategoryArea from './components/CategoryArea/CategoryArea';
 import SyntaxHighlighter from 'react-syntax-highlighter';
@@ -23,7 +24,7 @@ import { useTry } from './hooks/useTry/useTry';
 import Link from 'next/link';
 import { useGetQuizByLimit } from './hooks/useGetQuizByLimit/useGetQuizByLimit';
 import GetMoreQuizBtn from './components/GetMoreQuizBtn/GetMoreQuizBtn';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 import QuizExplanation from './components/QuizExplanation/QuizExplanation';
 import { EditorObject } from './types/EditorObject';
 import { PublicQuiz } from '@/models/PublicQuiz';
