@@ -2,6 +2,7 @@
 import { User } from '@/models/User';
 import React, { useState } from 'react';
 import { BasicUser } from '../../types/BasicUser';
+import { redirect } from 'next/navigation';
 
 export default function BasicForm({ userData }: { userData: User }) {
     //nameはid（ユニーク）
@@ -39,8 +40,11 @@ export default function BasicForm({ userData }: { userData: User }) {
                 '更新に失敗しました。ユーザーID（URL）に半角英数字を入力しているか確認してください',
             );
             setbasicLoading(false);
+            redirect(`/profile/setting`);
         }
+        const userData: User = await res.json();
         setbasicLoading(false);
+        redirect(`/profile/${userData?.name}`);
     };
 
     return (
