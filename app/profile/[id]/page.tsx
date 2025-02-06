@@ -35,8 +35,15 @@ export default async function page({
                         <div>
                             <Suspense
                                 fallback={
-                                    <div className="text-xs font-bold mt-5 font-mono">
-                                        loading...
+                                    <div className="text-xs font-bold font-mono pb-40">
+                                        <div className="h-[132px] mt-[10px] border-t border-t-[#212121] bg-[#1b1b1b] w-full text-left px-5 rounded-md flex justify-between items-center"></div>
+                                        <div className="h-[132px] mt-[10px] border-t border-t-[#212121] bg-[#1b1b1b] w-full text-left px-5 rounded-md flex justify-between items-center"></div>
+                                        <div className="h-[132px] mt-[10px] border-t border-t-[#212121] bg-[#1b1b1b] w-full text-left px-5 rounded-md flex justify-between items-center"></div>
+                                        <div className="h-[132px] mt-[10px] border-t border-t-[#212121] bg-[#1b1b1b] w-full text-left px-5 rounded-md flex justify-between items-center"></div>
+                                        <div className="h-[132px] mt-[10px] border-t border-t-[#212121] bg-[#1b1b1b] w-full text-left px-5 rounded-md flex justify-between items-center"></div>
+                                        <div className="h-[132px] mt-[10px] border-t border-t-[#212121] bg-[#1b1b1b] w-full text-left px-5 rounded-md flex justify-between items-center"></div>
+                                        <div className="h-[132px] mt-[10px] border-t border-t-[#212121] bg-[#1b1b1b] w-full text-left px-5 rounded-md flex justify-between items-center"></div>
+                                        <div className="h-[132px] mt-[10px] border-t border-t-[#212121] bg-[#1b1b1b] w-full text-left px-5 rounded-md flex justify-between items-center"></div>
                                     </div>
                                 }
                             >
