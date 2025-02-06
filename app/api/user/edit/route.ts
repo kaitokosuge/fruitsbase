@@ -16,6 +16,22 @@ export async function POST(req: NextRequest) {
     if (!isValidId(data.name)) {
         return NextResponse.json({ error: '無効なIDです' }, { status: 400 });
     }
+    const nameCount = (value: string) => {
+        return value.length > 40;
+    };
+    const bioCount = (value: string) => {
+        return value.length > 200;
+    };
+    const userNameCount = (value: string) => {
+        return value.length > 20;
+    };
+    if (
+        nameCount(data.name) ||
+        bioCount(data.bio) ||
+        userNameCount(data.username)
+    ) {
+        return NextResponse.json({ error: '字数超過です' }, { status: 400 });
+    }
     const userNewName = await prisma.user.update({
         where: { id: userId },
         data: {
