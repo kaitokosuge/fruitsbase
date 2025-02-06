@@ -2,6 +2,7 @@
 import { User } from '@/models/User';
 import React, { useState } from 'react';
 import { BasicUser } from '../../types/BasicUser';
+import { redirect } from 'next/navigation';
 
 export default function BasicForm({ userData }: { userData: User }) {
     //nameはid（ユニーク）
@@ -40,7 +41,9 @@ export default function BasicForm({ userData }: { userData: User }) {
             );
             setbasicLoading(false);
         }
+        const userData: User = await res.json();
         setbasicLoading(false);
+        redirect(`/profile/${userData?.name}`);
     };
 
     return (
