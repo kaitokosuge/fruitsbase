@@ -24,6 +24,8 @@ export async function POST(req: NextRequest) {
             name: `${data.name}`,
         },
     });
-    revalidatePath(`/profile/${userId}/setting`);
+    revalidatePath(`/profile/setting`);
+    revalidatePath(`/`);
+    revalidatePath(`/profile/${userNewName.name}`);
     return NextResponse.json(userNewName);
 }
