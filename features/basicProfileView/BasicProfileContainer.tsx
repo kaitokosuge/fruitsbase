@@ -57,12 +57,16 @@ export default async function BasicProfileContainer({
                         className="w-[80px] h-[80px] rounded-full object-cover"
                     />
                 )}
-                <h2 className="font-bold text-xl ml-5 overflow-hidden whitespace-nowrap">
+                <div className="font-bold text-xl ml-5 overflow-hidden whitespace-nowrap">
                     {resData.userData.username}
-                </h2>
+                    <p className="text-xs font-normal mt-1 text-gray-600">
+                        @{resData.userData.name}
+                    </p>
+                </div>
             </div>
+
             {resData.userData.bio && (
-                <p className="text-xs text-[#aaaaaa] mt-5">
+                <p className="text-xs text-[#aaaaaa] mt-3">
                     {resData.userData.bio}
                 </p>
             )}
