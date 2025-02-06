@@ -66,7 +66,7 @@ export default async function BasicProfileContainer({
             </div>
 
             {resData.userData.bio && (
-                <p className="text-xs text-[#aaaaaa] mt-3">
+                <p className="text-xs text-[#aaaaaa] mt-3 md:w-[350px] w-full overflow-scroll hidden-scrollbar">
                     {resData.userData.bio}
                 </p>
             )}
