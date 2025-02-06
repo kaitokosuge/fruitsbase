@@ -9,7 +9,6 @@ export default async function page({
     params: Promise<{ id: string }>;
 }) {
     const { id } = await params;
-
     return (
         <div className="bg-[#171717] text-[#F0F0F0] min-h-screen">
             <div className="bg-[#171717] text-[#F0F0F0] md:pt-20 pt-[50px] w-[90%] mx-auto">
