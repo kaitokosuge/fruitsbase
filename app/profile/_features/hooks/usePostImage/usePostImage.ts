@@ -56,7 +56,6 @@ export const usePostImage = (userImage: string | null | undefined) => {
 
             if (response.ok) {
                 const data: string = await response.json();
-                console.log(data);
                 setPreviewImage(null);
                 setImageFile(null);
                 setViewImage(data);
