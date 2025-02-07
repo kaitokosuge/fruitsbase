@@ -30,7 +30,10 @@ export async function DELETE(req: NextRequest) {
             id: data.quizId,
         },
     });
-    revalidatePath(`/profile/${userId}`);
+    const postUser = await prisma.user.findUnique({
+        where: { id: userId },
+    });
+    revalidatePath(`/profile/${postUser?.name}`);
     console.log('クイズ削除結果', quizDeleteRes);
     return NextResponse.json({ result: 'success' });
 }

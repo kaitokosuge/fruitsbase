@@ -102,7 +102,10 @@ export async function POST(req: NextRequest) {
     }
 
     console.log('クイズ保存結果', quizRes);
-    revalidatePath(`/profile/${userId}`);
+    const postUser = await prisma.user.findUnique({
+        where: { id: userId },
+    });
+    revalidatePath(`/profile/${postUser?.name}`);
     return NextResponse.json({
         res: 'success',
         error: null,
