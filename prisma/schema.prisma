@@ -31,6 +31,8 @@ model User {
   Category_color Category_color[]
   Follower Follower[] @relation("UserFollowers")
   Following Follower[] @relation("UserFollowing")
+
+  QuizPackege QuizPackage[]
 }
 
 model Quiz {
@@ -47,6 +49,7 @@ model Quiz {
   Quiz_Like Quiz_Like[]
   User_Correct User_Correct[]
   Category_Like Category_Like[]
+  QuizPackageStore QuizPackageStore[]
 }
 
 model Option {
@@ -134,4 +137,25 @@ model Follower {
   following User @relation("UserFollowing", fields: [followingId], references: [id])
 
   @@unique([followerId, followingId]) 
+}
+
+model QuizPackage {
+  id              String @id @default(cuid())
+  name            String
+  description     String?
+  color           String?
+  image           String? 
+  author          User     @relation(fields: [authorId], references: [id],onDelete: Cascade)
+  authorId        String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  QuizPackageStore QuizPackageStore[]
+}
+
+model QuizPackageStore {
+  quiz            Quiz      @relation(fields: [quizId], references: [id],onDelete: Cascade)
+  quizId          String
+  package         QuizPackage  @relation(fields: [packageId], references: [id],onDelete: Cascade)
+  packageId       String
+  @@id([quizId, packageId])
 }
