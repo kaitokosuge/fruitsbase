@@ -29,6 +29,8 @@ model User {
   Quiz_Like Quiz_Like[]
   User_Correct User_Correct[]
   Category_color Category_color[]
+  Follower Follower[] @relation("UserFollowers")
+  Following Follower[] @relation("UserFollowing")
 }
 
 model Quiz {
@@ -120,4 +122,16 @@ model Quiz_Like {
   userId          String
   createdAt       DateTime @default(now())
   @@id([quizId, userId])
+}
+
+model Follower {
+  id          String @id @default(cuid())
+  followerId  String
+  followingId String
+  createdAt   DateTime @default(now())
+
+  follower  User @relation("UserFollowers", fields: [followerId], references: [id])
+  following User @relation("UserFollowing", fields: [followingId], references: [id])
+
+  @@unique([followerId, followingId]) 
 }
