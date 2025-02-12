@@ -121,7 +121,7 @@ export default function QuizViews({ quizzes }: { quizzes: PublicQuiz[] }) {
                                                     }
                                                 </div>
                                             ) : (
-                                                <div className="w-full">
+                                                <div className="w-full max-h-[50px] overflow-hidden">
                                                     <SyntaxHighlighter
                                                         language="typescript"
                                                         style={atomOneDark}
