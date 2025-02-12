@@ -101,7 +101,7 @@ export default function QuizShow({ quiz }: { quiz: Quiz }) {
                     ) => (
                         <div key={item.id} className="max-w-full">
                             {'code' in item.data ? (
-                                <div className="text-[13px] mt-4 md:w-full w-[340px] mx-auto">
+                                <div className="text-[13px] mt-4 md:w-full w-[340px] mx-auto select-text">
                                     <SyntaxHighlighter
                                         language="typescript"
                                         style={atomOneDark}
@@ -110,7 +110,9 @@ export default function QuizShow({ quiz }: { quiz: Quiz }) {
                                     </SyntaxHighlighter>
                                 </div>
                             ) : (
-                                <div className="mt-4">{item.data.text}</div>
+                                <div className="mt-4 select-text">
+                                    {item.data.text}
+                                </div>
                             )}
                         </div>
                     ),
