@@ -106,14 +106,14 @@ export default function QuizzesView({
                                     <div className="text-[17px] w-full whitespace-nowrap font-bold pt-5">
                                         {JSON.parse(quiz.question)[0].data
                                             .text ? (
-                                            <div className="w-fit">
+                                            <div className="w-fit select-text">
                                                 {
                                                     JSON.parse(quiz.question)[0]
                                                         .data.text
                                                 }
                                             </div>
                                         ) : (
-                                            <div className="w-full max-h-[50px] overflow-hidden">
+                                            <div className="w-full max-h-[50px] overflow-hidden select-text">
                                                 <SyntaxHighlighter
                                                     language="typescript"
                                                     style={atomOneDark}
@@ -219,7 +219,7 @@ export default function QuizzesView({
                                                 className="max-w-full"
                                             >
                                                 {'code' in item.data ? (
-                                                    <div className="text-[13px] mt-4 md:w-full w-[340px] mx-auto">
+                                                    <div className="text-[13px] mt-4 md:w-full w-[340px] mx-auto select-text">
                                                         <SyntaxHighlighter
                                                             language="typescript"
                                                             style={atomOneDark}
@@ -228,7 +228,7 @@ export default function QuizzesView({
                                                         </SyntaxHighlighter>
                                                     </div>
                                                 ) : (
-                                                    <div className="mt-4">
+                                                    <div className="mt-4 select-text">
                                                         {item.data.text}
                                                     </div>
                                                 )}

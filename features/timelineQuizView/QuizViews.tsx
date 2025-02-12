@@ -141,7 +141,7 @@ export default function QuizViews({ quizzes }: { quizzes: PublicQuiz[] }) {
                                     </div>
                                 </div>
                             </DrawerTrigger>
-                            <DrawerContent className="md:min-h-[calc(100dvh-80px)] md:max-h-[calc(100dvh-80px)] min-h-[calc(100dvh-60px)] max-h-[calc(100dvh-60px)] md:px-10 bg-[#131313]">
+                            <DrawerContent className="md:min-h-[calc(100dvh-80px)] md:max-h-[calc(100dvh-80px)] min-h-[calc(100dvh-60px)] max-h-[calc(100dvh-60px)] md:px-10 bg-[#131313] ">
                                 <div className="h-[20px] w-[calc(100vw-10px)] bg-[#131313] rounded-t-[15px] fixed rigth-0 left-0 z-20"></div>
                                 <DrawerHeader className="pt-10 md:pb-60 px-5 pb-40 xl:w-[60%] lg:w-[65%] md:w-[95%] w-[100%] mx-auto overflow-y-scroll hidden-scrollbar">
                                     <Link
@@ -218,15 +218,15 @@ export default function QuizViews({ quizzes }: { quizzes: PublicQuiz[] }) {
                                         </div>
                                     </div>
                                     <DrawerTitle className=""></DrawerTitle>
-                                    <div className="font-normal md:text-[18px] text-[15px] text-left max-w-full text-[#F0F0F0]">
+                                    <div className="font-normal md:text-[18px] text-[15px] text-left max-w-full text-[#F0F0F0] select-auto">
                                         {JSON.parse(quiz.question).map(
                                             (item: EditorObject) => (
                                                 <div
                                                     key={item.id}
-                                                    className="max-w-full"
+                                                    className="max-w-full select-auto"
                                                 >
                                                     {'code' in item.data ? (
-                                                        <div className="text-[13px] mt-4 md:w-full w-[340px] mx-auto">
+                                                        <div className="text-[13px] mt-4 md:w-full w-[340px] mx-auto select-text">
                                                             <SyntaxHighlighter
                                                                 language="typescript"
                                                                 style={
@@ -237,7 +237,7 @@ export default function QuizViews({ quizzes }: { quizzes: PublicQuiz[] }) {
                                                             </SyntaxHighlighter>
                                                         </div>
                                                     ) : (
-                                                        <div className="mt-4">
+                                                        <div className="mt-4 select-text">
                                                             {item.data.text}
                                                         </div>
                                                     )}
