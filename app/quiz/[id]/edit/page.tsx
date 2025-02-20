@@ -1,5 +1,10 @@
+import QuizPatch from '@/features/quizPatch/QuizPatch';
 import React from 'react';
 
 export default function page() {
-    return <div>編集</div>;
+    return (
+        <div>
+            <QuizPatch />
+        </div>
+    );
 }
