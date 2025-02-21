@@ -3,18 +3,20 @@ import React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import EditorJS from '@editorjs/editorjs';
 import CodeTool from '@editorjs/code';
-import { useHandleQuestion } from '../../hooks/useHandleQuestion/useHandleQuestion';
+import { useHandleEditQuestion } from '../../hooks/useHandleEditQuestion/useHandleEditQuestion';
 
 export default function QuestionEditor({
     id,
     placeholder,
     handleInputChange,
+    currentQuestionText,
 }: {
     id: string;
     placeholder: string;
     handleInputChange: (editor: EditorJS) => void;
+    currentQuestionText: string;
 }) {
-    const { questionText } = useHandleQuestion();
+    const { questionText } = useHandleEditQuestion(currentQuestionText);
 
     const questionRef = useRef<EditorJS | null>(null);
     //windowオブジェクトが作成されてからeditorインスタンスを作るため、フラグを定義
@@ -25,10 +27,10 @@ export default function QuestionEditor({
             setisWindowMade(true);
         }
         if (isWindowMade) {
-            const questionEditor = new EditorJS({
+            const editQuestionEditor = new EditorJS({
                 holder: id,
                 onReady() {
-                    questionRef.current = questionEditor;
+                    questionRef.current = editQuestionEditor;
                 },
                 placeholder: placeholder,
                 inlineToolbar: true,
@@ -36,8 +38,12 @@ export default function QuestionEditor({
                     code: CodeTool,
                 },
                 autofocus: true,
-                data: JSON.parse(questionText),
-                onChange: () => handleInputChange(questionEditor),
+                data: {
+                    time: 10000,
+                    blocks: JSON.parse(questionText),
+                    version: '2^',
+                },
+                onChange: () => handleInputChange(editQuestionEditor),
             });
         }
         return () => {

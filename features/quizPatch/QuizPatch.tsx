@@ -5,12 +5,14 @@ import dynamic from 'next/dynamic';
 import { useHandleExplanation } from './hooks/useHandleExplanation/useHandleExplanation';
 import { useHandleOption } from './hooks/useHandleOption/useHandleOption';
 import { useHandleCategory } from './hooks/useHandleCategory/useHandleCategory';
-import { useHandleQuestion } from './hooks/useHandleQuestion/useHandleQuestion';
+
 // import Category from './components/Category/Category';
 // import { SaveQuiz } from './repositories/SaveQuiz';
 import { usePost } from './hooks/usePost/usePost';
 import Link from 'next/link';
 import PostBtn from './components/PostBtn/PostBtn';
+import { PublicQuiz } from '@/models/PublicQuiz';
+import { useHandleEditQuestion } from './hooks/useHandleEditQuestion/useHandleEditQuestion';
 
 const QuestionEditor = dynamic(
     () => import('./components/Editor/QuestionEditor'),
@@ -42,8 +44,11 @@ const Option = dynamic(() => import('./components/Options/Option'), {
 //     }[];
 // }
 
-export default function QuizPatch() {
-    const { questionText, handleInputChange } = useHandleQuestion();
+export default function QuizPatch({ editQuiz }: { editQuiz: PublicQuiz }) {
+    const { questionText, handleInputChange } = useHandleEditQuestion(
+        editQuiz.question,
+    );
+    console.log('保存（編集）するクイズデータ', questionText);
     const { explanationText, handleInputExChange } = useHandleExplanation();
     const {
         addOption,
@@ -120,9 +125,10 @@ export default function QuizPatch() {
                 </div>
             )}
             <QuestionEditor
-                id="question"
+                id="editQuestion"
                 placeholder="クイズ本文"
                 handleInputChange={handleInputChange}
+                currentQuestionText={editQuiz.question}
             />
             {postResponse && (
                 <div className="sm:w-[650px] w-[350px] mx-auto">

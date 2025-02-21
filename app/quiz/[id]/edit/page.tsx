@@ -1,7 +1,6 @@
 import QuizPatch from '@/features/quizPatch/QuizPatch';
+import { PublicQuiz } from '@/models/PublicQuiz';
 import { auth } from '@clerk/nextjs/server';
-import { Quiz } from '@prisma/client';
-import React, { Suspense } from 'react';
 
 export default async function page({
     params,
@@ -16,7 +15,7 @@ export default async function page({
     const editQuizId = (await params).id;
     console.log('パラメータ', editQuizId);
     const res = await fetch(
-        `http://localhost:3000/api/quiz/edit?editid=${editQuizId}`,
+        `${process.env.APP_URL}/api/quiz/edit?editid=${editQuizId}`,
         {
             method: 'GET',
         },
@@ -30,17 +29,14 @@ export default async function page({
 
     // error = コードベースで記述できるもの
     // いずれもnullチェックを忘れずに
-    const data: { editQuiz: Quiz | null; error: string | null } =
+    const data: { editQuiz: PublicQuiz | null; error: string | null } =
         await res.json();
-    console.log('レスポンス', data.editQuiz);
-    console.log(data.error);
+
     return (
         <div>
             {data.editQuiz ? (
                 <>
-                    <Suspense fallback={<>loading</>}>
-                        <QuizPatch />
-                    </Suspense>
+                    <QuizPatch editQuiz={data.editQuiz} />
                 </>
             ) : (
                 <>
