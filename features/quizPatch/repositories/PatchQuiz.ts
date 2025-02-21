@@ -1,14 +1,14 @@
 import { redirect } from 'next/navigation';
 import { FeaturesOption } from '../models/FeaturesOption';
 
-export const SaveQuiz = async (
+export const PatchQuiz = async (
     questionText: string,
     selectedIds: string[],
     options: FeaturesOption[],
     explanationText: string,
 ) => {
-    const res = await fetch('/api/quiz/create', {
-        method: 'POST',
+    const res = await fetch('/api/quiz/edit', {
+        method: 'PATCH',
         headers: {
             'Content-type': 'application/json',
         },

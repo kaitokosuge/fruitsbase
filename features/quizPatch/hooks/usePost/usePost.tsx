@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SaveQuiz } from '../../repositories/SaveQuiz';
+import { PatchQuiz } from '../../repositories/PatchQuiz';
 import { FeaturesOption } from '../../models/FeaturesOption';
 
 export const usePost = () => {
@@ -19,7 +19,7 @@ export const usePost = () => {
         explanationText: string,
     ) => {
         setLoading(true);
-        const resultData = await SaveQuiz(
+        const resultData = await PatchQuiz(
             questionText,
             selectedIds,
             options,
