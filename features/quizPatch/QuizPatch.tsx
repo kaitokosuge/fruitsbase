@@ -83,7 +83,10 @@ export default function QuizPatch({ editQuiz }: { editQuiz: Quiz }) {
                     </Link>
 
                     <div className="flex items-center">
-                        <p className="md:text-xs md:block hidden text-[#6a6a6a]">
+                        <p className="md:text-xs md:block hidden text-[#d5d5d5] ml-2">
+                            （編集）
+                        </p>
+                        <p className="md:text-xs md:block hidden text-[#6a6a6a] ml-2">
                             知識をアウトプットしよう！
                         </p>
                         {loading && (
