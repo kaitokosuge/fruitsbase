@@ -1,5 +1,5 @@
 import QuizPatch from '@/features/quizPatch/QuizPatch';
-import { PublicQuiz } from '@/models/PublicQuiz';
+import { Quiz } from '@/models/Quiz';
 import { auth } from '@clerk/nextjs/server';
 
 export default async function page({
@@ -29,7 +29,7 @@ export default async function page({
 
     // error = コードベースで記述できるもの
     // いずれもnullチェックを忘れずに
-    const data: { editQuiz: PublicQuiz | null; error: string | null } =
+    const data: { editQuiz: Quiz | null; error: string | null } =
         await res.json();
 
     return (

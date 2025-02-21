@@ -2,7 +2,7 @@
 'use client';
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { useHandleExplanation } from './hooks/useHandleExplanation/useHandleExplanation';
+
 import { useHandleOption } from './hooks/useHandleOption/useHandleOption';
 import { useHandleCategory } from './hooks/useHandleCategory/useHandleCategory';
 
@@ -11,8 +11,9 @@ import { useHandleCategory } from './hooks/useHandleCategory/useHandleCategory';
 import { usePost } from './hooks/usePost/usePost';
 import Link from 'next/link';
 import PostBtn from './components/PostBtn/PostBtn';
-import { PublicQuiz } from '@/models/PublicQuiz';
 import { useHandleEditQuestion } from './hooks/useHandleEditQuestion/useHandleEditQuestion';
+import { useHandleEditExplanation } from './hooks/useHandleEditExplanation/useHandleEditExplanation';
+import { Quiz } from '@/models/Quiz';
 
 const QuestionEditor = dynamic(
     () => import('./components/Editor/QuestionEditor'),
@@ -44,12 +45,15 @@ const Option = dynamic(() => import('./components/Options/Option'), {
 //     }[];
 // }
 
-export default function QuizPatch({ editQuiz }: { editQuiz: PublicQuiz }) {
+export default function QuizPatch({ editQuiz }: { editQuiz: Quiz }) {
     const { questionText, handleInputChange } = useHandleEditQuestion(
         editQuiz.question,
     );
-    console.log('保存（編集）するクイズデータ', questionText);
-    const { explanationText, handleInputExChange } = useHandleExplanation();
+    console.log('保存（編集）するクイズ本文データ', questionText);
+    const { explanationText, handleInputExChange } = useHandleEditExplanation(
+        editQuiz.explanation,
+    );
+    console.log('保存（編集）するクイズ解説データ', explanationText);
     const {
         addOption,
         removeOption,
@@ -183,6 +187,7 @@ export default function QuizPatch({ editQuiz }: { editQuiz: PublicQuiz }) {
                 id="explanation"
                 placeholder="クイズ解説"
                 handleInputExChange={handleInputExChange}
+                currentExplanationText={editQuiz.explanation}
             />
         </div>
     );
