@@ -17,6 +17,7 @@ export default function Option({
     handleChangeIsCorrect: (value: string, number: number) => void;
     removeOption: (id: number) => void;
 }) {
+    console.log('option text', option.text);
     const optionRef = useRef<EditorJS | null>(null);
     //windowオブジェクトが作成されてからeditorインスタンスを作るため、フラグを定義
     const [isWindowMade, setisWindowMade] = useState(false);
@@ -25,6 +26,7 @@ export default function Option({
             setisWindowMade(true);
         }
         if (isWindowMade) {
+            const optionText = option.text || '[]';
             const optionEditor = new EditorJS({
                 holder: String(option.id),
                 onReady() {
@@ -37,7 +39,7 @@ export default function Option({
                 autofocus: false,
                 data: {
                     time: 10000,
-                    blocks: JSON.parse(option.text),
+                    blocks: JSON.parse(optionText),
                     version: '2^',
                 },
                 onChange: () => handleOptionChange(optionEditor, option.id),
