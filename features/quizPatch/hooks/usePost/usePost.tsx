@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { SaveQuiz } from '../../repositories/SaveQuiz';
-import { QuizOption } from '../../models/QuizOption';
+import { FeaturesOption } from '../../models/FeaturesOption';
 
 export const usePost = () => {
     type PostResult = {
@@ -15,7 +15,7 @@ export const usePost = () => {
     const handleClickPost = async (
         questionText: string,
         selectedIds: string[],
-        options: QuizOption[],
+        options: FeaturesOption[],
         explanationText: string,
     ) => {
         setLoading(true);

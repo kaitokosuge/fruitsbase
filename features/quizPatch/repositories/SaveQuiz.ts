@@ -1,10 +1,10 @@
 import { redirect } from 'next/navigation';
-import { QuizOption } from '../models/QuizOption';
+import { FeaturesOption } from '../models/FeaturesOption';
 
 export const SaveQuiz = async (
     questionText: string,
     selectedIds: string[],
-    options: QuizOption[],
+    options: FeaturesOption[],
     explanationText: string,
 ) => {
     const res = await fetch('/api/quiz/create', {

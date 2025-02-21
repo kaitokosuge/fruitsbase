@@ -3,7 +3,6 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-import { useHandleOption } from './hooks/useHandleOption/useHandleOption';
 import { useHandleCategory } from './hooks/useHandleCategory/useHandleCategory';
 
 // import Category from './components/Category/Category';
@@ -14,6 +13,7 @@ import PostBtn from './components/PostBtn/PostBtn';
 import { useHandleEditQuestion } from './hooks/useHandleEditQuestion/useHandleEditQuestion';
 import { useHandleEditExplanation } from './hooks/useHandleEditExplanation/useHandleEditExplanation';
 import { Quiz } from '@/models/Quiz';
+import { useHandleEditOption } from './hooks/useHandleEditOption/useHandleEditOption';
 
 const QuestionEditor = dynamic(
     () => import('./components/Editor/QuestionEditor'),
@@ -46,6 +46,7 @@ const Option = dynamic(() => import('./components/Options/Option'), {
 // }
 
 export default function QuizPatch({ editQuiz }: { editQuiz: Quiz }) {
+    console.log(editQuiz.Option);
     const { questionText, handleInputChange } = useHandleEditQuestion(
         editQuiz.question,
     );
@@ -60,7 +61,9 @@ export default function QuizPatch({ editQuiz }: { editQuiz: Quiz }) {
         handleOptionChange,
         handleChangeIsCorrect,
         options,
-    } = useHandleOption();
+    } = useHandleEditOption(editQuiz.Option);
+    console.log('保存（編集）する選択肢データ', options);
+
     const { selectedIds } = useHandleCategory();
     // const { selectedIds, handleClickCategory } = useHandleCategory();
     const { loading, postResponse, handleClickPost } = usePost();

@@ -1,7 +1,9 @@
 'use client';
 import EditorJS, { OutputBlockData } from '@editorjs/editorjs';
 import { useState } from 'react';
-import { QuizOption } from '../../models/QuizOption';
+// import { QuizOption } from '../../models/QuizOption';
+import { QuizOption } from '@/models/QuizOption';
+import { FeaturesOption } from '../../models/FeaturesOption';
 
 export type DataItem = {
     id: string | undefined;
@@ -10,13 +12,14 @@ export type DataItem = {
 };
 export type OptionObj = Record<number, DataItem[]>;
 
-export const useHandleOption = () => {
+export const useHandleEditOption = (currentOptions: QuizOption) => {
     const [optionText, setOptionText] = useState<OptionObj>({});
-
-    const [options, setOptions] = useState<QuizOption[]>([
-        { text: '', is_correct: true, id: 1 },
-        { text: '', is_correct: true, id: 2 },
-    ]);
+    const editOptions = currentOptions.map((item, index) => ({
+        id: index + 1,
+        text: item.option,
+        is_correct: item.is_correct,
+    }));
+    const [options, setOptions] = useState<FeaturesOption[]>(editOptions);
 
     const handleOptionChange = (editor: EditorJS, optionId: number) => {
         editor.save().then((editorObj) => {
@@ -89,7 +92,9 @@ export const useHandleOption = () => {
     };
     //todo test->既存でないidを生成するか
     const addOption = () => {
-        const usedIds = new Set(options.map((option: QuizOption) => option.id));
+        const usedIds = new Set(
+            options.map((option: FeaturesOption) => option.id),
+        );
 
         const maxIds = 6;
         let newId: number | null = null;
@@ -101,7 +106,7 @@ export const useHandleOption = () => {
             }
         }
         if (newId !== null) {
-            const newOption: QuizOption = {
+            const newOption: FeaturesOption = {
                 text: '',
                 is_correct: true,
                 id: newId,

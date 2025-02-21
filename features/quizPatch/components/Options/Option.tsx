@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import EditorJS from '@editorjs/editorjs';
 import CodeTool from '@editorjs/code';
-import { QuizOption } from '../../models/QuizOption';
+import { FeaturesOption } from '../../models/FeaturesOption';
 
 export default function Option({
     option,
@@ -10,8 +10,8 @@ export default function Option({
     handleChangeIsCorrect,
     removeOption,
 }: {
-    options: QuizOption[];
-    option: QuizOption;
+    options: FeaturesOption[];
+    option: FeaturesOption;
     index: number;
     handleOptionChange: (editor: EditorJS, optionId: number) => void;
     handleChangeIsCorrect: (value: string, number: number) => void;
@@ -35,6 +35,11 @@ export default function Option({
                     code: CodeTool,
                 },
                 autofocus: false,
+                data: {
+                    time: 10000,
+                    blocks: JSON.parse(option.text),
+                    version: '2^',
+                },
                 onChange: () => handleOptionChange(optionEditor, option.id),
             });
         }
