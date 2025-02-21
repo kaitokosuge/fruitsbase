@@ -63,6 +63,7 @@ export default function Option({
                         onChange={(e) =>
                             handleChangeIsCorrect(e.target.value, option.id)
                         }
+                        value={option.is_correct.toString()}
                         name="pets"
                         id="pet-select"
                         className="font-bold bg-[#333333] ml-3 rounded-md px-3 py-1 text-[21px] text-gray-300 focus:outline-none"
