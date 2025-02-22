@@ -243,6 +243,12 @@ export default function AuthQuizzesView({
                                 />
                             </DrawerHeader>
                             <DrawerFooter className="bg-[#161616] border-t border-t-[#2c2c2c] rounded-t-[10px] flex items-center justify-end">
+                                <Link
+                                    href={`/quiz/${quiz.id}/edit`}
+                                    className="w-fit text-[16px] text-[#555555] border border-[#555555] px-3 py-1 rounded-md hover:text-green-400 hover:border-green-400 duration-300"
+                                >
+                                    編集する
+                                </Link>
                                 <button
                                     onClick={() => {
                                         const isDelete = confirm(
@@ -253,7 +259,7 @@ export default function AuthQuizzesView({
                                         }
                                         deleteQuiz(quiz.id);
                                     }}
-                                    className="w-fit text-[16px] text-[#555555] border border-[#555555] px-3 py-1 rounded-md hover:text-red-400 hover:border-red-400 duration-300"
+                                    className="ml-4 w-fit text-[16px] text-[#555555] border border-[#555555] px-3 py-1 rounded-md hover:text-red-400 hover:border-red-400 duration-300"
                                 >
                                     削除する
                                 </button>
