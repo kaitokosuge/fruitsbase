@@ -52,6 +52,7 @@ export async function PATCH(req: NextRequest) {
         return redirectToSignIn();
     }
     const data = await req.json();
+    console.log('編集リクエストデータ', data);
 
     const options: FeaturesOption[] = data.options;
     if (options.length < 2 || 6 < options.length) {
@@ -114,7 +115,10 @@ export async function PATCH(req: NextRequest) {
 
     const explanationText: string = data.explanation;
     // const categories = data.categories;
-    const quizRes = await prisma.quiz.create({
+    const quizRes = await prisma.quiz.update({
+        where: {
+            id: data.quizId,
+        },
         data: {
             question: questionText,
             explanation: explanationText,
