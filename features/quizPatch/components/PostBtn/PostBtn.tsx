@@ -8,8 +8,10 @@ export default function PostBtn({
     options,
     explanationText,
     loading,
+    editQuizId,
 }: {
     handleClickPost: (
+        editQuizId: string,
         questionText: string,
         selectedIds: string[],
         options: FeaturesOption[],
@@ -20,11 +22,13 @@ export default function PostBtn({
     options: FeaturesOption[];
     explanationText: string;
     loading: boolean;
+    editQuizId: string;
 }) {
     return (
         <button
             onClick={() =>
                 handleClickPost(
+                    editQuizId,
                     questionText,
                     selectedIds,
                     options,

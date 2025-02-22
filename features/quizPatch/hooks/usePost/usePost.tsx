@@ -13,6 +13,7 @@ export const usePost = () => {
         error: '',
     });
     const handleClickPost = async (
+        editQuizId: string,
         questionText: string,
         selectedIds: string[],
         options: FeaturesOption[],
@@ -20,6 +21,7 @@ export const usePost = () => {
     ) => {
         setLoading(true);
         const resultData = await PatchQuiz(
+            editQuizId,
             questionText,
             selectedIds,
             options,
