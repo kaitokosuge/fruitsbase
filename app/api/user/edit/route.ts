@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: '無効なIDです' }, { status: 400 });
     }
     const nameCount = (value: string) => {
-        return value.length > 40;
+        return value.length > 50;
     };
     const bioCount = (value: string) => {
         return value.length > 200;
