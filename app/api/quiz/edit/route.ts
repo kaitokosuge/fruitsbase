@@ -112,7 +112,19 @@ export async function PATCH(req: NextRequest) {
         console.log('空のコードブロックがあります');
         return NextResponse.json({ res: 'fail', error: 'optionCode' });
     }
-
+    const quizMadeUserId = await prisma.quiz.findUnique({
+        where: { id: data.quizId },
+        select: {
+            authorId: true,
+        },
+    });
+    if (!quizMadeUserId) {
+        return;
+    }
+    console.log('作者IDです', quizMadeUserId, userId);
+    if (quizMadeUserId.authorId !== userId) {
+        return;
+    }
     const explanationText: string = data.explanation;
     // const categories = data.categories;
     const quizRes = await prisma.quiz.update({
