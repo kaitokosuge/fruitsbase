@@ -7,7 +7,7 @@ export const PatchQuiz = async (
     options: FeaturesOption[],
     explanationText: string,
 ) => {
-    const res = await fetch('/api/quiz/edit', {
+    const res = await fetch(`/api/quiz/edit`, {
         method: 'PATCH',
         headers: {
             'Content-type': 'application/json',

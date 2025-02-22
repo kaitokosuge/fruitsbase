@@ -101,6 +101,7 @@ export default function QuizPatch({ editQuiz }: { editQuiz: Quiz }) {
                         </button> */}
                         <PostBtn
                             handleClickPost={handleClickPost}
+                            editQuizId={editQuiz.id}
                             questionText={questionText}
                             selectedIds={selectedIds}
                             options={options}
