@@ -50,14 +50,13 @@ export default function QuizPatch({ editQuiz }: { editQuiz: Quiz }) {
     const { questionText, handleInputChange } = useHandleEditQuestion(
         editQuiz.question,
     );
-    console.log('保存（編集）するクイズ本文データ', questionText);
+
     const { explanationText, handleInputExChange } = useHandleEditExplanation(
         editQuiz.explanation,
     );
-    console.log('保存（編集）するクイズ解説データ', explanationText);
+
     const { handleOptionChange, handleChangeIsCorrect, options } =
         useHandleEditOption(editQuiz.Option);
-    console.log('保存（編集）する選択肢データ', options);
 
     const { selectedIds } = useHandleCategory();
     // const { selectedIds, handleClickCategory } = useHandleCategory();
