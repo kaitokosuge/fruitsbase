@@ -1,5 +1,5 @@
 import React from 'react';
-import { FeaturesOption } from '../../models/FeaturesOption';
+import { FeaturesEditOption } from '../../models/FeaturesEditOption';
 
 export default function PostBtn({
     handleClickPost,
@@ -14,12 +14,12 @@ export default function PostBtn({
         editQuizId: string,
         questionText: string,
         selectedIds: string[],
-        options: FeaturesOption[],
+        options: FeaturesEditOption[],
         explanationText: string,
     ) => void;
     questionText: string;
     selectedIds: string[];
-    options: FeaturesOption[];
+    options: FeaturesEditOption[];
     explanationText: string;
     loading: boolean;
     editQuizId: string;

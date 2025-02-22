@@ -3,7 +3,7 @@ import EditorJS, { OutputBlockData } from '@editorjs/editorjs';
 import { useState } from 'react';
 // import { QuizOption } from '../../models/QuizOption';
 import { QuizOption } from '@/models/QuizOption';
-import { FeaturesOption } from '../../models/FeaturesOption';
+import { FeaturesEditOption } from '../../models/FeaturesEditOption';
 
 export type DataItem = {
     id: string | undefined;
@@ -15,11 +15,12 @@ export type OptionObj = Record<number, DataItem[]>;
 export const useHandleEditOption = (currentOptions: QuizOption) => {
     const [optionText, setOptionText] = useState<OptionObj>({});
     const editOptions = currentOptions.map((item, index) => ({
-        id: index + 1,
+        id: item.id,
+        stateId: index + 1,
         text: item.option,
         is_correct: item.is_correct,
     }));
-    const [options, setOptions] = useState<FeaturesOption[]>(editOptions);
+    const [options, setOptions] = useState<FeaturesEditOption[]>(editOptions);
 
     const handleOptionChange = (editor: EditorJS, optionId: number) => {
         editor.save().then((editorObj) => {
@@ -57,7 +58,7 @@ export const useHandleEditOption = (currentOptions: QuizOption) => {
             });
             setOptions((prevOptions) => {
                 return prevOptions.map((option) => {
-                    if (option.id === optionId) {
+                    if (option.stateId === optionId) {
                         // 該当する `option` の `text` を更新
                         return {
                             ...option,
@@ -72,7 +73,7 @@ export const useHandleEditOption = (currentOptions: QuizOption) => {
     const handleChangeIsCorrect = (value: string, optionId: number) => {
         setOptions((prevOptions) => {
             return prevOptions.map((option) => {
-                if (option.id === optionId) {
+                if (option.stateId === optionId) {
                     const isCorrect = false;
                     if (value === 'true') {
                         const isCorrect = true;
@@ -90,47 +91,10 @@ export const useHandleEditOption = (currentOptions: QuizOption) => {
             });
         });
     };
-    //todo test->既存でないidを生成するか
-    const addOption = () => {
-        const usedIds = new Set(
-            options.map((option: FeaturesOption) => option.id),
-        );
 
-        const maxIds = 6;
-        let newId: number | null = null;
-
-        for (let i = 1; i <= maxIds; i++) {
-            if (!usedIds.has(i)) {
-                newId = i;
-                break;
-            }
-        }
-        if (newId !== null) {
-            const newOption: FeaturesOption = {
-                text: '',
-                is_correct: true,
-                id: newId,
-            };
-            setOptions((prevOptions) => [...prevOptions, newOption]);
-        } else {
-            alert('不正な操作です');
-        }
-    };
-    ////todo test->指定したidが削除された配列になるか
-    const removeOption = (id: number) => {
-        if (options.length <= 2) {
-            alert('選択肢は2つ必要です');
-            return;
-        }
-        setOptions((prevOptions) =>
-            prevOptions.filter((option) => option.id !== id),
-        );
-    };
     return {
         optionText,
         setOptionText,
-        addOption,
-        removeOption,
         handleOptionChange,
         handleChangeIsCorrect,
         options,

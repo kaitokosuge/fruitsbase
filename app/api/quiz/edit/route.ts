@@ -1,4 +1,4 @@
-import { FeaturesOption } from '@/features/quizPatch/models/FeaturesOption';
+import { FeaturesEditOption } from '@/features/quizPatch/models/FeaturesEditOption';
 import { ParsedEditordata } from '@/features/quizPatch/models/ParsedEditordata';
 import prisma from '@/lib/prisma';
 import { auth } from '@clerk/nextjs/server';
@@ -54,7 +54,7 @@ export async function PATCH(req: NextRequest) {
     const data = await req.json();
     console.log('編集リクエストデータ', data);
 
-    const options: FeaturesOption[] = data.options;
+    const options: FeaturesEditOption[] = data.options;
     if (options.length < 2 || 6 < options.length) {
         return;
     }
@@ -136,7 +136,10 @@ export async function PATCH(req: NextRequest) {
     });
     console.log('保存しようとした選択肢', options);
     for (let i = 0; options.length > i; i++) {
-        const optionRes = await prisma.option.create({
+        const optionRes = await prisma.option.update({
+            where: {
+                id: data.options[i].id,
+            },
             data: {
                 option: options[i].text,
                 is_correct: options[i].is_correct,

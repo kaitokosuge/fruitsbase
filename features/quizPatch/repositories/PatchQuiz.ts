@@ -1,11 +1,11 @@
 import { redirect } from 'next/navigation';
-import { FeaturesOption } from '../models/FeaturesOption';
+import { FeaturesEditOption } from '../models/FeaturesEditOption';
 
 export const PatchQuiz = async (
     editQuizId: string,
     questionText: string,
     selectedIds: string[],
-    options: FeaturesOption[],
+    options: FeaturesEditOption[],
     explanationText: string,
 ) => {
     const res = await fetch(`/api/quiz/edit`, {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { PatchQuiz } from '../../repositories/PatchQuiz';
-import { FeaturesOption } from '../../models/FeaturesOption';
+import { FeaturesEditOption } from '../../models/FeaturesEditOption';
 
 export const usePost = () => {
     type PostResult = {
@@ -16,7 +16,7 @@ export const usePost = () => {
         editQuizId: string,
         questionText: string,
         selectedIds: string[],
-        options: FeaturesOption[],
+        options: FeaturesEditOption[],
         explanationText: string,
     ) => {
         setLoading(true);

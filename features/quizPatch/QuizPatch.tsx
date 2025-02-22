@@ -55,13 +55,8 @@ export default function QuizPatch({ editQuiz }: { editQuiz: Quiz }) {
         editQuiz.explanation,
     );
     console.log('保存（編集）するクイズ解説データ', explanationText);
-    const {
-        addOption,
-        removeOption,
-        handleOptionChange,
-        handleChangeIsCorrect,
-        options,
-    } = useHandleEditOption(editQuiz.Option);
+    const { handleOptionChange, handleChangeIsCorrect, options } =
+        useHandleEditOption(editQuiz.Option);
     console.log('保存（編集）する選択肢データ', options);
 
     const { selectedIds } = useHandleCategory();
@@ -176,20 +171,10 @@ export default function QuizPatch({ editQuiz }: { editQuiz: Quiz }) {
                         index={index}
                         handleOptionChange={handleOptionChange}
                         handleChangeIsCorrect={handleChangeIsCorrect}
-                        removeOption={removeOption}
                     />
                 </div>
             ))}
-            <div className="mx-auto w-[350px] sm:w-[600px] md:w-[650px] flex justify-end">
-                {options.length < 6 && (
-                    <button
-                        onClick={addOption}
-                        className="block text-gray-500 bg-[#333333] px-2 py-1 rounded-md text-[13px] hover:text-white duration-300"
-                    >
-                        選択肢を追加する
-                    </button>
-                )}
-            </div>
+
             <ExplanationEditor
                 id="explanation"
                 placeholder="クイズ解説"

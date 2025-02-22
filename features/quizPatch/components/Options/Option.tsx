@@ -1,21 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import EditorJS from '@editorjs/editorjs';
 import CodeTool from '@editorjs/code';
-import { FeaturesOption } from '../../models/FeaturesOption';
+import { FeaturesEditOption } from '../../models/FeaturesEditOption';
 
 export default function Option({
     option,
     index,
     handleOptionChange,
     handleChangeIsCorrect,
-    removeOption,
 }: {
-    options: FeaturesOption[];
-    option: FeaturesOption;
+    options: FeaturesEditOption[];
+    option: FeaturesEditOption;
     index: number;
     handleOptionChange: (editor: EditorJS, optionId: number) => void;
     handleChangeIsCorrect: (value: string, number: number) => void;
-    removeOption: (id: number) => void;
 }) {
     console.log('option text', option.text);
     const optionRef = useRef<EditorJS | null>(null);
@@ -42,7 +40,8 @@ export default function Option({
                     blocks: JSON.parse(optionText),
                     version: '2^',
                 },
-                onChange: () => handleOptionChange(optionEditor, option.id),
+                onChange: () =>
+                    handleOptionChange(optionEditor, option.stateId),
             });
         }
         return () => {
@@ -63,7 +62,10 @@ export default function Option({
                     <p className="text-gray-600 text-[11px]">正誤</p>
                     <select
                         onChange={(e) =>
-                            handleChangeIsCorrect(e.target.value, option.id)
+                            handleChangeIsCorrect(
+                                e.target.value,
+                                option.stateId,
+                            )
                         }
                         value={option.is_correct.toString()}
                         name="pets"
@@ -73,12 +75,6 @@ export default function Option({
                         <option value="true">◎</option>
                         <option value="false">×</option>
                     </select>
-                    <button
-                        onClick={() => removeOption(option.id)}
-                        className="ml-2 text-[12px] bg-[#333333] px-4 py-2 rounded-md text-gray-400"
-                    >
-                        削除
-                    </button>
                 </div>
             </div>
 
