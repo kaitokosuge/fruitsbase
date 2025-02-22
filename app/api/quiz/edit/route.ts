@@ -154,6 +154,7 @@ export async function PATCH(req: NextRequest) {
         where: { id: userId },
     });
     revalidatePath(`/profile/${postUser?.name}`);
+    revalidatePath(`/quiz/${quizRes.id}`);
     return NextResponse.json({
         res: 'success',
         error: null,
