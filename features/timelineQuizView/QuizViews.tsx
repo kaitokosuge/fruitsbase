@@ -166,6 +166,15 @@ export default function QuizViews({ quizzes }: { quizzes: PublicQuiz[] }) {
                                         <div className="w-[10px] h-[1px] bg-gray-600 ml-3"></div>
                                         <p className="text-[11px] text-gray-500 ml-3">
                                             <PostDate date={quiz.createdAt} />
+                                            {quiz.createdAt !==
+                                                quiz.updatedAt && (
+                                                <span className="md:ml-5 ml-1 text-gray-400">
+                                                    更新日:
+                                                    <PostDate
+                                                        date={quiz.updatedAt}
+                                                    />
+                                                </span>
+                                            )}
                                         </p>
                                     </Link>
                                     <div className="md:mt-1 mt-1 flex md:justify-end justify-around">
