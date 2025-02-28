@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
             author: true,
         },
         orderBy: {
-            updatedAt: 'desc',
+            createdAt: 'desc',
         },
     });
     const quizzes = rawQuizzes.map(({ explanation, Option, ...quizProp }) => ({
